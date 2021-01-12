@@ -16,6 +16,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.19.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
@@ -53,7 +55,7 @@
       <updated>1610445225360</updated>
       <workItem from="1610445227390" duration="207000" />
       <workItem from="1610455796449" duration="294000" />
-      <workItem from="1610456549953" duration="608000" />
+      <workItem from="1610456549953" duration="2105000" />
     </task>
     <servers />
   </component>
