@@ -1,10 +1,12 @@
 import React from 'react';
 import {Box} from "@material-ui/core";
 
+import Header from "../Header/Header";
+
 const Home = () => {
     return(
         <Box>
-            This is from home
+            <Header />
         </Box>
     )
 }
