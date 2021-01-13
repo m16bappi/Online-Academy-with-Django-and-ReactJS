@@ -1,6 +1,8 @@
-import React from "react";
-import {AppBar, Box, Button, IconButton, makeStyles, Toolbar, Typography} from '@material-ui/core';
+import React, {useState} from "react";
+import {AppBar, Box, Button, Drawer, IconButton, makeStyles, Toolbar, Typography} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+
+import SideBar from "../SideBar/SideBar";
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -17,12 +19,13 @@ const useStyles = makeStyles(theme=>({
 
 const Header = () => {
     const classes = useStyles()
+    const [sidebar, setSidebar] = useState(false)
 
     return(
         <Box className={classes.root}>
             <AppBar color={"primary"} position={"fixed"}>
                 <Toolbar>
-                    <IconButton color={"inherit"} edge={"start"}>
+                    <IconButton color={"inherit"} edge={"start"} onClick={()=>setSidebar(true)}>
                         <MenuIcon />
                     </IconButton>
                     <Typography variant={"h6"} className={classes.title}>
@@ -32,6 +35,8 @@ const Header = () => {
                 </Toolbar>
             </AppBar>
             <Toolbar />
+
+            <Drawer anchor={"left"} open={sidebar} onClose={()=>setSidebar(false)}><SideBar /></Drawer>
         </Box>
     )
 }
