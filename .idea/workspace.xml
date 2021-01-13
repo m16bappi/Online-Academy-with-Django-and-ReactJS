@@ -29,6 +29,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="academy" type="Python.DjangoServer" factoryName="Django server">
       <module name="academy" />
@@ -66,7 +71,7 @@
       <workItem from="1610455796449" duration="294000" />
       <workItem from="1610456549953" duration="3297000" />
       <workItem from="1610465087718" duration="7059000" />
-      <workItem from="1610516166060" duration="3314000" />
+      <workItem from="1610516166060" duration="8428000" />
     </task>
     <servers />
   </component>
