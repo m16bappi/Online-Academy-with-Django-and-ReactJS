@@ -1,6 +1,6 @@
 import { render } from "react-dom";
 import React, { Component, Fragment } from "react";
-import { HashRouter as Router} from 'react-router-dom';
+import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {CssBaseline, ThemeProvider} from "@material-ui/core";
 
@@ -10,6 +10,10 @@ import {theme} from '../Themes/Themes'
 
 
 import Home from "./Home/Home";
+import Programs from "./Programs/Programs";
+import Header from "./Header/Header";
+import ClassroomList from "./Classroom/ClassroomList";
+import MyClassroom from "./Classroom/MyClassroom";
 
 
 class App extends Component {
@@ -23,7 +27,13 @@ class App extends Component {
           <Router>
             <Fragment>
               <CssBaseline />
-              <Home />
+              <Header />
+              <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route exact path='/myClassroom' component={MyClassroom}/>
+                <Route exact path='/programs' component={Programs}/>
+                <Route exact path='/programs/:name' component={ClassroomList}/>
+              </Switch>
             </Fragment>
           </Router>
         </Provider>

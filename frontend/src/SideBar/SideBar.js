@@ -1,5 +1,6 @@
 import React from "react";
 import {Box, List, ListItem, ListItemIcon, ListItemText, makeStyles} from '@material-ui/core';
+import {Link} from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
@@ -21,12 +22,12 @@ const menuItems = [
     {
         liIcon: <MenuBookIcon />,
         liText: "Classroom",
-        liLink: "/"
+        liLink: "/myClassroom"
     },
     {
         liIcon: <SportsKabaddiIcon/>,
         liText: "Program",
-        liLink: "/"
+        liLink: "/programs"
     },
     {
         liIcon: <InfoIcon />,
@@ -41,7 +42,7 @@ const SideBar = () => {
         <Box className={classes.root}>
             <List>
                 {menuItems.map((item, key) => (
-                    <ListItem key={key} button divider>
+                    <ListItem key={key} button divider component={Link} to={item.liLink}>
                         <ListItemIcon>{item.liIcon}</ListItemIcon>
                         <ListItemText primary={item.liText}/>
                     </ListItem>

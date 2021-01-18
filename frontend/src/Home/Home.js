@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from "../Header/Header";
+import {Box, Typography} from "@material-ui/core";
 
 const Home = () => {
     return(
-        <React.Fragment>
-            <Header />
-        </React.Fragment>
+        <Box>
+            <Typography>This is home page</Typography>
+        </Box>
     )
 }
 

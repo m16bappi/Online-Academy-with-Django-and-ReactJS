@@ -1,7 +1,7 @@
-from .models import classroom
-from Users.models import teacher
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
+
+from .models import classroom
 
 
 class classroomSerializer(serializers.ModelSerializer):
