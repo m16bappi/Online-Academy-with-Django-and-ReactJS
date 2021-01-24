@@ -1,4 +1,4 @@
-import { GET_BLOG, ADD_BLOG, DELETE_BLOG } from '../../Types/Types';
+import { GET_BLOG, ADD_BLOG, DELETE_BLOG } from '../../Types/BlogTypes';
 
 const initialStates = {
     Blogs: []

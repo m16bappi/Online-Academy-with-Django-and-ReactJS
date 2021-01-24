@@ -1,4 +1,4 @@
-import * as Types from '../../Types/Types';
+import * as Types from '../../Types/AuthTypes';
 import Axios from 'axios';
 
 

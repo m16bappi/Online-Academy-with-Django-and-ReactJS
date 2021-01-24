@@ -1,19 +1,17 @@
 import React, {useState} from "react";
+import {connect} from "react-redux";
 import {Box, Collapse, Container, List, ListItem, ListItemIcon, ListItemText, makeStyles} from "@material-ui/core";
-import {useParams} from 'react-router-dom';
-import {ExpandLess, ExpandMore} from '@material-ui/icons'
+import {ExpandLess, ExpandMore} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme=>({
-    root: {},
-    active: {
-        backgroundColor: "red"
+    subList: {
+        paddingLeft: theme.spacing(3)
     }
 }))
 
 const intakeList = ['34', '35', '36', '37']
 
 const ClassroomList = () => {
-    const params = useParams()
     const classes = useStyles()
     const [item, setItem] = useState({})
 
@@ -29,8 +27,8 @@ const ClassroomList = () => {
                             </ListItemIcon>
                         </ListItem>
                         <Collapse in={item[value]}>
-                            <List>
-                                <ListItem>
+                            <List className={classes.subList}>
+                                <ListItem button>
                                     <ListItemText primary="cse-111"/>
                                 </ListItem>
                             </List>
@@ -42,4 +40,10 @@ const ClassroomList = () => {
     )
 }
 
-export default ClassroomList
+const mapStateToProps = (state) => {
+    return {
+        intake: state.Program
+    }
+}
+
+export default connect(mapStateToProps)(ClassroomList)

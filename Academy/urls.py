@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('Users.urls')),
     path('', include('Course.urls')),
     path('', include('Classroom.urls')),
+    path('', include('Programs.urls')),
     url(r'^api-auth/', include('rest_framework.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

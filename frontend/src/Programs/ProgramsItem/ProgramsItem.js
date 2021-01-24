@@ -1,7 +1,10 @@
 import React from "react";
-import {Link, useLocation} from "react-router-dom";
+import {connect} from "react-redux";
+import {useLocation, useHistory} from "react-router-dom";
 import {makeStyles, CardMedia, CardContent, Typography, Card, CardActionArea, Box} from '@material-ui/core';
 import programThumbnail from '../../../../res/programThumbnail.jpg'
+
+import {GET_INTAKE} from "../../../store/Actions/Program/Program";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,8 +25,15 @@ const useStyles = makeStyles(theme => ({
 const ProgramsItem = (props) => {
     const classes = useStyles()
     const location = useLocation()
+    const history = useHistory()
+
+    const urlHandler = () => {
+        props.GET_INTAKE(props.title)
+        history.push(`${location.pathname}/${props.title}`)
+    }
+
     return (
-        <Box className={classes.root} component={Link} to={`${location.pathname}/${props.title}`}>
+        <Box className={classes.root} onClick={()=>urlHandler()}>
             <Card>
                 <CardActionArea>
                     <CardMedia image={"/static/bundles/" + programThumbnail} className={classes.media}/>
@@ -36,4 +46,4 @@ const ProgramsItem = (props) => {
     )
 }
 
-export default ProgramsItem
+export default connect(null, {GET_INTAKE})(ProgramsItem)

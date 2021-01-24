@@ -17,4 +17,10 @@ class program(models.Model):
 
     def __str__(self):
         return self.program_title
-    
+
+class intake(models.Model):
+    intake_name = models.CharField(max_length=50, null=False, blank=False)
+    program_name = models.ForeignKey(program, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.intake_name
