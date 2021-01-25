@@ -5,14 +5,13 @@ import {Box, Collapse, Container, List, ListItem, ListItemIcon, ListItemText, ma
 import {ExpandLess, ExpandMore} from '@material-ui/icons';
 
 import {GET_INTAKE} from "../../store/Actions/Program/Program";
+import {GET_CLASSROOMS} from "../../store/Actions/Classroom/Classroom"
 
 const useStyles = makeStyles(theme=>({
     subList: {
         paddingLeft: theme.spacing(3)
     }
 }))
-
-const intakeList = ['34', '35', '36', '37']
 
 const ClassroomList = (props) => {
     const classes = useStyles()
@@ -23,23 +22,30 @@ const ClassroomList = (props) => {
         props.GET_INTAKE(params.name)
     }, [])
 
+    const intakeClickHandler = (intakeItem, program, intake) => {
+        props.GET_CLASSROOMS(program, intake)
+        setItem({[intakeItem.id]: !item[intakeItem.id]})
+    }
+
     return(
         <Container>
             <List>
-                {intakeList.map((value, index) =>(
-                    <Box  key={index}>
-                        <ListItem button divider onClick={()=>setItem({[value]: !item[value]})}>
-                            <ListItemText primary={`${value} Intake`}/>
+                {props.intake.map((intakeItem, intakeIndex) =>(
+                    <Box key={intakeIndex}>
+                        <ListItem button divider onClick={()=>intakeClickHandler(intakeItem, params.name, intakeItem.intake_name)}>
+                            <ListItemText primary={`${intakeItem.intake_name} Intake`}/>
                             <ListItemIcon>
-                                {item[value] ? <ExpandLess/>:<ExpandMore/>}
+                                {item[intakeItem.id] ? <ExpandLess/>:<ExpandMore/>}
                             </ListItemIcon>
                         </ListItem>
-                        <Collapse in={item[value]}>
-                            <List className={classes.subList}>
+                        <Collapse in={item[intakeItem.id]}>
+                            {props.classroom.map((classroomItem, classroomIndex) => (
+                                <List className={classes.subList} key={classroomIndex}>
                                 <ListItem button>
-                                    <ListItemText primary="cse-111"/>
+                                    <ListItemText primary={classroomItem.class_name}/>
                                 </ListItem>
                             </List>
+                            ))}
                         </Collapse>
                     </Box>
                 ))}
@@ -50,8 +56,9 @@ const ClassroomList = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        intake: state.Program
+        intake: state.Program.intake,
+        classroom: state.Classroom.classroom
     }
 }
 
-export default connect(mapStateToProps, {GET_INTAKE})(ClassroomList)
+export default connect(mapStateToProps, {GET_INTAKE, GET_CLASSROOMS})(ClassroomList)

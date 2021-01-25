@@ -41,7 +41,7 @@ export const USER_LOGOUT = () => (dispatch, getState) => {
 };
 
 export const TOKEN_CONFIG = getState => {
-    const token = getState().Login.token
+    const token = getState().Auth.token
     const config = {
         headers: {
             'Content-Type': 'application/json'

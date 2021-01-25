@@ -1,12 +1,16 @@
 import random
 import string
-from .models import classroom
-from Users.models import teacher, student
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
+
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions, views
-from .serializers import classroomCreateSerializer, classroomJoinSerializer, classroomSerializer
+from rest_framework.response import Response
+
+from Programs.models import program
+from Users.models import teacher, student
+from .models import classroom
+from .serializers import classroomCreateSerializer, classroomJoinSerializer, classroomSerializer, \
+    classroomIntakeListSerializer
 
 
 class classroomCreateAPIView(generics.CreateAPIView):
@@ -66,3 +70,24 @@ class classroomJoinAPIView(views.APIView):
             return Response({
                 'Message': 'your class code is wrong',
             })
+
+class classroomIntakeListAPIView(views.APIView):
+    serializer_class = classroomIntakeListSerializer
+
+    def post(self, request, *args, **kwargs):
+
+        print(request.data)
+
+        try:
+            program.objects.get(program_title=request.data.get('program')).intake_set.get(
+                intake_name=request.data.get('intake'))
+        except ObjectDoesNotExist:
+            return Response({
+                "message": "classroom does not exist"
+            })
+
+        intake = program.objects.get(program_title=request.data.get('program')).intake_set.get(intake_name=request.data.get('intake'))
+        classroom_list = intake.classroom_set.all()
+        return Response({
+            "classroom": classroomSerializer(classroom_list, many=True).data
+        })

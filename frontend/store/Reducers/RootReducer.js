@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import Blogs from './Blogs/Blogs';
-import Login from './Auth/Auth';
+import Auth from './Auth/Auth';
 import Program from "./Program/Program";
+import Classroom from "./Classroom/Classroom";
 
 export default combineReducers({
     Blogs,
-    Login,
-    Program
+    Auth,
+    Program,
+    Classroom
 });

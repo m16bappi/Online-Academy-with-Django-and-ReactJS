@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
 const ProgramsItem = (props) => {
     const classes = useStyles()
     const location = useLocation()
-    console.log(props)
 
     return (
         <Box className={classes.root} component={Link} to={`${location.pathname}/${props.title}`}>

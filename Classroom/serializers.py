@@ -27,3 +27,8 @@ class classroomCreateSerializer(serializers.ModelSerializer):
 
 class classroomJoinSerializer(serializers.Serializer):
     code = serializers.CharField()
+
+
+class classroomIntakeListSerializer(serializers.Serializer):
+    program = serializers.CharField()
+    intake = serializers.CharField()
