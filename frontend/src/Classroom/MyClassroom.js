@@ -1,7 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {connect} from "react-redux";
 import {Box} from "@material-ui/core";
 
-const MyClassroom = () => {
+import {GET_MY_CLASSROOMS} from "../../store/Actions/Classroom/Classroom";
+
+const MyClassroom = (props) => {
+
+    useEffect(()=>{
+        props.GET_MY_CLASSROOMS()
+    }, [])
+
     return(
         <Box>
             my classroom
@@ -9,4 +17,10 @@ const MyClassroom = () => {
     )
 }
 
-export default MyClassroom
+const mapStateToProps = (state) => {
+    return{
+        myclassroom: state.Classroom.myclassroom
+    }
+}
+
+export default connect(mapStateToProps, {GET_MY_CLASSROOMS})(MyClassroom)

@@ -1,7 +1,8 @@
-import {GET_CLASSROOM} from "../../Types/ClassroomTypes";
+import {GET_CLASSROOM, GET_MY_CLASSROOM} from "../../Types/ClassroomTypes";
 
 const initialState = {
-    classroom: []
+    classroom: [],
+    myclassroom: []
 }
 
 export default function (state=initialState, action) {
@@ -11,6 +12,13 @@ export default function (state=initialState, action) {
             return {
                 ...state,
                 ...action.payload
+            }
+        }
+        case GET_MY_CLASSROOM:
+        {
+            return {
+                ...state,
+                myclassroom: action.payload
             }
         }
         default:

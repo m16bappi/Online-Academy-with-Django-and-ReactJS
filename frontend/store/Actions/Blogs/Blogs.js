@@ -33,7 +33,7 @@ export const DELETE_BLOGS = (id) => (dispatch, getState) => {
 };
 
 export const TOKEN_CONFIG = getState => {
-    const token = getState().Login.token
+    const token = getState().Auth.token
     const config = {
         headers: {
             'Content-Type': 'application/json'

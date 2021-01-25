@@ -8,6 +8,8 @@ class classroomSerializer(serializers.ModelSerializer):
     program = serializers.StringRelatedField()
     course_teacher = serializers.StringRelatedField()
     students = serializers.StringRelatedField(many=True)
+    intake = serializers.StringRelatedField()
+    course_name = serializers.StringRelatedField()
 
     class Meta:
         model = classroom
@@ -32,3 +34,13 @@ class classroomJoinSerializer(serializers.Serializer):
 class classroomIntakeListSerializer(serializers.Serializer):
     program = serializers.CharField()
     intake = serializers.CharField()
+
+class myClassroomSerializer(serializers.ModelSerializer):
+    program = serializers.StringRelatedField()
+    course_teacher = serializers.StringRelatedField()
+    intake = serializers.StringRelatedField()
+    class_name = serializers.StringRelatedField()
+
+    class Meta:
+        model = classroom
+        fields = ['class_name', 'program', 'intake', 'course_teacher']

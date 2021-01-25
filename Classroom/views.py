@@ -1,7 +1,7 @@
 import random
 import string
 
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions, views
 from rest_framework.response import Response
@@ -10,7 +10,7 @@ from Programs.models import program
 from Users.models import teacher, student
 from .models import classroom
 from .serializers import classroomCreateSerializer, classroomJoinSerializer, classroomSerializer, \
-    classroomIntakeListSerializer
+    classroomIntakeListSerializer, myClassroomSerializer
 
 
 class classroomCreateAPIView(generics.CreateAPIView):
@@ -50,7 +50,7 @@ class classroomJoinAPIView(views.APIView):
             student.objects.get(name=self.request.user)
         except ObjectDoesNotExist:
             return Response({'message': 'your profile not found'})
-            
+
         key = request.data.get('code')
         classroom_object = classroom.objects.get(pk=kwargs['pk'])
         if classroom_object.class_code == key:
@@ -71,6 +71,7 @@ class classroomJoinAPIView(views.APIView):
                 'Message': 'your class code is wrong',
             })
 
+
 class classroomIntakeListAPIView(views.APIView):
     serializer_class = classroomIntakeListSerializer
 
@@ -86,8 +87,23 @@ class classroomIntakeListAPIView(views.APIView):
                 "message": "classroom does not exist"
             })
 
-        intake = program.objects.get(program_title=request.data.get('program')).intake_set.get(intake_name=request.data.get('intake'))
+        intake = program.objects.get(program_title=request.data.get('program')).intake_set.get(
+            intake_name=request.data.get('intake'))
         classroom_list = intake.classroom_set.all()
         return Response({
             "classroom": classroomSerializer(classroom_list, many=True).data
         })
+
+
+class myClassroomAPIView(generics.ListAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = myClassroomSerializer
+
+    def get_queryset(self):
+        try:
+            classroom_list = student.objects.get(name=self.request.user).students.all()
+            return classroom_list
+        except ObjectDoesNotExist:
+            return None

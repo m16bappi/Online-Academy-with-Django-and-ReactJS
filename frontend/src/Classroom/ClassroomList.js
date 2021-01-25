@@ -5,7 +5,7 @@ import {Box, Collapse, Container, List, ListItem, ListItemIcon, ListItemText, ma
 import {ExpandLess, ExpandMore} from '@material-ui/icons';
 
 import {GET_INTAKE} from "../../store/Actions/Program/Program";
-import {GET_CLASSROOMS} from "../../store/Actions/Classroom/Classroom"
+import {GET_CLASSROOMS_LIST} from "../../store/Actions/Classroom/Classroom"
 
 const useStyles = makeStyles(theme=>({
     subList: {
@@ -23,7 +23,7 @@ const ClassroomList = (props) => {
     }, [])
 
     const intakeClickHandler = (intakeItem, program, intake) => {
-        props.GET_CLASSROOMS(program, intake)
+        props.GET_CLASSROOMS_LIST(program, intake)
         setItem({[intakeItem.id]: !item[intakeItem.id]})
     }
 
@@ -61,4 +61,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {GET_INTAKE, GET_CLASSROOMS})(ClassroomList)
+export default connect(mapStateToProps, {GET_INTAKE, GET_CLASSROOMS_LIST})(ClassroomList)

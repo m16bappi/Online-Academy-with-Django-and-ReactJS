@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme=> ({
         alignItems: "center"
     },
     formIcon: {
-        marginTop: theme.spacing(5),
+        marginTop: theme.spacing(7),
         marginBottom: theme.spacing(5),
         width: theme.spacing(10),
         height: theme.spacing(10)
