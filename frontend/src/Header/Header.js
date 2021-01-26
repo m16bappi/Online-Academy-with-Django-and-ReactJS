@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
+import {useHistory} from "react-router-dom";
 import {AppBar, Box, Button, Drawer, IconButton, makeStyles, Toolbar, Typography} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -22,13 +23,19 @@ const useStyles = makeStyles(theme=>({
 
 const Header = (props) => {
     const classes = useStyles()
+    const history = useHistory()
     const [sidebar, setSidebar] = useState(false)
     const [auth, setAuth] = useState(false)
 
     const {isAuthenticated} = props.auth
 
+    const user_logout = () =>{
+        props.USER_LOGOUT()
+        history.push(`/`)
+    }
+
     const login = (<Button variant={"outlined"} color={"inherit"} onClick={()=>setAuth(true)}>Login</Button>)
-    const logout = (<Button variant={"contained"} color={"secondary"} onClick={()=>props.USER_LOGOUT()}>logout</Button>)
+    const logout = (<Button variant={"contained"} color={"secondary"} onClick={()=>user_logout()}>logout</Button>)
 
     return(
         <Box className={classes.root}>

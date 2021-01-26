@@ -1,6 +1,6 @@
 import Axios from "axios";
 import Cookies from "js-cookie"
-import {GET_CLASSROOM, GET_MY_CLASSROOM} from "../../Types/ClassroomTypes";
+import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_CLASSROOMS} from "../../Types/ClassroomTypes";
 
 const csrftoken = Cookies.get('csrftoken');
 
@@ -27,18 +27,28 @@ export const GET_CLASSROOMS_LIST = (program, intake) => (dispatch) => {
     Axios.post(`api/classroom/intakeClassroomList/`, {program, intake}, CONFIG())
         .then(res => {
             dispatch({
-                type: GET_CLASSROOM,
+                type: GET_INTAKE_CLASSROOM_LIST,
                 payload: res.data
             })
         }).catch(error => console.log(error.data))
 }
 
-export const GET_MY_CLASSROOMS = () => (dispatch, getState) => {
-    Axios.get(`api/classroom/myclassroom/`, TOKEN_CONFIG(getState))
+export const GET_MY_CLASSROOMS_LIST = () => (dispatch, getState) => {
+    Axios.get(`api/classroom/myclassroomlist/`, TOKEN_CONFIG(getState))
         .then(res => {
             dispatch({
-                type: GET_MY_CLASSROOM,
+                type: GET_MY_CLASSROOM_LIST,
                 payload: res.data
             })
         }) .catch(error => console.log(error))
+}
+
+export const GET_CLASSROOM = (classroom) => (dispatch, getState) => {
+    Axios.get(`api/classroom/${classroom}/`, TOKEN_CONFIG(getState))
+        .then(res => {
+            dispatch({
+                type: GET_CLASSROOMS,
+                payload: res.data
+            })
+        }).catch(error => console.log(error))
 }

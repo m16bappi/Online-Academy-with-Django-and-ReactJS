@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from Programs.models import program
 from Users.models import teacher, student
 from .models import classroom
-from .serializers import classroomCreateSerializer, classroomJoinSerializer, classroomSerializer, \
-    classroomIntakeListSerializer, myClassroomSerializer
+from .serializers import (classroomCreateSerializer, classroomJoinSerializer, classroomSerializer,
+                          classroomIntakeListSerializer, classroomListSerializer, myClassroomSerializer)
 
 
 class classroomCreateAPIView(generics.CreateAPIView):
@@ -76,9 +76,6 @@ class classroomIntakeListAPIView(views.APIView):
     serializer_class = classroomIntakeListSerializer
 
     def post(self, request, *args, **kwargs):
-
-        print(request.data)
-
         try:
             program.objects.get(program_title=request.data.get('program')).intake_set.get(
                 intake_name=request.data.get('intake'))
@@ -91,7 +88,7 @@ class classroomIntakeListAPIView(views.APIView):
             intake_name=request.data.get('intake'))
         classroom_list = intake.classroom_set.all()
         return Response({
-            "classroom": classroomSerializer(classroom_list, many=True).data
+            "intakeclassroomlist": classroomListSerializer(classroom_list, many=True).data
         })
 
 
@@ -99,7 +96,7 @@ class myClassroomAPIView(generics.ListAPIView):
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = myClassroomSerializer
+    serializer_class = classroomListSerializer
 
     def get_queryset(self):
         try:
@@ -107,3 +104,15 @@ class myClassroomAPIView(generics.ListAPIView):
             return classroom_list
         except ObjectDoesNotExist:
             return None
+
+class classroomAPIView(views.APIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = classroomSerializer
+
+    def get(self, request, *args, **kwargs):
+        get_classroom = classroom.objects.get(class_name=kwargs['class_name'])
+        return Response({
+            'classroom': classroomSerializer(get_classroom).data
+        })

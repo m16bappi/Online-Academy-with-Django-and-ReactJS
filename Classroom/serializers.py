@@ -44,3 +44,10 @@ class myClassroomSerializer(serializers.ModelSerializer):
     class Meta:
         model = classroom
         fields = ['class_name', 'program', 'intake', 'course_teacher']
+
+class classroomListSerializer(serializers.ModelSerializer):
+    class_name = serializers.StringRelatedField()
+
+    class Meta:
+        model = classroom
+        fields = ['class_name']

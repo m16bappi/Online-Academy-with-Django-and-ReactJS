@@ -12,8 +12,9 @@ import {theme} from '../Themes/Themes'
 import Home from "./Home/Home";
 import Programs from "./Programs/Programs";
 import Header from "./Header/Header";
-import ClassroomList from "./Classroom/ClassroomList";
-import MyClassroom from "./Classroom/MyClassroom";
+import ClassroomList from "./Classroom/ClassroomList/ClassroomList";
+import MyClassroom from "./Classroom/MyClassroomList/MyClassroomList";
+import InsideClassroom from "./Classroom/Classroom/Classroom";
 
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/myClassroom' component={MyClassroom}/>
+                <Route exact path='/myClassroom/:className' component={InsideClassroom} />
                 <Route exact path='/programs' component={Programs}/>
                 <Route exact path='/programs/:name' component={ClassroomList}/>
               </Switch>
