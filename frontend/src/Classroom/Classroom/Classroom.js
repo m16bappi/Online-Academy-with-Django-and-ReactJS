@@ -7,6 +7,7 @@ import SwitchVideoIcon from '@material-ui/icons/SwitchVideo';
 
 import Stream from "./Stream/Stream";
 import People from "./People/People";
+import Classworks from "./Classworks/Classworks";
 import header from "../../../../res/my_classroom_header/inside_classroom_header.jpg";
 
 const useStyles = makeStyles(theme=> ({
@@ -14,10 +15,7 @@ const useStyles = makeStyles(theme=> ({
         height: "25rem",
         marginTop: theme.spacing(2),
         borderRadius: "10px",
-        boxShadow: theme.shadows[2],
-        '&:hover': {
-            boxShadow: theme.shadows[5]
-        }
+        boxShadow: theme.shadows[2]
     },
     headerImage: {
         height: "20rem",
@@ -60,8 +58,9 @@ const useStyles = makeStyles(theme=> ({
     bodyContents: {
         width: "80%",
         height: "30rem",
-        background: "gray",
-        marginLeft: theme.spacing(1)
+        boxShadow: theme.shadows[2],
+        marginLeft: theme.spacing(1),
+        borderRadius: '5px'
     },
     tabItem: {
         fontFamily: "Playfair Display, serif",
@@ -88,7 +87,7 @@ const Classroom = (props) => {
                     <Typography variant="h4">{params.className}</Typography>
                 </Box>
                 <Box className={classes.headerActionContent}>
-                    <Typography variant="h6">class code: 123</Typography>
+                    <Typography variant="h6">class code: {props.classroom.class_code}</Typography>
                     <Button endIcon={<SwitchVideoIcon/>} variant="contained" color="secondary">GO LIVE</Button>
                 </Box>
             </Box>
@@ -104,7 +103,7 @@ const Classroom = (props) => {
                     </Tabs>
                 </Box>
                 <Box className={classes.bodyContents}>
-                    {tab === 0 ? <Stream />: tab === 1? null: <People/>}
+                    {tab === 0 ? <Stream />: tab === 1? <Classworks/>: <People/>}
                 </Box>
             </Box>
         </Container>
