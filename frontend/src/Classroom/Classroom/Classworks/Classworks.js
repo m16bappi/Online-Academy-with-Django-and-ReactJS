@@ -1,6 +1,11 @@
-import React from "react";
-import Countdown from "react-countdown";
-import {Box, Divider, makeStyles, Typography} from "@material-ui/core";
+import React, {useEffect} from "react";
+import {connect} from "react-redux";
+import {Box, makeStyles} from "@material-ui/core";
+
+import {getExamList} from "../../../../store/Actions/Classroom/Classroom";
+import ExamList from "./Exam/ExamList";
+import AssignmentList from "./Assignment/AssignmentList";
+import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -10,44 +15,45 @@ const useStyles = makeStyles(theme=>({
         '& h4': {
             fontFamily: "Playfair Display, serif",
             fontWeight: 500
+        },
+        '& h6': {
+            fontFamily: "Poppins,sans-serif",
+            fontWeight: 800
         }
     },
     quiz: {
-        minHeight: "15rem"
+        minHeight: "10rem"
     },
     assignment: {
-        minHeight: "15rem"
-    },
-    listItem: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        '&:hover': {
-            boxShadow: theme.shadows[1],
-            background: "#E8F0FE",
-            transition: "0.3s"
-        }
+        minHeight: "10rem",
+        marginTop: "5rem"
     }
 }))
 
-const Classworks = () => {
+const Classworks = (props) => {
     const classes = useStyles()
+    const params = useParams()
+
+    useEffect(()=>{
+        props.getExamList(params.className)
+    }, [])
+
     return(
         <Box className={classes.root}>
             <Box className={classes.quiz}>
-                <Typography variant="h4">Quiz</Typography>
-                <Divider />
+                <ExamList examlist={props.examlist}/>
             </Box>
             <Box className={classes.assignment}>
-                <Typography variant="h4">Assignments</Typography>
-                <Divider />
-                <Box className={classes.listItem}>
-                    <Typography variant="h6">Exam name</Typography>
-                    <Countdown date={Date.now() + 10000}/>
-                </Box>
+                <AssignmentList />
             </Box>
         </Box>
     )
 }
 
-export default Classworks
+const mapStateToProps = state => {
+    return {
+        examlist: state.Classroom.examlist
+    }
+}
+
+export default connect(mapStateToProps, {getExamList})(Classworks)

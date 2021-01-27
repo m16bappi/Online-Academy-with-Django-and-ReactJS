@@ -1,6 +1,6 @@
 import Axios from "axios";
 import Cookies from "js-cookie"
-import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_CLASSROOMS} from "../../Types/ClassroomTypes";
+import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_CLASSROOMS, GET_EXAM_LIST} from "../../Types/ClassroomTypes";
 
 const csrftoken = Cookies.get('csrftoken');
 
@@ -52,3 +52,14 @@ export const GET_CLASSROOM = (classroom) => (dispatch, getState) => {
             })
         }).catch(error => console.log(error))
 }
+
+export const getExamList = (classroom) => (dispatch, getState) => {
+    Axios.get(`api/classroom/examlist/${classroom}/`, TOKEN_CONFIG(getState))
+        .then(res=>{
+            dispatch({
+                type: GET_EXAM_LIST,
+                payload: res.data
+            })
+        })
+}
+

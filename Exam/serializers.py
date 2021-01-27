@@ -19,7 +19,7 @@ class ExamListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exam
-        fields = ['exam_name', 'total_marks', 'status', 'submitted']
+        fields = ['exam_name', 'total_marks', 'rules', 'posted_time', 'submission_time', 'status', 'submitted']
 
 class QuestionSerializer(serializers.ModelSerializer):
     pass

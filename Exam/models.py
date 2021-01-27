@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from Classroom.models import classroom
@@ -7,9 +8,14 @@ class Exam(models.Model):
     exam_name = models.CharField(max_length=200)
     classroom = models.ForeignKey(classroom, related_name="classroom_exam", on_delete=models.CASCADE)
     total_marks = models.IntegerField(default=0)
-    time_duration = models.IntegerField(default=0)
+    rules = models.CharField(max_length=100, default='Add some exam rules')
+    submission_time = models.DateTimeField(blank=True, null=True)
+    posted_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     submitted = models.ManyToManyField(User, related_name="submitted", blank=True)
-    status = models.BooleanField(default=0)
+
+    @property
+    def status(self):
+        return datetime.now() < self.submission_time
 
     def __str__(self):
         return self.exam_name
@@ -22,8 +28,8 @@ class Question(models.Model):
     option2 = models.CharField(max_length=100)
     option3 = models.CharField(max_length=100)
     option4 = models.CharField(max_length=100)
-    choose = (('A', 'option1'), ('B', 'option2'), ('C', 'option3'), ('D', 'option4'))
-    answer = models.CharField(max_length=1, choices=choose)
+    choose = (('Exam', 'option1'), ('B', 'option2'), ('C', 'option3'), ('D', 'option4'))
+    answer = models.CharField(max_length=4, choices=choose)
     duration = models.IntegerField(default=0)
 
     def __str__(self):
