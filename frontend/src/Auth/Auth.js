@@ -52,8 +52,8 @@ const useStyles = makeStyles(theme=> ({
         justifyContent: "center"
     },
     loginSuccessIcon: {
-        width: theme.spacing(10),
-        height: theme.spacing(10),
+        width: theme.spacing(8),
+        height: theme.spacing(8),
         marginBottom: theme.spacing(5),
         background: theme.palette.success.main
     },
@@ -87,7 +87,7 @@ const Auth = (props) => {
         <Fade in={props.open}>
                 <FormGroup className={classes.formGroup} aria-autocomplete={"none"}>
                     <FormControl>
-                        <Avatar className={classes.formIcon}><AccountCircleIcon/></Avatar>
+                        <Avatar className={classes.formIcon}><AccountCircleIcon style={{fontSize: 40}}/></Avatar>
                     </FormControl>
                     <FormControl className={classes.formItem}>
                         <TextField name="username" variant="outlined" label="username" onChange={(event)=>onChangeHandler(event)}/>
@@ -102,7 +102,7 @@ const Auth = (props) => {
 
     const loginSuccess = (
         <Box className={classes.loginSuccess}>
-            <Avatar className={classes.loginSuccessIcon}><CheckCircleIcon/></Avatar>
+            <Avatar className={classes.loginSuccessIcon}><CheckCircleIcon fontSize="large"/></Avatar>
             <Typography variant="h4" className={classes.loginSuccessText}>Success</Typography>
             <Button onClick={()=>props.onClose()} variant="contained" color="primary" size="large">OK</Button>
         </Box>

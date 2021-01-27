@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme=>({
         margin: theme.spacing(2),
         '& h4': {
             fontFamily: "Playfair Display, serif",
-            fontWeight: 600
+            fontWeight: 500
         },
         '& h6': {
             fontFamily: "Poppins,sans-serif",

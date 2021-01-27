@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme=> ({
     },
     bodyContents: {
         width: "80%",
-        height: "30rem",
+        minHeight: "30rem",
         boxShadow: theme.shadows[2],
         marginLeft: theme.spacing(1),
         borderRadius: '5px'
