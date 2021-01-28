@@ -35,11 +35,10 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
-
 class Participants(models.Model):
     exam_name = models.ForeignKey(Exam, related_name="participants", on_delete=models.CASCADE)
     student_name = models.ForeignKey(User, on_delete=models.CharField)
     obtain_marks = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.student_name
+        return self.student_name.username

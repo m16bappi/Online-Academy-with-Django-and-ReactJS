@@ -6,10 +6,9 @@ class ExamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exam
-        fields = ['exam_name', 'total_marks', 'time_duration', 'submitted']
+        fields = ['id', 'exam_name', 'total_marks', 'time_duration', 'submitted']
 
 class CreateExamSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Exam
         fields = '__all__'
@@ -19,7 +18,7 @@ class ExamListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exam
-        fields = ['exam_name', 'total_marks', 'rules', 'posted_time', 'submission_time', 'status', 'submitted']
+        fields = ['id', 'exam_name', 'total_marks', 'rules', 'posted_time', 'submission_time', 'status', 'submitted']
 
 class QuestionSerializer(serializers.ModelSerializer):
     exam_name = serializers.StringRelatedField()
@@ -32,7 +31,14 @@ class CreateQuestionSerializer(serializers.ModelSerializer):
     pass
 
 class ParticipantSerializer(serializers.ModelSerializer):
-    pass
+    exam_name = serializers.StringRelatedField()
+    student_name = serializers.StringRelatedField()
+
+    class Meta:
+        model = Participants
+        fields = '__all__'
 
 class CreateParticipantSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = Participants
+        fields = '__all__'

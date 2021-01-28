@@ -13,6 +13,7 @@ class BlogsListSerializer(serializers.ModelSerializer):
 
 class BlogsSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField()
+
     class Meta:
         model = Blogs
         fields = ['id', 'author', 'title', 'blog', 'likes']
