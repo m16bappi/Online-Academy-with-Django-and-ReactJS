@@ -1,6 +1,17 @@
 import * as Types from '../../Types/AuthTypes';
 import Axios from 'axios';
+import Cookies from "js-cookie";
 
+const csrftoken = Cookies.get('csrftoken')
+
+const CONFIG = () => {
+    return {
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        }
+    }
+}
 
 export const LOGIN_FAILD = (error) => dispatch => {
     console.log(error);
@@ -21,7 +32,7 @@ export const USER_LOADING = () => (dispatch, getState) => {
 };
 
 export const USER_LOGIN = (username, password) => dispatch => {
-    Axios.post(`api/auth/login/`, { username, password })
+    Axios.post(`api/auth/login/`, { username, password }, CONFIG())
         .then(res => {
             dispatch({
                 type: Types.LOGIN_SUCCESS,
@@ -44,7 +55,7 @@ export const TOKEN_CONFIG = getState => {
     const token = getState().Auth.token
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         }
     }
 

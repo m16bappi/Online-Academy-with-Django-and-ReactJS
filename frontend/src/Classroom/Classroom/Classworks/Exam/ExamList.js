@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Box, Button, Collapse, Divider, makeStyles, Typography} from "@material-ui/core";
 import Exam from "./Exam";
+import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles(theme=>({
     listItemRoot: {
@@ -49,14 +50,21 @@ const works = ['work1', 'work2', 'work3', 'work4', 'work5', "work6"]
 
 const ExamList = (props) => {
     const classes = useStyles()
+    const params = useParams().className
     const [collapse, setCollapse] = useState({})
     const [exam, setExam] = useState(false)
+    const [examName, setExamName] = useState()
 
-    const collapseHandler = (index) => {
+    const collapseHandler = (index, exam_name) => {
         setCollapse({[index]: !collapse[index]})
+        setExamName(exam_name)
     }
     const examModalHandler = () => {
         setExam(false)
+    }
+
+    const startExamHandler = () => {
+        setExam(true)
     }
 
     return(
@@ -66,7 +74,7 @@ const ExamList = (props) => {
                 <br/>
                 {props.examlist.map((item, index)=> (
                     <Box key={index} className={collapse[index]?`${classes.listItemRoot} ${classes.active}`:classes.listItemRoot}>
-                        <Box className={classes.listItem} onClick={item.status? ()=>collapseHandler(index): null} >
+                        <Box className={classes.listItem} onClick={item.status? ()=>collapseHandler(index, item.exam_name): null} >
                             <Typography variant="h6">{item.exam_name}</Typography>
                             {item.status ?
                                 <Typography>{new Date(item.submission_time).toLocaleString().split('T')[0]}</Typography>
@@ -79,19 +87,20 @@ const ExamList = (props) => {
                                 <Divider />
                                 <Box component="p">posted time: {new Date(item.posted_time).toLocaleDateString().split('T')[0]}</Box>
                                 <Box component="p">
-                                    Read carefully and answer the questions.<br/>
-                                    Answer Script should be in id.pdf format.<br/>
-                                    Don't Overwrite. Discuss your specific understanding in brief(possibly 6/10 lines max).
+                                    1. Read carefully and answer the questions.<br/>
+                                    2. You have to complete on time.<br/>
+                                    3. Every next question come after a countdown.<br/>
+                                    4. Mark the correct answer and hit next for next questions.
                                 </Box>
                                 <Divider />
                                 <Box component="div">
                                     <Button variant="outlined" color="secondary"
-                                    onClick={()=>setExam(true)}
+                                    onClick={()=>startExamHandler()}
                                     >Start</Button>
                                 </Box>
                             </Box>
+                            {exam ? <Exam open={exam} onClose={()=>examModalHandler()} exam_name={examName}/> : null}
                         </Collapse>
-                        <Exam open={exam} onClose={()=>examModalHandler()} exam_name={item.exam_name}/>
                     </Box>
                 ))}
         </Box>

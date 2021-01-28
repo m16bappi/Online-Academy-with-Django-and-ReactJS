@@ -22,7 +22,11 @@ class ExamListSerializer(serializers.ModelSerializer):
         fields = ['exam_name', 'total_marks', 'rules', 'posted_time', 'submission_time', 'status', 'submitted']
 
 class QuestionSerializer(serializers.ModelSerializer):
-    pass
+    exam_name = serializers.StringRelatedField()
+
+    class Meta:
+        model = Question
+        fields = '__all__'
 
 class CreateQuestionSerializer(serializers.ModelSerializer):
     pass

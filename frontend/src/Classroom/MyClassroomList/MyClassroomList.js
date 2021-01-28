@@ -29,8 +29,6 @@ const MyClassroom = (props) => {
         return Math.floor(Math.random()*headerImageList.length)
     }
 
-    console.log(props)
-
     return(
         <Container className={classes.root}>
             {props.myclassroom.map((item, index)=> (

@@ -1,11 +1,12 @@
-import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST,
+import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_QUESTIONS,
     GET_CLASSROOMS, GET_EXAM_LIST} from "../../Types/ClassroomTypes";
 
 const initialState = {
     intakeclassroomlist: [],
     myclassroomlist: [],
     classroom: {},
-    examlist: []
+    examlist: [],
+    questions: []
 }
 
 export default function (state=initialState, action) {
@@ -36,6 +37,13 @@ export default function (state=initialState, action) {
             return {
                 ...state,
                 examlist: action.payload
+            }
+        }
+        case GET_QUESTIONS:
+        {
+            return {
+                ...state,
+                questions: action.payload
             }
         }
         default:

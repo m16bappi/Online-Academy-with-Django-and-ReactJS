@@ -1,5 +1,5 @@
 import { render } from "react-dom";
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment} from "react";
 import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {CssBaseline, ThemeProvider} from "@material-ui/core";
@@ -14,7 +14,8 @@ import Programs from "./Programs/Programs";
 import Header from "./Header/Header";
 import ClassroomList from "./Classroom/ClassroomList/ClassroomList";
 import MyClassroom from "./Classroom/MyClassroomList/MyClassroomList";
-import InsideClassroom from "./Classroom/Classroom/Classroom";
+import Classroom from "./Classroom/Classroom/Classroom";
+import PrivateRoute from "./Route/PrivateRoute";
 
 
 class App extends Component {
@@ -32,7 +33,7 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/myClassroom' component={MyClassroom}/>
-                <Route exact path='/myClassroom/:className' component={InsideClassroom} />
+                <Route exact path='/myClassroom/:className' component={Classroom} />
                 <Route exact path='/programs' component={Programs}/>
                 <Route exact path='/programs/:name' component={ClassroomList}/>
               </Switch>

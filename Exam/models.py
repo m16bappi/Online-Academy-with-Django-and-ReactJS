@@ -9,7 +9,7 @@ class Exam(models.Model):
     classroom = models.ForeignKey(classroom, related_name="classroom_exam", on_delete=models.CASCADE)
     total_marks = models.IntegerField(default=0)
     rules = models.CharField(max_length=100, default='Add some exam rules')
-    submission_time = models.DateTimeField(blank=True, null=True)
+    submission_time = models.DateTimeField(blank=True, null=True, editable=True)
     posted_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     submitted = models.ManyToManyField(User, related_name="submitted", blank=True)
 
@@ -28,7 +28,7 @@ class Question(models.Model):
     option2 = models.CharField(max_length=100)
     option3 = models.CharField(max_length=100)
     option4 = models.CharField(max_length=100)
-    choose = (('Exam', 'option1'), ('B', 'option2'), ('C', 'option3'), ('D', 'option4'))
+    choose = (('A', 'option1'), ('B', 'option2'), ('C', 'option3'), ('D', 'option4'))
     answer = models.CharField(max_length=4, choices=choose)
     duration = models.IntegerField(default=0)
 
