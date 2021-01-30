@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from Classroom.models import classroom
 from .models import Exam, Participants
-from .serializers import (ExamListSerializer, QuestionSerializer, ParticipantSerializer, CreateParticipantSerializer)
+from .serializers import (ExamListSerializer, QuestionSerializer, ParticipantSerializer)
 
 
 class ExamAPIView(views.APIView):
@@ -32,6 +32,16 @@ class QuestionAPIView(generics.ListAPIView):
 
 class participantAPIView(views.APIView):
     def post(self, request, *args, **kwargs):
-        exam_object = Exam.objects.get(id=request.data.get('id'))
+        exam_object = Exam.objects.get(id=request.data.get('exam_id'))
+        if exam_object.submitted.filter(id=self.request.user.id).exists():
+            pass
+        else:
+            exam_object.submitted.add(self.request.user)
         participant = Participants.objects.create(exam_name=exam_object, student_name=self.request.user, obtain_marks=request.data.get('obtain_marks'))
         return Response(ParticipantSerializer(participant).data)
+
+class participantListAPIView(generics.ListAPIView):
+    serializer_class = ParticipantSerializer
+
+    def get_queryset(self):
+        return Exam.objects.get(id=self.kwargs['id']).participants.all().distinct()

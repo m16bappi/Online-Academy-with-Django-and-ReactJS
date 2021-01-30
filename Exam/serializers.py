@@ -37,8 +37,3 @@ class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participants
         fields = '__all__'
-
-class CreateParticipantSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Participants
-        fields = '__all__'

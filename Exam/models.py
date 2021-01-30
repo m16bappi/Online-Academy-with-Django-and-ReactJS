@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from Classroom.models import classroom
 
-
 class Exam(models.Model):
     exam_name = models.CharField(max_length=200)
     classroom = models.ForeignKey(classroom, related_name="classroom_exam", on_delete=models.CASCADE)

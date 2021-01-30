@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {Box, makeStyles} from "@material-ui/core";
 
-import {getExamList} from "../../../../store/Actions/Classroom/Classroom";
+import {getExamList, get_assignments} from "../../../../store/Actions/Classroom/Classroom";
 import ExamList from "./Exam/ExamList";
 import AssignmentList from "./Assignment/AssignmentList";
 import {useParams} from "react-router-dom";
@@ -36,12 +36,13 @@ const Classworks = (props) => {
 
     useEffect(()=>{
         props.getExamList(params.className)
+        props.get_assignments(params.className)
     }, [])
 
     return(
         <Box className={classes.root}>
             <Box className={classes.quiz}>
-                <ExamList examlist={props.examlist}/>
+                <ExamList />
             </Box>
             <Box className={classes.assignment}>
                 <AssignmentList />
@@ -50,10 +51,4 @@ const Classworks = (props) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        examlist: state.Classroom.examlist
-    }
-}
-
-export default connect(mapStateToProps, {getExamList})(Classworks)
+export default connect(null,{getExamList, get_assignments})(Classworks)

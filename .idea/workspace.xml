@@ -93,12 +93,17 @@
       <workItem from="1611475153671" duration="51884000" />
       <workItem from="1611640390348" duration="64218000" />
       <workItem from="1611804047235" duration="28041000" />
-      <workItem from="1611850915139" duration="11671000" />
+      <workItem from="1611850915139" duration="11672000" />
+      <workItem from="1611892867715" duration="21478000" />
+      <workItem from="1611974941967" duration="12676000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.gitignore" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

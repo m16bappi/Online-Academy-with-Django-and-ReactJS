@@ -1,6 +1,7 @@
-from rest_framework import viewsets, permissions, generics
+from rest_framework import permissions, generics
 from rest_framework.response import Response
-from .models import Blogs, Comments
+
+from .models import Blogs
 from .serializers import BlogsSerializer, BlogsListSerializer
 
 

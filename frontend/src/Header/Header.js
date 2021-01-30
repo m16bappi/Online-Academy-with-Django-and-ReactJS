@@ -51,7 +51,7 @@ const Header = (props) => {
                 </Toolbar>
             </AppBar>
             <Toolbar />
-            <Auth open={auth} onClose={()=>setAuth(false)}/>
+            {auth ? <Auth open={auth} onClose={()=>setAuth(false)}/>:null}
             <Drawer anchor={"left"} open={sidebar} onClose={()=>setSidebar(false)}><SideBar /></Drawer>
         </Box>
     )

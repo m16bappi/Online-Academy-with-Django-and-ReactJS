@@ -11,7 +11,7 @@ import {
     RadioGroup, FormControlLabel, Radio
 } from "@material-ui/core";
 import {connect} from "react-redux";
-import {getQuestions} from "../../../../../store/Actions/Classroom/Classroom";
+import {getQuestions, postParticipants} from "../../../../../store/Actions/Classroom/Classroom";
 import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles(theme=> ({
@@ -56,7 +56,7 @@ const Exam = (props) => {
     const [marks, setMarks] = useState(0)
 
     useEffect(()=> {
-        props.getQuestions(params, props.exam_name)
+        props.getQuestions(params, props.exam_name.exam_name)
     }, [])
 
     const onNextQuestion = (mark, answer) => {
@@ -66,7 +66,8 @@ const Exam = (props) => {
         }
     }
 
-    const onSubmitHandler = (mark, answer) => {
+    const onSubmitHandler = () => {
+        props.postParticipants(props.exam_name.exam_id, marks)
         props.onClose()
     }
 
@@ -82,7 +83,7 @@ const Exam = (props) => {
             <Fade in={props.open}>
                 <Box className={classes.container}>
                     <Box className={classes.containerHeader}>
-                        <Typography variant="h4">{props.exam_name}</Typography>
+                        <Typography variant="h4">{props.exam_name.exam_name}</Typography>
                     </Box>
                     {props.questions.length > index ?
                         <Box className={classes.containerBody}>
@@ -115,4 +116,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getQuestions})(Exam)
+export default connect(mapStateToProps, {getQuestions, postParticipants})(Exam)
