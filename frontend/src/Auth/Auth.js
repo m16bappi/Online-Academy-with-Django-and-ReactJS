@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme=> ({
         background: "white",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        outline: "none"
     },
     formIcon: {
         marginTop: theme.spacing(7),
@@ -49,7 +50,8 @@ const useStyles = makeStyles(theme=> ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        outline: "none"
     },
     loginSuccessIcon: {
         width: theme.spacing(8),
@@ -95,7 +97,9 @@ const Auth = (props) => {
                     <FormControl className={classes.formItem}>
                         <TextField name="password" variant="outlined" label="password" onChange={(event)=>onChangeHandler(event)}/>
                     </FormControl>
-                    <Button variant="contained" color="primary" onClick={onSubmitHandler} className={classes.formItem}>login</Button>
+                    <FormControl>
+                        <Button variant="contained" color="primary" onClick={onSubmitHandler} className={classes.formItem}>login</Button>
+                    </FormControl>
                 </FormGroup>
             </Fade>
     )
@@ -110,7 +114,7 @@ const Auth = (props) => {
 
     return(
         <Modal open={props.open} onClose={()=>props.onClose()} className={classes.root}
-        closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}}
+        closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}} disableEnforceFocus={true}
         >
             {isAuthenticated? loginSuccess: loginForm}
         </Modal>

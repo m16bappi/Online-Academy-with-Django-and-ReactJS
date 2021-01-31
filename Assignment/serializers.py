@@ -3,11 +3,10 @@ from .models import assignments, assignment_participants
 
 class assignmentSerializer(serializers.ModelSerializer):
     submitted = serializers.StringRelatedField(many=True)
-    classroom = serializers.StringRelatedField()
 
     class Meta:
         model = assignments
-        fields = '__all__'
+        fields = ['id', 'title', 'body', 'posted_time', 'submission_time', 'submitted', 'status']
 
 class createAssignmentSerializer(serializers.ModelSerializer):
     class Meta:

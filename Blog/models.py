@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Blogs(models.Model):
     author = models.ForeignKey(User, related_name='blog_author', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
+    cover = models.ImageField(default='BlogHeader.jpg', upload_to='blog_covers')
     blog = models.TextField()
     created_time = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='blog_likers', blank=True)

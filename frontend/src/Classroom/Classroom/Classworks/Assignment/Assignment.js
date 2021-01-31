@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import {connect} from "react-redux";
-import {Backdrop, Box, Modal, Fade, makeStyles, Typography, Button, Input} from "@material-ui/core";
+import {Backdrop, Box, Modal, Fade, makeStyles, Typography, Button, Input, FormControl} from "@material-ui/core";
+
+import {post_assignment_answer} from "../../../../../store/Actions/Classroom/Classroom";
 
 const useStyles = makeStyles(theme=> ({
     root: {
@@ -54,6 +56,16 @@ const useStyles = makeStyles(theme=> ({
 
 const Assignment = (props) => {
     const classes = useStyles()
+    const [value, setValue] = useState(false)
+    const [file, setFile] = useState()
+
+    const onsubmitHandler = () => {
+        const data = new FormData()
+        data.append('id', props.item.id)
+        data.append('file', file, file.name)
+        props.post_assignment_answer(data)
+        setValue(true)
+    }
 
     return(
         <Modal open={props.open} className={classes.root}
@@ -69,17 +81,27 @@ const Assignment = (props) => {
                             {props.item.body}
                         </Box>
                     </Box>
-                    <Box className={classes.containerFooter}>
-                        <Input type="file"/>
-                        <Box component="div">
-                            <Button onClick={()=>props.onclose()} variant="contained" color="primary">submit</Button>
+
+                    {props.item.submitted.includes(props.username)?
+                        <Box className={classes.containerFooter}>
+                            <Typography variant="h6">Submitted</Typography>
                             <Button onClick={()=>props.onclose()} variant="contained" color="secondary">close</Button>
                         </Box>
-                    </Box>
+                            :
+                        <form className={classes.containerFooter} onSubmit={()=>onsubmitHandler()}>
+                                <FormControl required>
+                                    <Input type="file" disabled={value} onChange={event => setFile(event.target.files[0])}/>
+                                </FormControl>
+                                <Box component="div">
+                                    <Button type="submit" variant="contained" color="primary" disabled={value}>submit</Button>
+                                    <Button onClick={()=>props.onclose()} variant="contained" color="secondary">close</Button>
+                                </Box>
+                        </form>
+                    }
                 </Box>
             </Fade>
         </Modal>
     )
 }
 
-export default Assignment
+export default connect(null, {post_assignment_answer})(Assignment)

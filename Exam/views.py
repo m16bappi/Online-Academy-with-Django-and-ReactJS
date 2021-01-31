@@ -1,5 +1,4 @@
 from rest_framework import generics, views, permissions
-from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.response import Response
 
 from Classroom.models import classroom

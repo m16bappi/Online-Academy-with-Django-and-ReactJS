@@ -34,10 +34,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.19.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/media" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mehedi\Desktop\BUBT\media" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\Classroom\Classworks\Exam" />
       <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\Classroom\Classworks\Exam\ExamList" />
@@ -95,7 +98,8 @@
       <workItem from="1611804047235" duration="28041000" />
       <workItem from="1611850915139" duration="11672000" />
       <workItem from="1611892867715" duration="21478000" />
-      <workItem from="1611974941967" duration="12676000" />
+      <workItem from="1611974941967" duration="34866000" />
+      <workItem from="1612064878810" duration="6630000" />
     </task>
     <servers />
   </component>

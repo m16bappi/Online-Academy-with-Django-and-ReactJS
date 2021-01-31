@@ -1,5 +1,7 @@
 import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_QUESTIONS,
-    GET_CLASSROOMS, GET_EXAM_LIST, PARTICIPANTS_LIST, POST_PARTICIPANTS, GET_ASSIGNMENTS} from "../../Types/ClassroomTypes";
+    GET_CLASSROOMS, GET_EXAM_LIST, PARTICIPANTS_LIST, POST_PARTICIPANTS,
+    GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER} from "../../Types/ClassroomTypes";
+
 import {USER_LOGOUT} from "../../Types/AuthTypes";
 
 const initialState = {
@@ -8,8 +10,9 @@ const initialState = {
     classroom: {},
     examlist: [],
     questions: [],
-    participants: [],
-    assignments: []
+    exam_participants: [],
+    assignments: [],
+    assignment_submit: []
 }
 
 export default function (state=initialState, action) {
@@ -77,6 +80,19 @@ export default function (state=initialState, action) {
                 assignments: action.payload
             }
         }
+        case POST_ASSIGNMENT_ANSWER:
+        {
+            return {
+                ...state,
+                assignments: state.assignments.map(item=> {
+                    if(item.id === action.id){
+                        item.submitted.push(action.user)
+                    }
+                    return item
+                }),
+                assignment_submit: [...state.assignment_submit, action.payload]
+            }
+        }
         case USER_LOGOUT:
         {
             return {
@@ -85,8 +101,9 @@ export default function (state=initialState, action) {
                 classroom: {},
                 examlist: [],
                 questions: [],
-                participants: [],
-                assignments: []
+                exam_participants: [],
+                assignments: [],
+                assignment_submit: []
             }
         }
         default:

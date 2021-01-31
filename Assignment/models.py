@@ -14,7 +14,7 @@ class assignments(models.Model):
 
     @property
     def status(self):
-        return datetime.now() > self.submission_time
+        return datetime.now() < self.submission_time
 
     def __str__(self):
         return self.title

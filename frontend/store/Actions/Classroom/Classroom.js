@@ -1,7 +1,7 @@
 import Axios from "axios";
 import Cookies from "js-cookie"
 import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_CLASSROOMS, GET_EXAM_LIST,
-    GET_QUESTIONS, PARTICIPANTS_LIST, POST_PARTICIPANTS, GET_ASSIGNMENTS} from "../../Types/ClassroomTypes";
+    GET_QUESTIONS, PARTICIPANTS_LIST, POST_PARTICIPANTS, GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER} from "../../Types/ClassroomTypes";
 
 const csrftoken = Cookies.get('csrftoken');
 
@@ -19,6 +19,16 @@ const TOKEN_CONFIG = (getState) => {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Token ${getState().Auth.token}`
+        }
+    }
+}
+
+const FILE_UPLOAD_CONFIG = (getState) => {
+    return {
+        headers: {
+            'Content-Type': ['multipart/form-data', 'application/json'],
+            'Authorization': `Token ${getState().Auth.token}`,
+            'X-CSRFToken': csrftoken
         }
     }
 }
@@ -102,6 +112,18 @@ export const get_assignments = (classroom) => dispatch => {
             dispatch({
                 type: GET_ASSIGNMENTS,
                 payload: res.data
+            })
+        }) .catch(error => console.log(error))
+}
+
+export const post_assignment_answer = (data) => (dispatch, getState) => {
+    Axios.post(`api/classroom/assignment/participant/`, data, FILE_UPLOAD_CONFIG(getState))
+        .then(res => {
+            dispatch({
+                type: POST_ASSIGNMENT_ANSWER,
+                payload: res.data,
+                user: getState().Auth.user.username,
+                id: data.id
             })
         }) .catch(error => console.log(error))
 }

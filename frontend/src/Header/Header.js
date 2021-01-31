@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme=>({
 
 const Header = (props) => {
     const classes = useStyles()
-    const history = useHistory()
     const [sidebar, setSidebar] = useState(false)
     const [auth, setAuth] = useState(false)
 
@@ -31,7 +30,6 @@ const Header = (props) => {
 
     const user_logout = () =>{
         props.USER_LOGOUT()
-        history.push(`/`)
     }
 
     const login = (<Button variant={"outlined"} color={"inherit"} onClick={()=>setAuth(true)}>Login</Button>)

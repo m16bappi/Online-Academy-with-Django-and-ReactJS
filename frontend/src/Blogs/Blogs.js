@@ -1,12 +1,28 @@
 import React from "react";
 import {connect} from "react-redux";
 import {GET_BLOGS, ADD_BLOGS} from "../../store/Actions/Blogs/Blogs";
-import {Box} from "@material-ui/core";
+import {Box, makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+    root: {}
+}))
 
 const Blogs = () => {
+    const classes = useStyles()
+
     return(
         <Box>
-            Blogs
+           <Box>
+               Header
+           </Box>
+           <Box>
+               <Box>
+                   Blogs
+               </Box>
+               <Box>
+                   Category
+               </Box>
+           </Box>
         </Box>
     )
 }

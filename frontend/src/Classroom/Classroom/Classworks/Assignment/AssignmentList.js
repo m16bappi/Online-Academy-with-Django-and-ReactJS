@@ -26,24 +26,6 @@ const useStyles = makeStyles(theme=>({
             transition: "0.3s",
             cursor: "pointer"
         }
-    },
-    listItemCollapse: {
-        minHeight: "5rem",
-        paddingLeft: theme.spacing(2),
-        paddingRight:theme.spacing(2),
-        '& p': {
-            fontFamily: "Poppins,sans-serif",
-            fontWeight: 600
-        },
-        '& div': {
-            height: "3rem",
-            display: "flex",
-            justifyContent: "start",
-            alignItems: "center"
-        }
-    },
-    active: {
-        boxShadow: theme.shadows[2]
     }
 }))
 
@@ -62,11 +44,16 @@ const AssignmentList = (props) => {
                 <Divider />
                 <br/>
                 {props.assignments.map((item, index)=> (
-                    <Box className={classes.listItem} key={index} onClick={()=>onClickHandler(item)}>
+                    <Box className={classes.listItem} key={index} onClick={item.status ? ()=>onClickHandler(item):null}>
                         <Typography variant="h6">{item.title}</Typography>
+                        {item.status ?
+                            <Typography>{new Date(item.submission_time).toLocaleString().split('T')[0]}</Typography>
+                                :
+                            <Typography>Time over</Typography>
+                        }
                     </Box>
                 ))}
-                {value ? <Assignment open={value} onclose={()=>setValue(false)} item={state}/>:null}
+                {value ? <Assignment open={value} onclose={()=>setValue(false)} item={state} username={props.username}/>:null}
         </Box>
     )
 }
