@@ -35,6 +35,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="12.19.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/media" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -99,7 +100,10 @@
       <workItem from="1611850915139" duration="11672000" />
       <workItem from="1611892867715" duration="21478000" />
       <workItem from="1611974941967" duration="34866000" />
-      <workItem from="1612064878810" duration="6630000" />
+      <workItem from="1612064878810" duration="7227000" />
+      <workItem from="1612106441171" duration="2194000" />
+      <workItem from="1612110237675" duration="1311000" />
+      <workItem from="1612188790724" duration="7678000" />
     </task>
     <servers />
   </component>
