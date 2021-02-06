@@ -46,7 +46,8 @@ const useStyles = makeStyles(theme=>({
             textAlign: "center",
             fontWeight: 500,
             '&:hover': {
-                color: "tomato"
+                color: "tomato",
+                cursor: "pointer"
             }
         },
         '& h6': {

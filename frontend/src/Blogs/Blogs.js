@@ -5,6 +5,8 @@ import {Box, makeStyles} from "@material-ui/core";
 import BlogItem from "./BlogItem/Blogitem";
 
 import BlogImage from "./BlogImage/BlogHeader.jpg";
+import Filter from "./Filter";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,7 +27,8 @@ const useStyles = makeStyles(theme => ({
         }
     },
     filter: {
-        width: "auto"
+        width: "30%",
+        height: "auto"
     }
 }))
 
@@ -42,7 +45,7 @@ const Blogs = () => {
                <BlogItem image={BlogImage}/>
            </Box>
            <Box className={classes.filter}>
-               Category
+               <Filter />
            </Box>
         </Box>
     )
