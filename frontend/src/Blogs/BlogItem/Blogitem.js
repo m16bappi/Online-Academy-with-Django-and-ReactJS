@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme=>({
     image: {
         height: "25rem",
         width: "100%",
-        [theme.breakpoints.down('md')] : {
+        [theme.breakpoints.down('sm')] : {
             height: "15rem"
         }
     },
@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme=>({
             fontWeight: 600,
             textAlign: "justify"
         },
-        [theme.breakpoints.down('md')] : {
+        [theme.breakpoints.down('sm')] : {
             width: "100%",
             margin: 0,
             height: "28rem"

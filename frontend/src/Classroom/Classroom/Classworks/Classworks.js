@@ -9,9 +9,10 @@ import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles(theme=>({
     root: {
-        marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
+        boxShadow: theme.shadows[2],
+        padding: theme.spacing(2),
+        width: "100%",
+        minHeight: "30rem",
         '& h4': {
             fontFamily: "Playfair Display, serif",
             fontWeight: 500

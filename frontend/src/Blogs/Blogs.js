@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         flexDirection: "row",
         gap: "3rem",
-        [theme.breakpoints.down('md')] : {
+        [theme.breakpoints.down('sm')] : {
             flexDirection: "column-reverse"
         }
     },
@@ -22,13 +22,16 @@ const useStyles = makeStyles(theme => ({
         width: "70%",
         display: "flex",
         flexDirection: "column",
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
             width: "100%"
         }
     },
     filter: {
         width: "30%",
-        height: "auto"
+        height: "auto",
+        [theme.breakpoints.down("sm")]: {
+            width: "100%"
+        }
     }
 }))
 

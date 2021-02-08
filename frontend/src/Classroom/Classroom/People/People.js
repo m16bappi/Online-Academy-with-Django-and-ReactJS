@@ -4,7 +4,10 @@ import {Avatar, Box, Divider, ListItem, ListItemAvatar, ListItemText, makeStyles
 
 const useStyles = makeStyles(theme=>({
     root: {
-        margin: theme.spacing(2),
+        boxShadow: theme.shadows[2],
+        width: "100%",
+        minHeight: "30rem",
+        padding: theme.spacing(2),
         '& h4': {
             fontFamily: "Playfair Display, serif",
             fontWeight: 500
@@ -37,17 +40,17 @@ const People = (props) => {
             <Typography variant='h4'>Teacher</Typography>
             <Divider />
             <Box className={classes.listItems}>
-                <Avatar>{props.peoples.course_teacher.charAt(0)}</Avatar>
-                <Typography variant="h6">{props.peoples.course_teacher}</Typography>
+                <Avatar>{props.peoples["course_teacher"].charAt(0)}</Avatar>
+                <Typography variant="h6">{props.peoples["course_teacher"]}</Typography>
             </Box>
 
             <Box className={classes.studentHeader}>
                 <Typography variant="h4">Students</Typography>
-                <Typography variant='h4'>{props.peoples.students.length}</Typography>
+                <Typography variant='h4'>{props.peoples["students"].length}</Typography>
             </Box>
             <Divider />
 
-            {props.peoples.students.map((items, index)=>(
+            {props.peoples["students"].map((items, index)=>(
                 <Box className={classes.listItems} key={index}>
                     <Avatar>{items.charAt(0)}</Avatar>
                     <Typography variant="h6">{items}</Typography>

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
-import {Box, Button, CardMedia, Container, makeStyles, Tab, Tabs, Typography, useTheme,} from "@material-ui/core";
+import {Box, Button, CardMedia, Container, makeStyles, Tab, Tabs, Typography} from "@material-ui/core";
 import {GET_CLASSROOM} from "../../../store/Actions/Classroom/Classroom";
-import SwitchVideoIcon from '@material-ui/icons/SwitchVideo';
+import VideocamIcon from '@material-ui/icons/Videocam';
 
 import Stream from "./Stream/Stream";
 import People from "./People/People";
 import Classworks from "./Classworks/Classworks";
-import header from "../../../../res/my_classroom_header/inside_classroom_header.jpg";
+import header from "../classroomImages/img2.jpg";
 
 const useStyles = makeStyles(theme=> ({
     header: {
@@ -19,8 +19,7 @@ const useStyles = makeStyles(theme=> ({
     },
     headerImage: {
         height: "20rem",
-        position: "relative",
-        borderBottom: "5px solid tomato"
+        position: "relative"
     },
     headerContent: {
         position: "absolute",
@@ -29,7 +28,8 @@ const useStyles = makeStyles(theme=> ({
         transform: "translate(-50%, -50%)",
         '& h4': {
             fontFamily: "Oswald, sans-serif",
-            fontWeight: 800
+            fontWeight: 800,
+            color: "white"
         }
     },
     headerActionContent: {
@@ -47,6 +47,7 @@ const useStyles = makeStyles(theme=> ({
     body: {
         display: "flex",
         flexDirection: "row",
+        gap: theme.spacing(2),
         marginTop: theme.spacing(5)
     },
     bodyTabs: {
@@ -56,11 +57,7 @@ const useStyles = makeStyles(theme=> ({
         borderRadius: "5px"
     },
     bodyContents: {
-        width: "80%",
-        minHeight: "30rem",
-        boxShadow: theme.shadows[2],
-        marginLeft: theme.spacing(1),
-        borderRadius: '5px'
+        width: "80%"
     },
     tabItem: {
         fontFamily: "Playfair Display, serif",
@@ -72,7 +69,6 @@ const useStyles = makeStyles(theme=> ({
 const Classroom = (props) => {
     const classes = useStyles()
     const params = useParams()
-    const theme = useTheme()
     const [tab, setTab] = useState(0)
 
     useEffect(()=>{
@@ -87,8 +83,8 @@ const Classroom = (props) => {
                     <Typography variant="h4">{params.className}</Typography>
                 </Box>
                 <Box className={classes.headerActionContent}>
-                    <Typography variant="h6">class code: {props.classroom.class_code}</Typography>
-                    <Button endIcon={<SwitchVideoIcon/>} variant="contained" color="secondary">GO LIVE</Button>
+                    <Typography variant="h6">class code: {props.classroom["class_code"]}</Typography>
+                    <Button endIcon={<VideocamIcon/>} variant="outlined" color="primary">LIVE</Button>
                 </Box>
             </Box>
 

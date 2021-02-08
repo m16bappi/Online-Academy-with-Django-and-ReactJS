@@ -20,7 +20,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager">
     <configuration name="BUBT" type="Python.DjangoServer" factoryName="Django server">
@@ -61,7 +61,8 @@
       <workItem from="1612671029991" duration="749000" />
       <workItem from="1612689385755" duration="662000" />
       <workItem from="1612691470258" duration="1003000" />
-      <workItem from="1612762164033" duration="874000" />
+      <workItem from="1612762164033" duration="7927000" />
+      <workItem from="1612783029217" duration="5300000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {useHistory} from "react-router-dom";
 import {AppBar, Box, Button, Drawer, IconButton, makeStyles, Toolbar, Typography} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -33,7 +32,7 @@ const Header = (props) => {
     }
 
     const login = (<Button variant={"outlined"} color={"inherit"} onClick={()=>setAuth(true)}>Login</Button>)
-    const logout = (<Button variant={"contained"} color={"secondary"} onClick={()=>user_logout()}>logout</Button>)
+    const logout = (<Button variant={"outlined"} color={"inherit"} onClick={()=>user_logout()}>logout</Button>)
 
     return(
         <Box className={classes.root}>
