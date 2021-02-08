@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e26635b4-fa8b-43a0-a070-3c7288573d99" name="Default Changelist" comment="" />
+    <list default="true" id="74e2df8d-055d-4887-8e4e-d911e93e24c5" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,19 +10,7 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-        <option value="JavaScript File" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectId" id="1mxpi0ZVkfM9AcAnZz8WPOmDb0P" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1o8bAlOSbPuYkZedKkI1qA8XsDP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -30,29 +18,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.19.0" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.19.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/media" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Mehedi\Desktop\BUBT\media" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\Classroom\Classworks\Exam" />
-      <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\Classroom\Classworks\Exam\ExamList" />
-      <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\Classroom" />
-      <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\MyClassroomList" />
-      <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\MyClassroom" />
-    </key>
-  </component>
   <component name="RunManager">
-    <configuration name="academy" type="Python.DjangoServer" factoryName="Django server">
-      <module name="academy" />
+    <configuration name="BUBT" type="Python.DjangoServer" factoryName="Django server">
+      <module name="BUBT" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -76,61 +48,24 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e26635b4-fa8b-43a0-a070-3c7288573d99" name="Default Changelist" comment="" />
-      <created>1610445225360</created>
+      <changelist id="74e2df8d-055d-4887-8e4e-d911e93e24c5" name="Default Changelist" comment="" />
+      <created>1612671023611</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1610445225360</updated>
-      <workItem from="1610445227390" duration="207000" />
-      <workItem from="1610455796449" duration="294000" />
-      <workItem from="1610456549953" duration="3297000" />
-      <workItem from="1610465087718" duration="7059000" />
-      <workItem from="1610516166060" duration="8430000" />
-      <workItem from="1610608904424" duration="9479000" />
-      <workItem from="1610806510778" duration="18636000" />
-      <workItem from="1611147990433" duration="4084000" />
-      <workItem from="1611211736564" duration="10544000" />
-      <workItem from="1611290028734" duration="3729000" />
-      <workItem from="1611293827117" duration="6548000" />
-      <workItem from="1611475153671" duration="51884000" />
-      <workItem from="1611640390348" duration="64218000" />
-      <workItem from="1611804047235" duration="28041000" />
-      <workItem from="1611850915139" duration="11672000" />
-      <workItem from="1611892867715" duration="21478000" />
-      <workItem from="1611974941967" duration="34866000" />
-      <workItem from="1612064878810" duration="7227000" />
-      <workItem from="1612106441171" duration="2194000" />
-      <workItem from="1612110237675" duration="1311000" />
-      <workItem from="1612188790724" duration="7678000" />
-      <workItem from="1612248011702" duration="385000" />
-      <workItem from="1612332863550" duration="3023000" />
-      <workItem from="1612428654608" duration="32000" />
-      <workItem from="1612430030011" duration="9000" />
-      <workItem from="1612432808457" duration="142000" />
+      <updated>1612671023611</updated>
+      <workItem from="1612671029991" duration="749000" />
+      <workItem from="1612689385755" duration="662000" />
+      <workItem from="1612691470258" duration="1003000" />
+      <workItem from="1612762164033" duration="874000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="UnknownFeatures">
-    <option featureType="com.intellij.fileTypeFactory" implementationName="*.gitignore" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/BUBT$0001_initial.coverage" NAME="0001_initial Coverage Results" MODIFIED="1611211576312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Blog/migrations" />
   </component>
 </project>
