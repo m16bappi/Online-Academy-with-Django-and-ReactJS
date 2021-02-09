@@ -4,8 +4,12 @@ import {Box, makeStyles, TextField} from "@material-ui/core";
 const useStyles = makeStyles(theme => ({
     root: {
         width: "100%",
-        height: "auto"
-    }
+        height: "auto",
+        display: "flex",
+        flexDirection: "column",
+        gap: theme.spacing(2)
+    },
+    textArea: {}
 }))
 
 const Stream = (props) => {
@@ -16,7 +20,7 @@ const Stream = (props) => {
 
     return(
         <Box className={classes.root}>
-            <Box>
+            <Box className={classes.textArea}>
                 <TextField multiline={true}
                 rows={3} rowsMax={5} fullWidth={true} variant={"outlined"} color={"primary"}
                 />

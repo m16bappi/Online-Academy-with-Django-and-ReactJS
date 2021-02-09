@@ -10,6 +10,9 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="1o8bAlOSbPuYkZedKkI1qA8XsDP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -62,7 +65,9 @@
       <workItem from="1612689385755" duration="662000" />
       <workItem from="1612691470258" duration="1003000" />
       <workItem from="1612762164033" duration="7927000" />
-      <workItem from="1612783029217" duration="5300000" />
+      <workItem from="1612783029217" duration="7856000" />
+      <workItem from="1612810980572" duration="3027000" />
+      <workItem from="1612850964993" duration="4951000" />
     </task>
     <servers />
   </component>

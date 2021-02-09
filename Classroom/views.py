@@ -1,7 +1,7 @@
 import random
 import string
 
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions, views
 from rest_framework.response import Response
@@ -10,7 +10,7 @@ from Programs.models import program
 from Users.models import teacher, student
 from .models import classroom
 from .serializers import (classroomCreateSerializer, classroomJoinSerializer, classroomSerializer,
-                          classroomIntakeListSerializer, classroomListSerializer, myClassroomSerializer)
+                          classroomIntakeListSerializer, classroomListSerializer)
 
 
 class classroomCreateAPIView(generics.CreateAPIView):
@@ -104,6 +104,7 @@ class myClassroomAPIView(generics.ListAPIView):
             return classroom_list
         except ObjectDoesNotExist:
             return None
+
 
 class classroomAPIView(views.APIView):
     permission_classes = [

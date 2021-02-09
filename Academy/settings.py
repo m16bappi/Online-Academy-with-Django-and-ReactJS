@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'Programs',
     'Classroom',
     'Exam',
-    'Assignment'
+    'Assignment',
+    'Stream'
 ]
 
 
