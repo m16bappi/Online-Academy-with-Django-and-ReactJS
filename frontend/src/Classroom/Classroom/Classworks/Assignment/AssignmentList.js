@@ -47,7 +47,7 @@ const AssignmentList = (props) => {
                     <Box className={classes.listItem} key={index} onClick={item.status ? ()=>onClickHandler(item):null}>
                         <Typography variant="h6">{item.title}</Typography>
                         {item.status ?
-                            <Typography>{new Date(item.submission_time).toLocaleString().split('T')[0]}</Typography>
+                            <Typography>{new Date(item["submission_time"]).toLocaleString().split('T')[0]}</Typography>
                                 :
                             <Typography>Time over</Typography>
                         }
