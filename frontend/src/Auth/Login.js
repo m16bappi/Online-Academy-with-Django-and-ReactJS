@@ -8,7 +8,7 @@ import {
     Modal,
     TextField,
     Fade,
-    Box, FormGroup
+    Box, FormGroup, Link
 } from "@material-ui/core";
 import login from "./Icons/login.png";
 import register from "./Icons/register.png";
@@ -23,45 +23,47 @@ const useStyles = makeStyles(theme=> ({
         justifyContent: "center",
         alignItems: "center"
     },
-    formGroup: {
+    container: {
         width: "20rem",
         height: "30rem",
         background: "white",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: theme.spacing(2),
         outline: "none",
-        paddingLeft: "3rem",
-        paddingRight: "3rem",
         borderRadius: "5px"
     },
-    formIcon: {
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(5),
-        width: theme.spacing(12),
-        height: theme.spacing(12)
-    },
-    loginSuccess: {
-        width: "20rem",
-        height: "30rem",
-        background: "white",
+
+    formGroup: {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        outline: "none"
+        paddingLeft: "3rem",
+        paddingRight: "3rem",
+        '&>:nth-child(1)': {
+            marginTop: theme.spacing(5),
+            marginBottom: theme.spacing(5),
+            width: theme.spacing(12),
+            height: theme.spacing(12)
+        },
+        '&>:nth-child(5)': {
+            color: "grey",
+            fontSize: "larger",
+            alignSelf: "flex-end",
+            marginTop: theme.spacing(2)
+        }
+    },
+    loginSuccess: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
     },
     loginSuccessIcon: {
         width: theme.spacing(12),
         height: theme.spacing(12),
-        marginBottom: theme.spacing(5),
-        borderRadius: "5px"
+        marginBottom: theme.spacing(5)
     }
 }))
 
-
-const Auth = (props) => {
+const Login = (props) => {
     const classes = useStyles()
     const {isAuthenticated} = props.auth
     const [auth, setAuth] = useState({
@@ -109,16 +111,19 @@ const Auth = (props) => {
 
     const loginForm = (
         <Fade in={props.open}>
-                <FormGroup className={classes.formGroup} aria-autocomplete={"none"}>
-                    <Avatar src={"/static/bundles/"+login} variant={"square"} className={classes.formIcon}/>
-                    <TextField name="username" variant="outlined" label="username" fullWidth error={error.username}
-                               helperText={error.username ? 'Enter username': null}
-                               onChange={(event)=>onChangeHandler(event)}/>
-                    <TextField name="password" variant="outlined" label="password" fullWidth  error={error.password}
-                               helperText={error.password ? 'Enter password': null}
-                               onChange={(event)=>onChangeHandler(event)}/>
-                    <Button variant="contained" color="primary" onClick={onSubmitHandler} fullWidth>login</Button>
-                </FormGroup>
+                <Box className={classes.container}>
+                    <FormGroup className={classes.formGroup} aria-autocomplete={"none"}>
+                        <Avatar src={"/static/bundles/"+login} variant={"square"}/>
+                        <TextField name="username" variant="outlined" label="username" fullWidth error={error.username}
+                                   helperText={error.username ? 'Enter username': ' '}
+                                   onChange={(event)=>onChangeHandler(event)}/>
+                        <TextField name="password" variant="outlined" label="password" fullWidth  error={error.password}
+                                   helperText={error.password ? 'Enter password': ' '}
+                                   onChange={(event)=>onChangeHandler(event)}/>
+                        <Button variant="contained" color="primary" onClick={onSubmitHandler} fullWidth>login</Button>
+                        <Link component="button">SIGN UP</Link>
+                    </FormGroup>
+                </Box>
             </Fade>
     )
 
@@ -144,4 +149,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {USER_LOGIN})(Auth)
+export default connect(mapStateToProps, {USER_LOGIN})(Login)

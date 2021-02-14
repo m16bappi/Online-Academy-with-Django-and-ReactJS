@@ -4,7 +4,7 @@ import {AppBar, Box, Button, Drawer, IconButton, makeStyles, Toolbar, Typography
 import MenuIcon from '@material-ui/icons/Menu';
 
 import SideBar from "../SideBar/SideBar";
-import Auth from "../Auth/Auth"
+import Login from "../Auth/Login"
 import {USER_LOGOUT} from "../../store/Actions/Auth/Login";
 
 const useStyles = makeStyles(theme=>({
@@ -48,7 +48,7 @@ const Header = (props) => {
                 </Toolbar>
             </AppBar>
             <Toolbar />
-            {auth ? <Auth open={auth} onClose={()=>setAuth(false)}/>:null}
+            {auth ? <Login open={auth} onClose={()=>setAuth(false)}/>:null}
             <Drawer anchor={"left"} open={sidebar} onClose={()=>setSidebar(false)}><SideBar /></Drawer>
         </Box>
     )
