@@ -1,7 +1,9 @@
 import Axios from "axios";
 import Cookies from "js-cookie"
 import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_CLASSROOMS, GET_EXAM_LIST,
-    GET_QUESTIONS, PARTICIPANTS_LIST, POST_PARTICIPANTS, GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER} from "../../Types/ClassroomTypes";
+    GET_QUESTIONS, PARTICIPANTS_LIST, POST_PARTICIPANTS, GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER,
+    GET_STREAM, POST_STREAM, GET_STREAM_COMMENT, POST_STREAM_COMMENT
+} from "../../Types/ClassroomTypes";
 
 const csrftoken = Cookies.get('csrftoken');
 
@@ -54,8 +56,8 @@ export const GET_MY_CLASSROOMS_LIST = () => (dispatch, getState) => {
         }) .catch(error => console.log(error))
 }
 
-export const GET_CLASSROOM = (classroom) => (dispatch, getState) => {
-    Axios.get(`api/classroom/${classroom}/`, TOKEN_CONFIG(getState))
+export const GET_CLASSROOM = (id) => (dispatch, getState) => {
+    Axios.get(`api/classroom/${id}/`, TOKEN_CONFIG(getState))
         .then(res => {
             dispatch({
                 type: GET_CLASSROOMS,
@@ -126,4 +128,36 @@ export const post_assignment_answer = (data) => (dispatch, getState) => {
                 id: data.id
             })
         }) .catch(error => console.log(error))
+}
+
+export const get_stream = (id) => (dispatch) => {
+    Axios.get(`api/classroom/stream/list/${id}/`)
+        .then(res => {
+            dispatch({
+                type: GET_STREAM,
+                payload: res.data
+            })
+        }) .catch(error => console.log(error))
+}
+
+/*
+export const post_stream = () => dispatch => {
+    Axios.get(``)
+        .then(res => {
+            dispatch({
+                type: POST_STREAM,
+                payload: res.data
+            })
+        }).catch(error => console.log(error))
+}
+*/
+
+export const get_stream_comment = (id) => dispatch => {
+    Axios.get(`api/classroom/stream/comment/list/${id}/`)
+        .then(res => {
+            dispatch({
+                type: GET_STREAM_COMMENT,
+                payload: res.data
+            })
+        }).catch(error => console.log(error))
 }

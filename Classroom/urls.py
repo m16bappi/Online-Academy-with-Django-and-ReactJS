@@ -7,5 +7,5 @@ urlpatterns = [
     path('api/classroom/join/<int:pk>/', classroomJoinAPIView.as_view(), name='classroom_join'),
     path('api/classroom/intakeClassroomList/', classroomIntakeListAPIView.as_view()),
     path('api/classroom/myclassroomlist/', myClassroomAPIView.as_view()),
-    path('api/classroom/<str:class_name>/', classroomAPIView.as_view())
+    path('api/classroom/<int:id>/', classroomAPIView.as_view())
 ]

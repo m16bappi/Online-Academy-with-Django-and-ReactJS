@@ -1,7 +1,8 @@
 import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_QUESTIONS,
     GET_CLASSROOMS, GET_EXAM_LIST, PARTICIPANTS_LIST, POST_PARTICIPANTS,
-    GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER} from "../../Types/ClassroomTypes";
-
+    GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER, GET_STREAM, POST_STREAM, GET_STREAM_COMMENT,
+    POST_STREAM_COMMENT
+} from "../../Types/ClassroomTypes";
 import {USER_LOGOUT} from "../../Types/AuthTypes";
 
 const initialState = {
@@ -12,7 +13,11 @@ const initialState = {
     questions: [],
     exam_participants: [],
     assignments: [],
-    assignment_submit: []
+    assignment_submit: [],
+    stream: {
+        streams: [],
+        comments: []
+    }
 }
 
 export default function (state=initialState, action) {
@@ -59,7 +64,7 @@ export default function (state=initialState, action) {
                 ...state,
                 examlist: state.examlist.map(item=>{
                     if (item.id === action.exam_id){
-                        item.submitted.push(action.user)
+                        item["submitted"].push(action.user)
                     }
                     return item
                 }),
@@ -86,11 +91,31 @@ export default function (state=initialState, action) {
                 ...state,
                 assignments: state.assignments.map(item=> {
                     if(item.id === action.id){
-                        item.submitted.push(action.user)
+                        item["submitted"].push(action.user)
                     }
                     return item
                 }),
                 assignment_submit: [...state.assignment_submit, action.payload]
+            }
+        }
+        case GET_STREAM:
+        {
+            return {
+                ...state,
+                stream: {
+                    ...state.stream,
+                    streams: action.payload
+                }
+            }
+        }
+        case GET_STREAM_COMMENT:
+        {
+            return {
+                ...state,
+                stream: {
+                    ...state.stream,
+                    comments: action.payload
+                }
             }
         }
         case USER_LOGOUT:
@@ -103,7 +128,11 @@ export default function (state=initialState, action) {
                 questions: [],
                 exam_participants: [],
                 assignments: [],
-                assignment_submit: []
+                assignment_submit: [],
+                stream: {
+                    streams: [],
+                    comments: []
+                }
             }
         }
         default:

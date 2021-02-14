@@ -7,9 +7,10 @@ import {
     TextField,
     Typography,
     ListItem,
-    ListItemAvatar, ListItemText, List, Input, IconButton
+    ListItemAvatar, ListItemText, List, IconButton
 } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
+import {connect} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     postBody: {
         //fontFamily: "Poppins,sans-serif",
         fontWeight: "400",
-        //color: "black",
+        //color: "dark",
         textAlign: "justify",
         paddingBottom: theme.spacing(2),
         borderBottom: "1px solid grey"
@@ -85,7 +86,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Stream = (props) => {
-  
     const classes = useStyles()
     const [input, setInput] = useState(false)
     const [textarea, setTextarea] = useState('')
@@ -97,7 +97,7 @@ const Stream = (props) => {
 
     const inputButton = (
         <Box className={classes.inputButton} onClick={()=>setInput(true)}>
-            <Avatar>M</Avatar>
+            <Avatar>{props.username ? props.username.charAt(0):null}</Avatar>
             <Typography component={'p'}>Announce something on your class</Typography>
         </Box>)
 
@@ -117,38 +117,45 @@ const Stream = (props) => {
             <Box className={classes.input}>
                 {input ? inputField:inputButton}
             </Box>
-            <Box className={classes.post}>
-                <ListItem disableGutters className={classes.postHeader}>
-                    <ListItemAvatar><Avatar>M</Avatar></ListItemAvatar>
-                    <ListItemText primary="Mehedi Hasan" secondary="16,12,1995"/>
-                </ListItem>
-                <Typography className={classes.postBody}>When Denise Edwards (not her real name) saw a text on her 11-year-old son’s phone that said, “Im gonna kill you 2mrw”
-                    from an unrecognized number, her heart stopped. She asked her son about it and was shocked to hear an older boy on
-                    his bus had been sending these types of texts for about two months.
-                    Experts estimate that teens are at least four times more likely to say something hurtful or demeaning to another child
-                    when behind the veil of a phone or computer.
-                </Typography>
-                <Box className={classes.postFooter}>
-                    <Typography>Comments</Typography>
-                    <Box className={classes.postFooterInput}>
-                        <Avatar>M</Avatar>
-                        <TextField fullWidth variant="outlined"/>
-                        <IconButton><SendIcon /></IconButton>
+            {props.stream.map((item, index)=>(
+                <Box className={classes.post} key={index}>
+                    <ListItem disableGutters className={classes.postHeader}>
+                        <ListItemAvatar><Avatar>{item ? item.user.charAt(0):null}</Avatar></ListItemAvatar>
+                        <ListItemText primary={item.user} secondary={item.created}/>
+                    </ListItem>
+                    <Typography className={classes.postBody}>{item.body}</Typography>
+                    <Box className={classes.postFooter}>
+                        <Typography>Comments</Typography>
+                        <Box className={classes.postFooterInput}>
+                            <Avatar>{props.username ? props.username.charAt(0):null}</Avatar>
+                            <TextField fullWidth variant="outlined"/>
+                            <IconButton><SendIcon /></IconButton>
+                        </Box>
+                        <List disablePadding>
+                        {props.comment.filter(value => value.stream === item.id).map((value, key)=>(
+                            <ListItem alignItems={"flex-start"} disableGutters key={key}>
+                                <ListItemAvatar><Avatar>{value ? value.user.charAt(0):null}</Avatar></ListItemAvatar>
+                                <ListItemText primary={value.user} secondary={
+                                    <Typography>
+                                        {value.comment}
+                                    </Typography>
+                                }/>
+                            </ListItem>
+                        ))}
+                        </List>
                     </Box>
-                    <List disablePadding>
-                        <ListItem alignItems={"flex-start"} disableGutters>
-                            <ListItemAvatar><Avatar>A</Avatar></ListItemAvatar>
-                            <ListItemText primary="Mehedi Hasan" secondary={
-                                <Typography>
-                                    Ali Connors — I'll be in your neighborhood doing errands this…
-                                </Typography>
-                            }/>
-                        </ListItem>
-                    </List>
                 </Box>
-            </Box>
+            ))}
         </Box>
     )
 }
 
-export default Stream
+const mapStateToProps = (state) => {
+    return {
+        username: state.Auth.user.username,
+        stream: state.Classroom.stream.streams,
+        comment: state.Classroom.stream.comments
+    }
+}
+
+export default connect(mapStateToProps, null)(Stream)

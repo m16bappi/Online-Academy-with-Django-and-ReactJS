@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {Box, Container, makeStyles} from "@material-ui/core";
+import {Container, makeStyles} from "@material-ui/core";
 import {GET_MY_CLASSROOMS_LIST} from "../../../store/Actions/Classroom/Classroom";
 import MyClassroomListItem from "./MyClassroomListItem/MyClassroomListItem";
 
@@ -12,7 +12,7 @@ import header5 from '../../../../res/my_classroom_header/my_classroom_header (5)
 
 const headerImageList = [header1, header2, header3, header4, header5]
 
-const useStyles = makeStyles(theme=> ({
+const useStyles = makeStyles(()=> ({
     root: {
         display: "flex",
         flexDirection: "row"
@@ -32,7 +32,7 @@ const MyClassroom = (props) => {
     return(
         <Container className={classes.root}>
             {props.myclassroom.map((item, index)=> (
-                <MyClassroomListItem class_name={item.class_name} image={headerImageList[get_rand()]} key={index}/>
+                <MyClassroomListItem id={item.id} class_name={item.class_name} image={headerImageList[get_rand()]} key={index}/>
             ))}
         </Container>
     )

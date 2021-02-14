@@ -31,7 +31,7 @@ const MyClassroomListItem = (props) => {
     const classes = useStyles()
     const location = useLocation()
     return(
-        <Box className={classes.root} component={Link} to={`${location.pathname}/${props.class_name}`}>
+        <Box className={classes.root} component={Link} to={`${location.pathname}/${props.id}`}>
             <Card className={classes.cardRoot}>
                 <CardActionArea>
                     <CardMedia image={"/static/bundles/" + props.image} className={classes.media}/>

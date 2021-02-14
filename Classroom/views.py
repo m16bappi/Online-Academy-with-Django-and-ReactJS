@@ -113,7 +113,7 @@ class classroomAPIView(views.APIView):
     serializer_class = classroomSerializer
 
     def get(self, request, *args, **kwargs):
-        get_classroom = classroom.objects.get(class_name=kwargs['class_name'])
+        get_classroom = classroom.objects.get(id=kwargs['id'])
         return Response({
             'classroom': classroomSerializer(get_classroom).data
         })

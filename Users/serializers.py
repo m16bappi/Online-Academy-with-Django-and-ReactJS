@@ -1,14 +1,17 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import authenticate
+from django.core.exceptions import ObjectDoesNotExist
+from .models import teacher, student
+
 
 # user register serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password']
+        fields = ['username', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True}}
-    
+
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],
@@ -16,6 +19,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
 
 # user login serializer
 class LoginSerializer(serializers.Serializer):
@@ -29,8 +33,25 @@ class LoginSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError('Incorrect username or password')
 
+
 # user info serializer
 class UserSerializer(serializers.ModelSerializer):
+    status = serializers.SerializerMethodField('status_method')
+
+    @classmethod
+    def status_method(cls, data):
+        try:
+            student.objects.get(name__username=data.username)
+            return 'student'
+        except ObjectDoesNotExist:
+            return 'teacher'
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'email', 'status']
+
+
+class studentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = student
+        fields = '__all__'

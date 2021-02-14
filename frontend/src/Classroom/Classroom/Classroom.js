@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import {Box, Button, CardMedia, Container, makeStyles, Tab, Tabs, Typography} from "@material-ui/core";
 import {GET_CLASSROOM} from "../../../store/Actions/Classroom/Classroom";
+import {get_stream, get_stream_comment} from "../../../store/Actions/Classroom/Classroom";
 import VideocamIcon from '@material-ui/icons/Videocam';
 
 import Stream from "./Stream/Stream";
@@ -72,7 +73,9 @@ const Classroom = (props) => {
     const [tab, setTab] = useState(0)
 
     useEffect(()=>{
-        props.GET_CLASSROOM(params.className)
+        props.GET_CLASSROOM(params.id)
+        props.get_stream(params.id)
+        props.get_stream_comment(params.id)
     }, [])
 
     return (
@@ -80,7 +83,7 @@ const Classroom = (props) => {
             <Box className={classes.header}>
                 <CardMedia image={"/static/bundles/"+header} className={classes.headerImage}/>
                 <Box className={classes.headerContent}>
-                    <Typography variant="h4">{params.className}</Typography>
+                    <Typography variant="h4">{props.classroom.class_name}</Typography>
                 </Box>
                 <Box className={classes.headerActionContent}>
                     <Typography variant="h6">class code: {props.classroom["class_code"]}</Typography>
@@ -99,7 +102,7 @@ const Classroom = (props) => {
                     </Tabs>
                 </Box>
                 <Box className={classes.bodyContents}>
-                    {tab === 0 ? <Stream />: tab === 1? <Classworks/>: <People/>}
+                    {tab === 0 ? <Stream classroom={props.classroom}/>: tab === 1? <Classworks/>: <People/>}
                 </Box>
             </Box>
         </Container>
@@ -107,9 +110,9 @@ const Classroom = (props) => {
 }
 
 const mapStateToProps = state => {
-    return{
+    return {
         classroom: state.Classroom.classroom
     }
 }
 
-export default connect(mapStateToProps, {GET_CLASSROOM})(Classroom)
+export default connect(mapStateToProps, {GET_CLASSROOM, get_stream, get_stream_comment})(Classroom)

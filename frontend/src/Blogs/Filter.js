@@ -38,8 +38,8 @@ const Filter = (props) => {
                 </Box> : <Typography variant="h5">Filter</Typography>
             }
             <List>
-                {list.map(item=>(
-                    <ListItem button divider={true}>
+                {list.map((item, index)=>(
+                    <ListItem button divider={true} key={index}>
                         <ListItemAvatar><Avatar>{item.charAt(0)}</Avatar></ListItemAvatar>
                         <ListItemText primary={item}/>
                         <ListItemSecondaryAction>
