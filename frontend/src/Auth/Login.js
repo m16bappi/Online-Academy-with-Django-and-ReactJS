@@ -11,11 +11,10 @@ import {
     Box, FormGroup, Link
 } from "@material-ui/core";
 import login from "./Icons/login.png";
-import register from "./Icons/register.png";
 import success from "./Icons/success.png";
 
+import Registration from "./Registration";
 import {USER_LOGIN} from "../../store/Actions/Auth/Login";
-
 
 const useStyles = makeStyles(theme=> ({
     root: {
@@ -23,15 +22,12 @@ const useStyles = makeStyles(theme=> ({
         justifyContent: "center",
         alignItems: "center"
     },
-    container: {
+    formGroup: {
         width: "20rem",
         height: "30rem",
         background: "white",
         outline: "none",
-        borderRadius: "5px"
-    },
-
-    formGroup: {
+        borderRadius: "5px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -51,6 +47,11 @@ const useStyles = makeStyles(theme=> ({
         }
     },
     loginSuccess: {
+        width: "20rem",
+        height: "30rem",
+        background: "white",
+        outline: "none",
+        borderRadius: "5px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -66,6 +67,7 @@ const useStyles = makeStyles(theme=> ({
 const Login = (props) => {
     const classes = useStyles()
     const {isAuthenticated} = props.auth
+    const [select, setSelect] = useState(false)
     const [auth, setAuth] = useState({
         username: '',
         password: ''
@@ -111,34 +113,32 @@ const Login = (props) => {
 
     const loginForm = (
         <Fade in={props.open}>
-                <Box className={classes.container}>
-                    <FormGroup className={classes.formGroup} aria-autocomplete={"none"}>
-                        <Avatar src={"/static/bundles/"+login} variant={"square"}/>
-                        <TextField name="username" variant="outlined" label="username" fullWidth error={error.username}
-                                   helperText={error.username ? 'Enter username': ' '}
-                                   onChange={(event)=>onChangeHandler(event)}/>
-                        <TextField name="password" variant="outlined" label="password" fullWidth  error={error.password}
-                                   helperText={error.password ? 'Enter password': ' '}
-                                   onChange={(event)=>onChangeHandler(event)}/>
-                        <Button variant="contained" color="primary" onClick={onSubmitHandler} fullWidth>login</Button>
-                        <Link component="button">SIGN UP</Link>
-                    </FormGroup>
-                </Box>
-            </Fade>
+            <FormGroup className={classes.formGroup} aria-autocomplete={"none"}>
+                <Avatar src={"/static/bundles/"+login} variant={"square"}/>
+                <TextField name="username" variant="outlined" label="username" fullWidth error={error.username}
+                           helperText={error.username ? 'Enter username': ' '}
+                           onChange={(event)=>onChangeHandler(event)}/>
+                <TextField name="password" variant="outlined" label="password" fullWidth  error={error.password}
+                           helperText={error.password ? 'Enter password': ' '}
+                           onChange={(event)=>onChangeHandler(event)}/>
+                <Button variant="contained" color="primary" onClick={onSubmitHandler} fullWidth>login</Button>
+                <Link component="button" onClick={()=>setSelect(true)}>SIGN UP</Link>
+            </FormGroup>
+        </Fade>
     )
 
     const loginSuccess = (
-        <Box className={classes.loginSuccess}>
-            <Avatar className={classes.loginSuccessIcon} src={"/static/bundles/"+success} variant={"square"}/>
-            <Button onClick={()=>props.onClose()} variant="contained" color="primary" size="large">OK</Button>
-        </Box>
+            <Box className={classes.loginSuccess}>
+                <Avatar className={classes.loginSuccessIcon} src={"/static/bundles/"+success} variant={"square"}/>
+                <Button onClick={()=>props.onClose()} variant="contained" color="primary" size="large">OK</Button>
+            </Box>
     )
 
     return(
         <Modal open={props.open} onClose={()=>props.onClose()} className={classes.root}
         closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}} disableEnforceFocus={true}
         >
-            {isAuthenticated? loginSuccess: loginForm}
+            { select ? <Registration change={()=>setSelect(false)}/> : isAuthenticated ? loginSuccess: loginForm}
         </Modal>
     )
 }

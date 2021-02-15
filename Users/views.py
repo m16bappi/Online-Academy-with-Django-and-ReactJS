@@ -27,12 +27,11 @@ class registerApiView(generics.GenericAPIView):
                     'address': self.request.data.get('student')['address'],
                     'dept': program.objects.get(id=self.request.data.get('student')['dept']).id
                 }
-
                 st = studentSerializer(data=data)
                 st.is_valid(raise_exception=True)
                 st.save()
         except DatabaseError:
-            return Response('Database Error')
+            raise Response('Database Error')
         return Response({
             'user': UserSerializer(user, context=self.get_serializer_context()).data,
             'token': AuthToken.objects.create(user)[1]

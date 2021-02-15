@@ -17,9 +17,3 @@ class classroom(models.Model):
 
     def __str__(self):
         return str(self.class_name)
-
-
-'''
-class classroomDiscussion(models.Model):
-    pass
-'''
