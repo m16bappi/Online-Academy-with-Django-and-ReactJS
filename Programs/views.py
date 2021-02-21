@@ -12,6 +12,7 @@ class intakeAPIView(generics.ListAPIView):
         dept = program.objects.get(program_title=self.kwargs.get('program'))
         return intake.objects.filter(program_name=dept)
 
+
 class programAPIView(generics.ListAPIView):
     queryset = program.objects.all()
     serializer_class = programSerializer

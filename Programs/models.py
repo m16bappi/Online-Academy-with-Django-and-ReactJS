@@ -1,8 +1,8 @@
 from django.db import models
 
+
 # Create your models here.
 class program(models.Model):
-
     program_choice = (
         ('CSE', 'CSE'),
         ('BBA', 'BBA'),
@@ -17,6 +17,7 @@ class program(models.Model):
 
     def __str__(self):
         return self.program_title
+
 
 class intake(models.Model):
     intake_name = models.CharField(max_length=50, null=False, blank=False)
