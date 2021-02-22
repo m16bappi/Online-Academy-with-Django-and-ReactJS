@@ -36,8 +36,8 @@ const Classworks = (props) => {
     const params = useParams()
 
     useEffect(()=>{
-        props.getExamList(params.className)
-        props.get_assignments(params.className)
+        props.getExamList(params.id)
+        props.get_assignments(params.id)
     }, [])
 
     return(

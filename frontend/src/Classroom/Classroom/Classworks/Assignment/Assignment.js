@@ -64,6 +64,7 @@ const Assignment = (props) => {
         data.append('id', props.item.id)
         data.append('file', file, file.name)
         props.post_assignment_answer(data)
+        console.log(data)
         setValue(true)
     }
 
@@ -88,15 +89,17 @@ const Assignment = (props) => {
                             <Button onClick={()=>props.onclose()} variant="contained" color="secondary">close</Button>
                         </Box>
                             :
-                        <form className={classes.containerFooter} onSubmit={()=>onsubmitHandler()}>
+                        <Box className={classes.containerFooter}>
                                 <FormControl required>
-                                    <Input type="file" disabled={value} onChange={event => setFile(event.target.files[0])}/>
+                                    <Input type="file" disabled={value} onChange={event => setFile(event.target.files[0])}
+                                    disableUnderline
+                                    />
                                 </FormControl>
                                 <Box component="div">
-                                    <Button type="submit" variant="contained" color="primary" disabled={value}>submit</Button>
+                                    <Button onClick={onsubmitHandler} variant="contained" color="primary" disabled={value}>submit</Button>
                                     <Button onClick={()=>props.onclose()} variant="contained" color="secondary">close</Button>
                                 </Box>
-                        </form>
+                        </Box>
                     }
                 </Box>
             </Fade>

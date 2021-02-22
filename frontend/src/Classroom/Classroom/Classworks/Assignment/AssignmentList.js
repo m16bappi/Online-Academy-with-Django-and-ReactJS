@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
 import {Box, Divider, makeStyles, Typography} from "@material-ui/core";
-import Countdown from "react-countdown";
 
 import Assignment from "./Assignment";
 

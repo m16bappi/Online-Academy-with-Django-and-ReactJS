@@ -12,7 +12,7 @@ class assignmentListAPIView(generics.ListAPIView):
     serializer_class = assignmentSerializer
 
     def get_queryset(self):
-        classroom_object = classroom.objects.get(class_name=self.kwargs['class_name'])
+        classroom_object = classroom.objects.get(id=self.kwargs['id'])
         return classroom_object.assignments.all()
 
 

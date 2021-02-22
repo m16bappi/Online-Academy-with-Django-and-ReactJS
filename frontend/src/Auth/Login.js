@@ -73,8 +73,8 @@ const Login = (props) => {
         password: ''
     })
     const [error, setError] = useState({
-        'username': false,
-        'password': false
+        username: false,
+        password: false
     })
     const onChangeHandler = (e) => {
         setAuth({
@@ -138,7 +138,9 @@ const Login = (props) => {
         <Modal open={props.open} onClose={()=>props.onClose()} className={classes.root}
         closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}} disableEnforceFocus={true}
         >
-            { select ? <div style={{outline: "none"}}><Registration change={()=>setSelect(false)}/></div> :
+            {select ? <div style={{outline: "none"}}>
+                    <Registration change={()=>setSelect(false)}/>
+            </div> :
                 isAuthenticated ? loginSuccess: loginForm}
         </Modal>
     )

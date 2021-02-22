@@ -3,6 +3,7 @@ from django.db import models
 from Classroom.models import classroom
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class assignments(models.Model):
     title = models.CharField(max_length=100)
@@ -18,6 +19,7 @@ class assignments(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class assignment_participants(models.Model):
     assignment = models.ForeignKey(assignments, related_name='assignment_participants', on_delete=models.CASCADE)

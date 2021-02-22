@@ -3,6 +3,7 @@ from knox.models import AuthToken
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FileUploadParser
 
 from Programs.models import program
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer, studentSerializer
@@ -11,21 +12,29 @@ from .serializers import RegisterSerializer, LoginSerializer, UserSerializer, st
 # register api view
 class registerApiView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
+    parser_classes = [MultiPartParser]
 
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data.get('user'))
+        print(self.request.data)
+        userData = {
+            'username': self.request.data.get('username'),
+            'email': self.request.data.get('email'),
+            'password': self.request.data.get('password')
+        }
+        serializer = self.get_serializer(data=userData)
         try:
             with transaction.atomic():
                 serializer.is_valid(raise_exception=True)
                 user = serializer.save()
                 data = {
                     'name': user.id,
-                    'varsity_id': self.request.data.get('student')['varsity_id'],
-                    'intake': self.request.data.get('student')['intake'],
-                    'section': self.request.data.get('student')['section'],
-                    'phone': self.request.data.get('student')['phone'],
-                    'address': self.request.data.get('student')['address'],
-                    'dept': program.objects.get(id=self.request.data.get('student')['dept']).id
+                    'varsity_id': self.request.data.get('varsity_id'),
+                    'intake': self.request.data.get('intake'),
+                    'section': self.request.data.get('section'),
+                    'phone': self.request.data.get('phone'),
+                    'address': self.request.data.get('address'),
+                    'dept': program.objects.get(program_title=self.request.data.get('dept')).id,
+                    'photo': self.request.data.get('file')
                 }
                 st = studentSerializer(data=data)
                 st.is_valid(raise_exception=True)

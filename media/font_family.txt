@@ -1,0 +1,3 @@
+Poppins,sans-serif
+Playfair Display, serif
+Oswald, sans-serif
