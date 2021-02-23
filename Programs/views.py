@@ -7,10 +7,7 @@ from .serializers import intakeSerializer, programSerializer
 # Create your views here.
 class intakeAPIView(generics.ListAPIView):
     serializer_class = intakeSerializer
-
-    def get_queryset(self):
-        dept = program.objects.get(program_title=self.kwargs.get('program'))
-        return intake.objects.filter(program_name=dept)
+    queryset = intake.objects.all()
 
 
 class programAPIView(generics.ListAPIView):

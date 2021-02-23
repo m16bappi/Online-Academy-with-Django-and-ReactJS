@@ -9,11 +9,10 @@ import {
     StepLabel,
     TextField,
     Button, Select, MenuItem,
-    FormControlLabel, Radio, Input, FormControl, FormHelperText, Avatar
+    FormControlLabel, Radio, Input, FormControl, FormHelperText
 } from "@material-ui/core";
 
 import {user_register} from "../../store/Actions/Auth/Register";
-import success from "./Icons/success.png";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -192,10 +191,16 @@ const Registration = (props) => {
             }
             else
             {
-                const fileData = new FormData()
-                if (file) {
-                    fileData.append('file', file, file.name)
-                }
+                const data = new FormData()
+                data.append('mode', mode)
+                data.append('username', user.username)
+                data.append('email', user.email)
+                data.append('password', user.password)
+                data.append('file', file, file.name)
+                data.append('dept', dept)
+                data.append('phone', th.phone)
+                data.append('address', th.address)
+                props.user_register(data)
             }
         }
     }
@@ -213,6 +218,7 @@ const Registration = (props) => {
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
             {activeStep === 0 ? <Button variant="contained" onClick={()=> props.change()}>Login</Button>: null}
+            { props.isAuthenticated ? <Button variant="contained" color="secondary" onClick={()=> props.close()}>Close</Button>: null}
         </Box>
     )
 

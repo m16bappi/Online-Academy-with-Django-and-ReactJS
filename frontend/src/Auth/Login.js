@@ -139,7 +139,7 @@ const Login = (props) => {
         closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}} disableEnforceFocus={true}
         >
             {select ? <div style={{outline: "none"}}>
-                    <Registration change={()=>setSelect(false)}/>
+                    <Registration change={()=>setSelect(false)} close={()=>props.onClose()}/>
             </div> :
                 isAuthenticated ? loginSuccess: loginForm}
         </Modal>

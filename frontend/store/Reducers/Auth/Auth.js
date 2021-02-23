@@ -4,7 +4,8 @@ const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: false,
     loginStart: false,
-    user: []
+    user: [],
+    profile: []
 };
 
 export default function (state = initialState, action) {
@@ -23,7 +24,8 @@ export default function (state = initialState, action) {
                     ...state,
                     loginStart: false,
                     isAuthenticated: true,
-                    user: action.payload
+                    user: action.payload.user,
+                    profile: action.payload.profile
                 }
             }
 
@@ -47,7 +49,8 @@ export default function (state = initialState, action) {
                     token: localStorage.removeItem('token'),
                     isAuthenticated: false,
                     loginStart: false,
-                    user: []
+                    user: [],
+                    profile: []
                 }
             }
 

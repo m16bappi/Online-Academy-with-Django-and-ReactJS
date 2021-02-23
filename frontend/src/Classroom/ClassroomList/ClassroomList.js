@@ -1,53 +1,38 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {connect} from "react-redux";
+import {Box, Container, List, ListItem, makeStyles, Typography} from "@material-ui/core";
 import {useParams} from "react-router-dom";
-import {Box, Collapse, Container, List, ListItem, ListItemIcon, ListItemText, makeStyles} from "@material-ui/core";
-import {ExpandLess, ExpandMore} from '@material-ui/icons';
 
-import {GET_INTAKE} from "../../../store/Actions/Program/Program";
-import {GET_CLASSROOMS_LIST} from "../../../store/Actions/Classroom/Classroom"
-
-const useStyles = makeStyles(theme=>({
-    subList: {
-        paddingLeft: theme.spacing(3)
+const useStyles = makeStyles(()=>({
+    header: {
+        width: "100%",
+        height: "20rem",
+        background: "grey",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }))
 
 const ClassroomList = (props) => {
     const classes = useStyles()
-    const [item, setItem] = useState({})
     const params = useParams()
+    const [Collapse, setCollapse] = useState({})
+    const [intake, setIntake] = useState({id: 0})
 
-    useEffect(() => {
-        props.GET_INTAKE(params.name)
-    }, [])
-
-    const intakeClickHandler = (intakeItem, program, intake) => {
-        props.GET_CLASSROOMS_LIST(program, intake)
-        setItem({[intakeItem.id]: !item[intakeItem.id]})
+    const collapseHandler = (id) => {
+        setCollapse({[id]: !collase[id]})
+        setIntake({id: id})
     }
 
     return(
         <Container>
+            <Box className={classes.header}>
+                <Typography variant="h3" color="inherit">{params.name}</Typography>
+            </Box>
             <List>
-                {props.intake.map((intakeItem, intakeIndex) =>(
-                    <Box key={intakeIndex}>
-                        <ListItem button divider onClick={()=>intakeClickHandler(intakeItem, params.name, intakeItem.intake_name)}>
-                            <ListItemText primary={`${intakeItem.intake_name} Intake`}/>
-                            <ListItemIcon>
-                                {item[intakeItem.id] ? <ExpandLess/>:<ExpandMore/>}
-                            </ListItemIcon>
-                        </ListItem>
-                        <Collapse in={item[intakeItem.id]}>
-                            {props.classroom.map((classroomItem, classroomIndex) => (
-                                <List className={classes.subList} key={classroomIndex}>
-                                <ListItem button>
-                                    <ListItemText primary={classroomItem.class_name}/>
-                                </ListItem>
-                            </List>
-                            ))}
-                        </Collapse>
-                    </Box>
+                {props.intake.filter(value => value.program_name === params.name).map((item, index) => (
+                    <ListItem key={index} button>{item.intake_name}</ListItem>
                 ))}
             </List>
         </Container>
@@ -57,8 +42,8 @@ const ClassroomList = (props) => {
 const mapStateToProps = (state) => {
     return {
         intake: state.Program.intake,
-        classroom: state.Classroom.intakeclassroomlist
+        classroomList: state.Classroom.classroomList
     }
 }
 
-export default connect(mapStateToProps, {GET_INTAKE, GET_CLASSROOMS_LIST})(ClassroomList)
+export default connect(mapStateToProps)(ClassroomList)

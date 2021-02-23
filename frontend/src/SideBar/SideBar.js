@@ -1,15 +1,24 @@
 import React from "react";
-import {Box, List, ListItem, ListItemIcon, ListItemText, makeStyles} from '@material-ui/core';
+import {connect} from "react-redux";
+import {Avatar, Box, List, ListItem, ListItemIcon, ListItemText, makeStyles} from '@material-ui/core';
 import {Link} from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 
-const useStyles = makeStyles((theme)=> ({
+const useStyles = makeStyles(()=> ({
     root: {
-        width: theme.spacing(30),
+        width: "20rem",
         height: "100vh"
+    },
+    profile: {
+        width: "100%",
+        height: "10rem",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }))
 
@@ -36,10 +45,13 @@ const menuItems = [
     }
 ]
 
-const SideBar = () => {
+const SideBar = (props) => {
     const classes = useStyles()
     return(
         <Box className={classes.root}>
+            <Box className={classes.profile}>
+                <Avatar variant="square" src={props.profile.photo}/>
+            </Box>
             <List>
                 {menuItems.map((item, key) => (
                     <ListItem key={key} button divider component={Link} to={item.liLink}>
@@ -52,4 +64,11 @@ const SideBar = () => {
     )
 }
 
-export default SideBar
+const mapStateToProps = (state) => {
+    return {
+        user: state.Auth.user,
+        profile: state.Auth.profile
+    }
+}
+
+export default connect(mapStateToProps)(SideBar)

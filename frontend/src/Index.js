@@ -4,7 +4,9 @@ import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {CssBaseline, ThemeProvider} from "@material-ui/core";
 
-import { USER_LOADING } from '../store/Actions/Auth/Login'
+import { USER_LOADING } from '../store/Actions/Auth/Login';
+import {get_programs, get_intakes} from "../store/Actions/Program/Program";
+import {get_classroom_list} from "../store/Actions/Classroom/Classroom";
 import store from '../store';
 import {theme} from '../Themes/Themes'
 
@@ -21,6 +23,9 @@ import PrivateRoute from "./Route/PrivateRoute";
 class App extends Component {
   componentDidMount() {
     store.dispatch(USER_LOADING())
+    store.dispatch(get_programs())
+    store.dispatch(get_intakes())
+    store.dispatch(get_classroom_list())
   }
   render() {
     return (
@@ -33,7 +38,7 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Home}/>
                 <PrivateRoute exact path='/myClassroom' component={MyClassroom}/>
-                <PrivateRoute exact path='/myClassroom/:id' component={Classroom} />
+                <PrivateRoute exact path='/myClassroom/:id' component={Classroom}/>
                 <Route exact path='/programs' component={Programs}/>
                 <Route exact path='/programs/:name' component={ClassroomList}/>
               </Switch>

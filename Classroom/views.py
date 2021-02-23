@@ -72,26 +72,6 @@ class classroomJoinAPIView(views.APIView):
             })
 
 
-class classroomIntakeListAPIView(views.APIView):
-    serializer_class = classroomIntakeListSerializer
-
-    def post(self, request, *args, **kwargs):
-        try:
-            program.objects.get(program_title=request.data.get('program')).intake_set.get(
-                intake_name=request.data.get('intake'))
-        except ObjectDoesNotExist:
-            return Response({
-                "message": "classroom does not exist"
-            })
-
-        intake = program.objects.get(program_title=request.data.get('program')).intake_set.get(
-            intake_name=request.data.get('intake'))
-        classroom_list = intake.classroom_set.all()
-        return Response({
-            "intakeclassroomlist": classroomListSerializer(classroom_list, many=True).data
-        })
-
-
 class myClassroomAPIView(generics.ListAPIView):
     permission_classes = [
         permissions.IsAuthenticated

@@ -1,6 +1,6 @@
 import Axios from "axios";
 import Cookies from "js-cookie"
-import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_CLASSROOMS, GET_EXAM_LIST,
+import {GET_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_CLASSROOMS, GET_EXAM_LIST,
     GET_QUESTIONS, PARTICIPANTS_LIST, POST_PARTICIPANTS, GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER,
     GET_STREAM, POST_STREAM, GET_STREAM_COMMENT, POST_STREAM_COMMENT
 } from "../../Types/ClassroomTypes";
@@ -35,12 +35,11 @@ const FILE_UPLOAD_CONFIG = (getState) => {
     }
 }
 
-
-export const GET_CLASSROOMS_LIST = (program, intake) => (dispatch) => {
-    Axios.post(`api/classroom/intakeClassroomList/`, {program, intake}, CONFIG())
+export const get_classroom_list = () => (dispatch) => {
+    Axios.get(`api/classroom/list/`)
         .then(res => {
             dispatch({
-                type: GET_INTAKE_CLASSROOM_LIST,
+                type: GET_CLASSROOM_LIST,
                 payload: res.data
             })
         }).catch(error => console.log(error.data))
@@ -98,7 +97,7 @@ export const postParticipants = (exam_id, obtain_marks) => (dispatch, getState) 
         }).catch(e=>console.log(e))
 }
 
-export const participantsList = (id) => (dispatch) => {
+export const get_participantsList = (id) => (dispatch) => {
     Axios.get(`api/classroom/exam/list/participants/${id}/`, CONFIG())
         .then(res => {
             dispatch({

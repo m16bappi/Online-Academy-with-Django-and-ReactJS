@@ -1,10 +1,13 @@
 from rest_framework import serializers
 from .models import intake, program
 
+
 class intakeSerializer(serializers.ModelSerializer):
+    program_name = serializers.StringRelatedField()
+
     class Meta:
         model = intake
-        fields = '__all__'
+        fields = ['intake_name', 'program_name']
 
 
 class programSerializer(serializers.ModelSerializer):

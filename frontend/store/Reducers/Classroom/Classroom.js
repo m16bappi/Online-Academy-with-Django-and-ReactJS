@@ -1,4 +1,4 @@
-import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_QUESTIONS,
+import {GET_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_QUESTIONS,
     GET_CLASSROOMS, GET_EXAM_LIST, PARTICIPANTS_LIST, POST_PARTICIPANTS,
     GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER, GET_STREAM, POST_STREAM, GET_STREAM_COMMENT,
     POST_STREAM_COMMENT
@@ -6,7 +6,7 @@ import {GET_INTAKE_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_QUESTIONS,
 import {USER_LOGOUT} from "../../Types/AuthTypes";
 
 const initialState = {
-    intakeclassroomlist: [],
+    classroomList: [],
     myclassroomlist: [],
     classroom: {},
     examlist: [],
@@ -22,11 +22,11 @@ const initialState = {
 
 export default function (state=initialState, action) {
     switch (action.type){
-        case GET_INTAKE_CLASSROOM_LIST:
+        case GET_CLASSROOM_LIST:
         {
             return {
                 ...state,
-                ...action.payload
+                classroomList: action.payload
             }
         }
         case GET_MY_CLASSROOM_LIST:
