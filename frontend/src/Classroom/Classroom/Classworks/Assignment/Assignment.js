@@ -64,7 +64,6 @@ const Assignment = (props) => {
         data.append('id', props.item.id)
         data.append('file', file, file.name)
         props.post_assignment_answer(data)
-        console.log(data)
         setValue(true)
     }
 

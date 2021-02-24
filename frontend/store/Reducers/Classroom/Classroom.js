@@ -1,8 +1,4 @@
-import {GET_CLASSROOM_LIST, GET_MY_CLASSROOM_LIST, GET_QUESTIONS,
-    GET_CLASSROOMS, GET_EXAM_LIST, PARTICIPANTS_LIST, POST_PARTICIPANTS,
-    GET_ASSIGNMENTS, POST_ASSIGNMENT_ANSWER, GET_STREAM, POST_STREAM, GET_STREAM_COMMENT,
-    POST_STREAM_COMMENT
-} from "../../Types/ClassroomTypes";
+import * as Type from "../../Types/ClassroomTypes";
 import {USER_LOGOUT} from "../../Types/AuthTypes";
 
 const initialState = {
@@ -22,35 +18,35 @@ const initialState = {
 
 export default function (state=initialState, action) {
     switch (action.type){
-        case GET_CLASSROOM_LIST:
+        case Type.GET_CLASSROOM_LIST:
         {
             return {
                 ...state,
                 classroomList: action.payload
             }
         }
-        case GET_MY_CLASSROOM_LIST:
+        case Type.GET_MY_CLASSROOM_LIST:
         {
             return {
                 ...state,
                 myclassroomlist: action.payload
             }
         }
-        case GET_CLASSROOMS:
+        case Type.GET_CLASSROOMS:
         {
             return {
                 ...state,
                 ...action.payload
             }
         }
-        case GET_EXAM_LIST:
+        case Type.GET_EXAM_LIST:
         {
             return {
                 ...state,
                 examlist: action.payload
             }
         }
-        case GET_QUESTIONS:
+        case Type.GET_QUESTIONS:
         {
             return {
                 ...state,
@@ -58,7 +54,7 @@ export default function (state=initialState, action) {
             }
         }
 
-        case POST_PARTICIPANTS:
+        case Type.POST_PARTICIPANTS:
         {
             return {
                 ...state,
@@ -71,34 +67,34 @@ export default function (state=initialState, action) {
                 participants: [...state.participants, action.payload]
             }
         }
-        case PARTICIPANTS_LIST:
+        case Type.PARTICIPANTS_LIST:
         {
             return {
                 ...state,
                 participants: action.payload
             }
         }
-        case GET_ASSIGNMENTS:
+        case Type.GET_ASSIGNMENTS:
         {
             return {
                 ...state,
                 assignments: action.payload
             }
         }
-        case POST_ASSIGNMENT_ANSWER:
+        case Type.POST_ASSIGNMENT_ANSWER:
         {
             return {
                 ...state,
                 assignments: state.assignments.map(item=> {
-                    if(item.id === action.id){
-                        item["submitted"].push(action.user)
+                    if(item.id === action.payload.assignment){
+                        item["submitted"].push(action.payload.student_name)
                     }
                     return item
                 }),
                 assignment_submit: [...state.assignment_submit, action.payload]
             }
         }
-        case GET_STREAM:
+        case Type.GET_STREAM:
         {
             return {
                 ...state,
@@ -108,7 +104,7 @@ export default function (state=initialState, action) {
                 }
             }
         }
-        case GET_STREAM_COMMENT:
+        case Type.GET_STREAM_COMMENT:
         {
             return {
                 ...state,

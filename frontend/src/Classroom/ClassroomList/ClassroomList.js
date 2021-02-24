@@ -1,7 +1,22 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {Box, Container, List, ListItem, makeStyles, Typography} from "@material-ui/core";
+import {
+    Box,
+    Collapse,
+    Container, Icon, IconButton,
+    List,
+    ListItem,
+    ListItemSecondaryAction,
+    ListItemText,
+    makeStyles,
+    Typography
+} from "@material-ui/core";
 import {useParams} from "react-router-dom";
+
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const useStyles = makeStyles(()=>({
     header: {
@@ -17,12 +32,10 @@ const useStyles = makeStyles(()=>({
 const ClassroomList = (props) => {
     const classes = useStyles()
     const params = useParams()
-    const [Collapse, setCollapse] = useState({})
-    const [intake, setIntake] = useState({id: 0})
+    const [open, setOpen] = useState({})
 
-    const collapseHandler = (id) => {
-        setCollapse({[id]: !collase[id]})
-        setIntake({id: id})
+    const collapseHandler = (index) => {
+        setOpen({[index]: !open[index]})
     }
 
     return(
@@ -32,7 +45,26 @@ const ClassroomList = (props) => {
             </Box>
             <List>
                 {props.intake.filter(value => value.program_name === params.name).map((item, index) => (
-                    <ListItem key={index} button>{item.intake_name}</ListItem>
+                    <Box key={index}>
+                        <ListItem button onClick={()=> collapseHandler(index)} divider>
+                            <ListItemText primary={`${item.intake_name} INTAKE`}/>
+                            {open[index] ? <ExpandLess /> : <ExpandMore />}
+                        </ListItem>
+                        <Collapse in={open[index]} timeout="auto" unmountOnExit>
+                            <List>
+                                {props.classroomList.filter(value => value.intake === item.intake_name).map((value, index1) => (
+                                    <ListItem key={index1}>
+                                        <ListItemText primary={value.class_name}/>
+                                        <ListItemSecondaryAction>
+                                            {props.isAuthenticated && props.status === 'student' ? value.students.includes(props.username)?
+                                                <Icon><DoneAllIcon /></Icon> : <IconButton><AddCircleOutlineIcon/></IconButton>: null
+                                            }
+                                        </ListItemSecondaryAction>
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Collapse>
+                    </Box>
                 ))}
             </List>
         </Container>
@@ -41,6 +73,9 @@ const ClassroomList = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        status: state.Auth.user.status,
+        isAuthenticated: state.Auth.isAuthenticated,
+        username: state.Auth.user.username,
         intake: state.Program.intake,
         classroomList: state.Classroom.classroomList
     }
