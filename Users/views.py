@@ -40,7 +40,7 @@ class registerApiView(generics.GenericAPIView):
                     }
                     st = studentSerializer(data=data)
                     st.is_valid(raise_exception=True)
-                    st.save()
+                    object = st.save()
                 else:
                     data = {
                         'name': user.id,
@@ -51,16 +51,13 @@ class registerApiView(generics.GenericAPIView):
                     }
                     th = teacherSerializer(data=data)
                     th.is_valid(raise_exception=True)
-                    th.save()
+                    object = th.save()
         except DatabaseError:
             raise Response('Database Error')
-        if self.request.data.get('mode') == 'student':
-            profile = studentSerializer(st)
-        else:
-            profile = teacherSerializer(th)
+        
         return Response({
             'user': UserSerializer(user, context=self.get_serializer_context()).data,
-            'profile': profile.data,
+            'profile': studentSerializer(object).data if self.request.data.get('mode') == 'student' else teacherSerializer(object).data,
             'token': AuthToken.objects.create(user)[1]
         })
 
