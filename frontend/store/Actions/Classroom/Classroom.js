@@ -155,3 +155,13 @@ export const get_stream_comment = (id) => dispatch => {
             })
         }).catch(error => console.log(error))
 }
+
+export const get_teacher_classroom = () => (dispatch, getState) => {
+    Axios.get(`api/classroom/teacher/`, TOKEN_CONFIG(getState))
+        .then(res => {
+            dispatch({
+                type: Type.TEACHER_CLASSROOM,
+                payload: res.data
+            })
+        }).catch(error => console.log(error))
+}

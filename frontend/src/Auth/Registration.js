@@ -243,7 +243,7 @@ const Registration = (props) => {
            <RadioGroup row value={mode}>
                <FormControlLabel value="student" control={<Radio />} label="Student"
                                  onChange={event => setMode(event.target.value)}/>
-               <FormControlLabel value="teacher" control={<Radio />} label="Teacher"
+               <FormControlLabel value="teacher" control={<Radio />} label="Dashboard"
                                  onChange={event => setMode(event.target.value)}/>
            </RadioGroup>
         </Box>

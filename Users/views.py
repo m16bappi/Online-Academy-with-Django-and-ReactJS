@@ -54,7 +54,7 @@ class registerApiView(generics.GenericAPIView):
                     object = th.save()
         except DatabaseError:
             raise Response('Database Error')
-        
+
         return Response({
             'user': UserSerializer(user, context=self.get_serializer_context()).data,
             'profile': studentSerializer(object).data if self.request.data.get('mode') == 'student' else teacherSerializer(object).data,

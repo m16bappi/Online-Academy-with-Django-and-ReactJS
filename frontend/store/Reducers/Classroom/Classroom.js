@@ -3,6 +3,7 @@ import {USER_LOGOUT} from "../../Types/AuthTypes";
 
 const initialState = {
     classroomList: [],
+    teacher_classroom: [],
     myclassroomlist: [],
     classroom: {},
     examlist: [],
@@ -30,6 +31,13 @@ export default function (state=initialState, action) {
             return {
                 ...state,
                 myclassroomlist: action.payload
+            }
+        }
+        case Type.TEACHER_CLASSROOM:
+        {
+            return {
+                ...state,
+                teacher_classroom: action.payload
             }
         }
         case Type.GET_CLASSROOMS:
@@ -122,6 +130,7 @@ export default function (state=initialState, action) {
                 classroom: {},
                 examlist: [],
                 questions: [],
+                teacher_classroom: [],
                 exam_participants: [],
                 assignments: [],
                 assignment_submit: [],

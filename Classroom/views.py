@@ -6,11 +6,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions, views
 from rest_framework.response import Response
 
-from Programs.models import program
 from Users.models import teacher, student
 from .models import classroom
 from .serializers import (classroomCreateSerializer, classroomJoinSerializer, classroomSerializer,
-                          classroomIntakeListSerializer, classroomListSerializer)
+                          classroomListSerializer)
 
 
 class classroomCreateAPIView(generics.CreateAPIView):
@@ -32,6 +31,16 @@ class classroomCreateAPIView(generics.CreateAPIView):
             'message': 'class created',
             'classroom': classroomSerializer(object).data
         })
+
+
+class teacherClassroomAPIView(generics.ListAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = classroomSerializer
+
+    def get_queryset(self):
+        return classroom.objects.filter(course_teacher=teacher.objects.get(name=self.request.user))
 
 
 class classroomListAPIView(generics.ListAPIView):

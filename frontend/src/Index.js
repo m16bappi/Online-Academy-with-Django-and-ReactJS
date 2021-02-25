@@ -14,11 +14,11 @@ import {theme} from '../Themes/Themes'
 import Home from "./Home/Home";
 import Programs from "./Programs/Programs";
 import Header from "./Header/Header";
+import Dashboard from "./Dashboard/Dashboard";
 import ClassroomList from "./Classroom/ClassroomList/ClassroomList";
 import MyClassroom from "./Classroom/MyClassroomList/MyClassroomList";
 import Classroom from "./Classroom/Classroom/Classroom";
 import PrivateRoute from "./Route/PrivateRoute";
-
 
 class App extends Component {
   componentDidMount() {
@@ -39,6 +39,8 @@ class App extends Component {
                 <Route exact path='/' component={Home}/>
                 <PrivateRoute exact path='/myClassroom' component={MyClassroom}/>
                 <PrivateRoute exact path='/myClassroom/:id' component={Classroom}/>
+                <PrivateRoute exact path='/dashboard' component={Dashboard}/>
+                <PrivateRoute exact path='/dashboard/:id' component={Classroom}/>
                 <Route exact path='/programs' component={Programs}/>
                 <Route exact path='/programs/:name' component={ClassroomList}/>
               </Switch>
