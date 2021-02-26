@@ -1,13 +1,14 @@
-import React, {useEffect} from "react";
-import {Container, Fab, makeStyles} from "@material-ui/core";
+import React, {useEffect, useState} from "react";
+import {Box, Container, Fab, makeStyles, Modal} from "@material-ui/core";
 import {connect} from "react-redux";
 
 import teacherImg from "./img/teacher.jpg"
 import AddIcon from '@material-ui/icons/Add';
+import CreateClassroom from "../CreateClassroom/CreateClassroom";
 import {get_teacher_classroom} from "../../store/Actions/Classroom/Classroom";
 import MyClassroomListItem from "../Classroom/MyClassroomList/MyClassroomListItem/MyClassroomListItem";
 
-const useStyle = makeStyles(theme=>({
+const useStyle = makeStyles(()=>({
     root: {
         display: "flex",
         flexDirection: "row"
@@ -16,20 +17,30 @@ const useStyle = makeStyles(theme=>({
         right: 100,
         bottom: 100,
         position: 'fixed'
+    },
+    modal: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }))
 
 const Dashboard = (props) => {
     const classes = useStyle()
+    const [modal, setModal] = useState(false)
     useEffect(()=>{
         props.get_teacher_classroom()
     }, [])
+
     return (
         <Container className={classes.root}>
+            <Modal open={modal} onClose={() => setModal(false)} className={classes.modal}>
+                <Box style={{outline: "none"}}><CreateClassroom /></Box>
+            </Modal>
             {props.teacher_classroom.map((value, index) => (
                 <MyClassroomListItem class_name={value.class_name} image={teacherImg} id={value.id} key={index}/>
             ))}
-            <Fab className={classes.fab} color={"secondary"}>
+            <Fab className={classes.fab} color={"secondary"} onClick={()=>setModal(true)}>
                 <AddIcon />
             </Fab>
         </Container>
