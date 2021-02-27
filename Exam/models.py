@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from Classroom.models import classroom
 
+
 class Exam(models.Model):
     exam_name = models.CharField(max_length=200)
     classroom = models.ForeignKey(classroom, related_name="classroom_exam", on_delete=models.CASCADE)
@@ -19,6 +20,7 @@ class Exam(models.Model):
     def __str__(self):
         return self.exam_name
 
+
 class Question(models.Model):
     question = models.TextField(max_length=500)
     exam_name = models.ForeignKey(Exam, on_delete=models.CASCADE)
@@ -33,6 +35,7 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
+
 
 class Participants(models.Model):
     exam_name = models.ForeignKey(Exam, related_name="participants", on_delete=models.CASCADE)
