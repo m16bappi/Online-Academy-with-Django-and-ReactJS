@@ -20,7 +20,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Mehedi\Desktop\BUBT\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
   </component>
   <component name="RunManager">
     <configuration name="BUBT" type="Python.DjangoServer" factoryName="Django server">
@@ -79,7 +81,9 @@
       <workItem from="1614132905925" duration="13360000" />
       <workItem from="1614260298899" duration="13090000" />
       <workItem from="1614312481107" duration="2604000" />
-      <workItem from="1614339553104" duration="11588000" />
+      <workItem from="1614339553104" duration="11778000" />
+      <workItem from="1614402923631" duration="14464000" />
+      <workItem from="1614426686772" duration="1395000" />
     </task>
     <servers />
   </component>

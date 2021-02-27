@@ -7,6 +7,7 @@ import {CssBaseline, ThemeProvider} from "@material-ui/core";
 import { USER_LOADING } from '../store/Actions/Auth/Login';
 import {get_programs, get_intakes} from "../store/Actions/Program/Program";
 import {get_classroom_list} from "../store/Actions/Classroom/Classroom";
+import {get_course_list} from "../store/Actions/Course/Course";
 import store from '../store';
 import {theme} from '../Themes/Themes'
 
@@ -26,7 +27,9 @@ class App extends Component {
     store.dispatch(get_programs())
     store.dispatch(get_intakes())
     store.dispatch(get_classroom_list())
+    store.dispatch(get_course_list())
   }
+
   render() {
     return (
       <ThemeProvider theme={theme}>

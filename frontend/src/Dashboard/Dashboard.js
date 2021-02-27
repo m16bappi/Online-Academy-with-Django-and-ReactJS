@@ -11,7 +11,8 @@ import MyClassroomListItem from "../Classroom/MyClassroomList/MyClassroomListIte
 const useStyle = makeStyles(()=>({
     root: {
         display: "flex",
-        flexDirection: "row"
+        flexDirection: "row",
+        flexWrap: "wrap"
     },
     fab: {
         right: 100,
@@ -33,9 +34,9 @@ const Dashboard = (props) => {
     }, [])
 
     return (
-        <Container className={classes.root}>
+        <Container className={classes.root} maxWidth={"xl"}>
             <Modal open={modal} onClose={() => setModal(false)} className={classes.modal}>
-                <Box style={{outline: "none"}}><CreateClassroom /></Box>
+                <Box style={{outline: "none"}}><CreateClassroom onClose={()=>setModal(false)}/></Box>
             </Modal>
             {props.teacher_classroom.map((value, index) => (
                 <MyClassroomListItem class_name={value.class_name} image={teacherImg} id={value.id} key={index}/>

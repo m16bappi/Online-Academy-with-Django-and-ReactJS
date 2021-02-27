@@ -40,6 +40,26 @@ export default function (state=initialState, action) {
                 teacher_classroom: action.payload
             }
         }
+        case Type.CREATE_CLASSROOMS:
+        {
+            return {
+                ...state,
+                teacher_classroom: [...state.teacher_classroom, action.payload]
+            }
+        }
+        case Type.JOIN_CLASSROOM:
+        {
+            console.log(action.payload)
+            return {
+                ...state,
+                classroomList: state.classroomList.map(value => {
+                    if (value.id === action.payload.id){
+                        value.students.push(action.payload.username)
+                    }
+                    return value
+                })
+            }
+        }
         case Type.GET_CLASSROOMS:
         {
             return {

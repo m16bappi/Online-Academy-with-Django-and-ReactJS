@@ -17,6 +17,7 @@ const TOKEN_CONFIG = (getState) => {
     return {
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
             'Authorization': `Token ${getState().Auth.token}`
         }
     }
@@ -49,7 +50,7 @@ export const GET_MY_CLASSROOMS_LIST = () => (dispatch, getState) => {
                 type: Type.GET_MY_CLASSROOM_LIST,
                 payload: res.data
             })
-        }) .catch(error => console.log(error))
+        }).catch(error => console.log(error))
 }
 
 export const GET_CLASSROOM = (id) => (dispatch, getState) => {
@@ -62,9 +63,32 @@ export const GET_CLASSROOM = (id) => (dispatch, getState) => {
         }).catch(error => console.log(error))
 }
 
+export const create_classroom = (data) => (dispatch, getState) => {
+    Axios.post(`api/classroom/create/`, data, TOKEN_CONFIG(getState))
+        .then(res => {
+            dispatch({
+                type: Type.CREATE_CLASSROOMS,
+                payload: res.data
+            })
+        }).catch(error => console.log(error))
+}
+
+export const join_classroom = (id, code) => (dispatch, getState) => {
+    Axios.post(`api/classroom/join/`, {id, code}, TOKEN_CONFIG(getState))
+        .then(() => {
+            dispatch({
+                type: Type.JOIN_CLASSROOM,
+                payload: {
+                    id: id,
+                    username: getState().Auth.user.username
+                }
+            })
+        }).catch(error => console.log(error))
+}
+
 export const getExamList = (classroom) => (dispatch, getState) => {
     Axios.get(`api/classroom/exam/list/${classroom}/`, TOKEN_CONFIG(getState))
-        .then(res=>{
+        .then(res => {
             dispatch({
                 type: Type.GET_EXAM_LIST,
                 payload: res.data
@@ -74,12 +98,12 @@ export const getExamList = (classroom) => (dispatch, getState) => {
 
 export const getQuestions = (classroom, exam) => (dispatch, getState) => {
     Axios.get(`api/classroom/exam/questions/${classroom}/${exam}/`, TOKEN_CONFIG(getState))
-        .then(res=> {
+        .then(res => {
             dispatch({
                 type: Type.GET_QUESTIONS,
                 payload: res.data
             })
-        }).catch(e=>console.log(e))
+        }).catch(e => console.log(e))
 }
 
 export const postParticipants = (exam_id, obtain_marks) => (dispatch, getState) => {
@@ -91,7 +115,7 @@ export const postParticipants = (exam_id, obtain_marks) => (dispatch, getState) 
                 user: getState().Auth.user.username,
                 exam_id: exam_id
             })
-        }).catch(e=>console.log(e))
+        }).catch(e => console.log(e))
 }
 
 export const get_participantsList = (id) => (dispatch) => {
@@ -111,7 +135,7 @@ export const get_assignments = (classroom) => dispatch => {
                 type: Type.GET_ASSIGNMENTS,
                 payload: res.data
             })
-        }) .catch(error => console.log(error))
+        }).catch(error => console.log(error))
 }
 
 export const post_assignment_answer = (data) => (dispatch, getState) => {
@@ -121,7 +145,7 @@ export const post_assignment_answer = (data) => (dispatch, getState) => {
                 type: Type.POST_ASSIGNMENT_ANSWER,
                 payload: res.data
             })
-        }) .catch(error => console.log(error))
+        }).catch(error => console.log(error))
 }
 
 export const get_stream = (id) => (dispatch) => {
@@ -131,7 +155,7 @@ export const get_stream = (id) => (dispatch) => {
                 type: Type.GET_STREAM,
                 payload: res.data
             })
-        }) .catch(error => console.log(error))
+        }).catch(error => console.log(error))
 }
 
 /*
