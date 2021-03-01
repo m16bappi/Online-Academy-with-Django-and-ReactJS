@@ -5,14 +5,13 @@ from Classroom.models import classroom
 
 
 class Stream(models.Model):
-    title = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     classroom = models.ForeignKey(classroom, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.body
 
 
 class Comment(models.Model):

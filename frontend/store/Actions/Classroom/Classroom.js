@@ -75,7 +75,7 @@ export const create_classroom = (data) => (dispatch, getState) => {
 
 export const join_classroom = (id, code) => (dispatch, getState) => {
     Axios.post(`api/classroom/join/`, {id, code}, TOKEN_CONFIG(getState))
-        .then(() => {
+        .then((res) => {
             dispatch({
                 type: Type.JOIN_CLASSROOM,
                 payload: {
@@ -158,23 +158,32 @@ export const get_stream = (id) => (dispatch) => {
         }).catch(error => console.log(error))
 }
 
-/*
-export const post_stream = () => dispatch => {
-    Axios.get(``)
+export const post_stream = (textarea, id) => (dispatch, getState) => {
+    Axios.post(`api/classroom/stream/create/`, {textarea, id}, TOKEN_CONFIG(getState))
         .then(res => {
             dispatch({
-                type: POST_STREAM,
+                type: Type.POST_STREAM,
                 payload: res.data
             })
         }).catch(error => console.log(error))
 }
-*/
+
 
 export const get_stream_comment = (id) => dispatch => {
     Axios.get(`api/classroom/stream/comment/list/${id}/`)
         .then(res => {
             dispatch({
                 type: Type.GET_STREAM_COMMENT,
+                payload: res.data
+            })
+        }).catch(error => console.log(error))
+}
+
+export const post_stream_comment = (data) => (dispatch, getState) => {
+    Axios.post(`api/classroom/stream/comment/create/`, data, TOKEN_CONFIG(getState))
+        .then(res => {
+            dispatch({
+                type: Type.POST_STREAM_COMMENT,
                 payload: res.data
             })
         }).catch(error => console.log(error))

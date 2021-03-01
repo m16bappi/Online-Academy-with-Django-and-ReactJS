@@ -132,6 +132,26 @@ export default function (state=initialState, action) {
                 }
             }
         }
+        case Type.POST_STREAM:
+        {
+            return {
+                ...state,
+                stream: {
+                    ...state.stream,
+                    streams: [...state.stream.streams, action.payload]
+                }
+            }
+        }
+        case Type.POST_STREAM_COMMENT:
+        {
+            return {
+                ...state,
+                stream: {
+                    ...state.stream,
+                    comments: [...state.stream.comments, action.payload]
+                }
+            }
+        }
         case Type.GET_STREAM_COMMENT:
         {
             return {

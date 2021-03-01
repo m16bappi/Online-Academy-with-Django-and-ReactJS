@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
 import {connect} from "react-redux";
+import {post_stream, post_stream_comment} from "../../../../store/Actions/Classroom/Classroom";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -89,10 +90,24 @@ const Stream = (props) => {
     const classes = useStyles()
     const [input, setInput] = useState(false)
     const [textarea, setTextarea] = useState('')
+    const [comment, setComment] = useState({
+        id: null,
+        comment: ''
+    })
 
     const inputHandler = () => {
         setInput(false)
         setTextarea('')
+    }
+
+    const post_stream_handler = () => {
+        props.post_stream(textarea, props.id)
+        setTextarea('')
+    }
+
+    const post_comment_handler = () => {
+        props.post_stream_comment(comment)
+        setComment({comment: ''})
     }
 
     const inputButton = (
@@ -104,11 +119,13 @@ const Stream = (props) => {
     const inputField = (
         <Box className={classes.inputField}>
             <TextField multiline rows={3} rowsMax={5} label="Announce something on your class"
+                       value={textarea}
                 name="textarea" onChange={event => setTextarea(event.target.value)}
             />
             <Box>
                 <Button variant="text" onClick={inputHandler}>Cancel</Button>
-                <Button variant="contained" color="primary" disabled={!textarea.length}>post</Button>
+                <Button variant="contained" color="primary" disabled={!textarea.length}
+                        onClick={post_stream_handler}>post</Button>
             </Box>
         </Box>)
 
@@ -128,8 +145,9 @@ const Stream = (props) => {
                         <Typography>Comments</Typography>
                         <Box className={classes.postFooterInput}>
                             <Avatar>{props.username ? props.username.charAt(0):null}</Avatar>
-                            <TextField fullWidth variant="outlined"/>
-                            <IconButton><SendIcon /></IconButton>
+                            <TextField fullWidth variant="outlined" value={comment.id === item.id ? comment.comment : ''}
+                                       onChange={event => setComment({comment: event.target.value, id: item.id}) }/>
+                            <IconButton onClick={post_comment_handler}><SendIcon /></IconButton>
                         </Box>
                         <List disablePadding>
                         {props.comment.filter(value => value.stream === item.id).map((value, key)=>(
@@ -158,4 +176,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Stream)
+export default connect(mapStateToProps, {post_stream, post_stream_comment})(Stream)

@@ -1,6 +1,7 @@
 import random
 import string
 
+from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics, permissions, views
 from rest_framework.response import Response
@@ -74,21 +75,12 @@ class classroomJoinAPIView(views.APIView):
         classroom_object = classroom.objects.get(id=self.request.data['id'])
         if classroom_object.class_code == key:
             if classroom_object.students.filter(id=student.objects.get(name=self.request.user).id).exists():
-                classroom_object.students.remove(student.objects.get(name=self.request.user))
-                return Response({
-                    'message': 'unrolled from class',
-                    'classroom': classroomSerializer(classroom_object).data
-                })
+                return Response(status=status.HTTP_400_BAD_REQUEST)
             else:
                 classroom_object.students.add(student.objects.get(name=self.request.user))
-                return Response({
-                    'message': 'you are joined the class',
-                    'classroom': classroomSerializer(classroom_object).data
-                })
+                return Response(status=status.HTTP_200_OK)
         else:
-            return Response({
-                'Message': 'your class code is wrong',
-            })
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class myClassroomAPIView(generics.ListAPIView):

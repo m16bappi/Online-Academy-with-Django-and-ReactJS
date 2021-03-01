@@ -14,13 +14,12 @@ class createStreamAPIView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         data = {
-            'title': self.request.data['title'],
-            'body': self.request.data['body'],
-            'classroom': classroom.objects.get(id=self.request.data['id']),
-            'user': self.request.user
+            'body': self.request.data['textarea'],
+            'classroom': classroom.objects.get(id=self.request.data['id']).id,
+            'user': self.request.user.id
         }
         serializer = self.get_serializer(data=data)
-        serializer.is_valid(exception_raise=True)
+        serializer.is_valid(raise_exception=True)
         object = serializer.save()
         return Response(StreamSerializer(object).data)
 
@@ -30,6 +29,24 @@ class StreamListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         return Stream.objects.filter(classroom_id__exact=self.kwargs['id'])
+
+
+class createCommentAPIView(generics.CreateAPIView):
+    serializer_class = createCommentSerializer
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'comment': self.request.data['comment'],
+            'stream': Stream.objects.get(id=self.request.data['id']).id,
+            'user': self.request.user.id
+        }
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        object = serializer.save()
+        return Response(CommentSerializer(object).data)
 
 
 class CommentListAPIView(generics.ListAPIView):
