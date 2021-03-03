@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {Box, Button, Collapse, Divider, makeStyles, Typography} from "@material-ui/core";
+import {Box, Button, Collapse, Divider, IconButton, makeStyles, Typography} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 import Exam from "./Exam";
-import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles(theme=>({
     listItemRoot: {
@@ -43,6 +43,11 @@ const useStyles = makeStyles(theme=>({
     },
     active: {
         boxShadow: theme.shadows[2]
+    },
+    header: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems:"center"
     }
 }))
 
@@ -72,7 +77,10 @@ const ExamList = (props) => {
 
     return(
         <Box>
-            <Typography variant="h4">Quiz</Typography>
+            <Box className={classes.header}>
+                <Typography variant="h4">Quiz</Typography>
+                <IconButton color="primary"><AddIcon /></IconButton>
+            </Box>
                 <Divider />
                 <br/>
                 {props.examlist.map((item, index)=> (

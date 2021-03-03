@@ -15,7 +15,8 @@ const headerImageList = [header1, header2, header3, header4, header5]
 const useStyles = makeStyles(()=> ({
     root: {
         display: "flex",
-        flexDirection: "row"
+        flexDirection: "row",
+        flexWrap: "wrap"
     }
 }))
 

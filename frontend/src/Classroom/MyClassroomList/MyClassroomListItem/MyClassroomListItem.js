@@ -4,7 +4,7 @@ import {Link, useLocation} from "react-router-dom";
 
 const useStyles = makeStyles(theme=> ({
     root: {
-        width: "25rem",
+        width: "20rem",
         height: "auto",
         textDecoration: "none",
         margin: theme.spacing(2),

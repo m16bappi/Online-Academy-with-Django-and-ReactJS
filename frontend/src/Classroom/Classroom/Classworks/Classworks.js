@@ -7,6 +7,7 @@ import ExamList from "./Exam/ExamList";
 import AssignmentList from "./Assignment/AssignmentList";
 import {useParams} from "react-router-dom";
 
+
 const useStyles = makeStyles(theme=>({
     root: {
         boxShadow: theme.shadows[2],
@@ -28,6 +29,16 @@ const useStyles = makeStyles(theme=>({
     assignment: {
         minHeight: "10rem",
         marginTop: "5rem"
+    },
+    fab: {
+        bottom: 100,
+        right: 350,
+        position: "fixed"
+    },
+    modal: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }))
 

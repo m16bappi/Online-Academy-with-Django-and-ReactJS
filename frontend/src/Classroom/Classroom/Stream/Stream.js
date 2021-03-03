@@ -64,6 +64,7 @@ const useStyles = makeStyles(theme => ({
     postBody: {
         //fontFamily: "Poppins,sans-serif",
         fontWeight: "400",
+        width: "100%",
         //color: "dark",
         textAlign: "justify",
         paddingBottom: theme.spacing(2),
