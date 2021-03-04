@@ -46,7 +46,7 @@ const AssignmentList = (props) => {
         <Box>
             <Box className={classes.header}>
                 <Typography variant="h4">Assignments</Typography>
-                <IconButton color={"primary"}><AddIcon /></IconButton>
+                <IconButton color="primary"><AddIcon /></IconButton>
             </Box>
             <Divider/>
             <br/>

@@ -102,7 +102,8 @@ const Classroom = (props) => {
                     </Tabs>
                 </Box>
                 <Box className={classes.bodyContents}>
-                    {tab === 0 ? <Stream classroom={props.classroom} id={params.id}/>: tab === 1? <Classworks/>: <People/>}
+                    {tab === 0 ? <Stream classroom={props.classroom} id={params.id}/>: tab === 1?
+                        <Classworks classroom={props.classroom}/>: <People/>}
                 </Box>
             </Box>
         </Container>

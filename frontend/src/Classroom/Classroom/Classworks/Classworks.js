@@ -54,10 +54,10 @@ const Classworks = (props) => {
     return(
         <Box className={classes.root}>
             <Box className={classes.quiz}>
-                <ExamList />
+                <ExamList classroom={props.classroom}/>
             </Box>
             <Box className={classes.assignment}>
-                <AssignmentList />
+                <AssignmentList classroom={props.classroom}/>
             </Box>
         </Box>
     )
