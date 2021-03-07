@@ -22,7 +22,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Mehedi\Desktop\BUBT\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RunManager">
     <configuration name="BUBT" type="Python.DjangoServer" factoryName="Django server">
@@ -93,7 +93,11 @@
       <workItem from="1614791098368" duration="46000" />
       <workItem from="1614791164854" duration="44000" />
       <workItem from="1614791227668" duration="5964000" />
-      <workItem from="1614837366012" duration="11426000" />
+      <workItem from="1614837366012" duration="11463000" />
+      <workItem from="1614934676298" duration="1040000" />
+      <workItem from="1615071383166" duration="54000" />
+      <workItem from="1615093276422" duration="127000" />
+      <workItem from="1615093478777" duration="6480000" />
     </task>
     <servers />
   </component>

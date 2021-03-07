@@ -14,7 +14,7 @@ import {connect} from "react-redux";
 import {getQuestions, postParticipants} from "../../../../../store/Actions/Classroom/Classroom";
 import {useParams} from "react-router-dom";
 
-const useStyles = makeStyles(theme=> ({
+const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
         justifyContent: "center",
@@ -55,14 +55,14 @@ const Exam = (props) => {
     const [index, setIndex] = useState(0)
     const [marks, setMarks] = useState(0)
 
-    useEffect(()=> {
+    useEffect(() => {
         props.getQuestions(params, props.exam_name.exam_name)
     }, [])
 
     const onNextQuestion = (mark, answer) => {
-        setIndex(index+1)
-        if(answer === value){
-            setMarks(marks+mark)
+        setIndex(index + 1)
+        if (answer === value) {
+            setMarks(marks + mark)
         }
     }
 
@@ -75,9 +75,9 @@ const Exam = (props) => {
         setValue(e.target.value)
     }
 
-    return(
+    return (
         <Modal open={props.open}
-            className={classes.root}
+               className={classes.root}
                closeAfterTransition BackdropComponent={Backdrop} BackdropProps={{timeout: 500}}
         >
             <Fade in={props.open}>
@@ -89,19 +89,25 @@ const Exam = (props) => {
                         <Box className={classes.containerBody}>
                             <Typography variant="h6">This is question title</Typography>
                             <FormControl>
-                            <RadioGroup value={value} onChange={event => radioHandler(event)}>
-                                <FormControlLabel value="A" control={<Radio />} label={props.questions[index].option1} />
-                                <FormControlLabel value="B" control={<Radio />} label={props.questions[index].option2} />
-                                <FormControlLabel value="C" control={<Radio />} label={props.questions[index].option3} />
-                                <FormControlLabel value="D" control={<Radio />} label={props.questions[index].option4} />
-                            </RadioGroup>
-                        </FormControl>
-                            <Button onClick={()=>onNextQuestion(props.questions[index].marks, props.questions[index].answer)}
-                                    variant="outlined" color="primary">next</Button>
+                                <RadioGroup value={value} onChange={event => radioHandler(event)}>
+                                    <FormControlLabel value="A" control={<Radio/>}
+                                                      label={props.questions[index].option1}/>
+                                    <FormControlLabel value="B" control={<Radio/>}
+                                                      label={props.questions[index].option2}/>
+                                    <FormControlLabel value="C" control={<Radio/>}
+                                                      label={props.questions[index].option3}/>
+                                    <FormControlLabel value="D" control={<Radio/>}
+                                                      label={props.questions[index].option4}/>
+                                </RadioGroup>
+                            </FormControl>
+                            <Button
+                                onClick={() => onNextQuestion(props.questions[index].marks, props.questions[index].answer)}
+                                variant="outlined" color="primary">next</Button>
                         </Box> :
                         <Box className={classes.containerBody}>
                             <Typography variant="h4">Exam completed</Typography>
-                            <Button variant="contained" color="secondary" onClick={()=>onSubmitHandler()}>Submit</Button>
+                            <Button variant="contained" color="secondary"
+                                    onClick={() => onSubmitHandler()}>Submit</Button>
                         </Box>
                     }
                 </Box>
