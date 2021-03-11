@@ -1,13 +1,27 @@
 from rest_framework import generics, views, permissions
 from rest_framework.response import Response
+from django.db import transaction
 
 from Classroom.models import classroom
 from .models import Exam, Participants
 from .serializers import (ExamListSerializer, QuestionSerializer, ParticipantSerializer)
 
 
-class ExamAPIView(views.APIView):
-    pass
+class createExamAPIView(views.APIView):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def post(self, request, *args, **kwargs):
+        exam_data = self.request.data['exam']
+        qsn_set = self.request.data['qsnSet']
+        date = self.request.data['date']
+
+        print(exam_data)
+        print(date)
+        print(qsn_set)
+
+        return Response('ok')
 
 
 class ExamListAPIView(generics.ListAPIView):

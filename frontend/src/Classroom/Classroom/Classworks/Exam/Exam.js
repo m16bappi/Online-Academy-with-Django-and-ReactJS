@@ -11,7 +11,7 @@ import {
     RadioGroup, FormControlLabel, Radio
 } from "@material-ui/core";
 import {connect} from "react-redux";
-import {getQuestions, postParticipants} from "../../../../../store/Actions/Classroom/Classroom";
+import {getQuestions, postAssignmentParticipants} from "../../../../../store/Actions/Classroom/Classroom";
 import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
@@ -122,4 +122,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getQuestions, postParticipants})(Exam)
+export default connect(mapStateToProps, {getQuestions, postParticipants: postAssignmentParticipants})(Exam)

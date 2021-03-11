@@ -10,6 +10,7 @@ import {
     TextField,
     Typography
 } from "@material-ui/core";
+import {connect} from "react-redux";
 import DateFnsUtils from '@date-io/date-fns';
 
 import {
@@ -18,11 +19,12 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+import {createExam} from "../../../../../store/Actions/Classroom/Classroom";
 
 const useStyles = makeStyles({
     root: {
         width: "30rem",
-        height: "40rem",
+        height: "42rem",
         background: "white",
         borderRadius: "5px",
         padding: "1rem",
@@ -69,15 +71,14 @@ const CreateExam = (props) => {
     const qsnAddHandler = () => {
         setQsnSet([...qsnSet, qsn])
         setQsn({
-        question: '',
-        option1: '',
-        option2: '',
-        option3: '',
-        option4: '',
-        answer: 'A',
-        marks: 0
-    })
-        console.log(qsnSet)
+            question: '',
+            option1: '',
+            option2: '',
+            option3: '',
+            option4: '',
+            answer: 'A',
+            marks: 0
+        })
     }
 
     const qsnOnChangeHandler = (event) => {
@@ -85,6 +86,10 @@ const CreateExam = (props) => {
             ...qsn,
             [event.target.name]: event.target.value
         })
+    }
+
+    const submit = () => {
+        props.createExam(exam, qsnSet, date)
     }
 
     return (
@@ -127,19 +132,22 @@ const CreateExam = (props) => {
                 </Grid>
             </MuiPickersUtilsProvider>
             <TextField label="Question" name="question" fullWidth value={qsn.question}
-            onChange={qsnOnChangeHandler}
+                       onChange={qsnOnChangeHandler}
             />
             <TextField label="option 1" name="option1" fullWidth value={qsn.option1}
-            onChange={qsnOnChangeHandler}
+                       onChange={qsnOnChangeHandler}
             />
             <TextField label="option 2" name="option2" fullWidth value={qsn.option2}
-            onChange={qsnOnChangeHandler}
+                       onChange={qsnOnChangeHandler}
             />
             <TextField label="option 3" name="option3" fullWidth value={qsn.option3}
-            onChange={qsnOnChangeHandler}
+                       onChange={qsnOnChangeHandler}
             />
             <TextField label="option 4" name="option4" fullWidth value={qsn.option4}
-            onChange={qsnOnChangeHandler}
+                       onChange={qsnOnChangeHandler}
+            />
+            <TextField label="marks" name="marks" fullWidth value={qsn.marks}
+                       onChange={qsnOnChangeHandler}
             />
             <FormControl>
                 <RadioGroup value={qsn.answer} onChange={event => radioHandler(event)} row>
@@ -156,7 +164,7 @@ const CreateExam = (props) => {
             <Box className={classes.footer}>
                 <ButtonGroup>
                     <Button color="primary" variant="contained" onClick={qsnAddHandler}>Add</Button>
-                    <Button color="secondary" variant="contained">Submit</Button>
+                    <Button color="secondary" variant="contained" onClick={submit}>Submit</Button>
                 </ButtonGroup>
                 <Typography>{`added questions: ${qsnSet.length}`}</Typography>
             </Box>
@@ -164,4 +172,4 @@ const CreateExam = (props) => {
     )
 }
 
-export default CreateExam
+export default connect(null, {createExam})(CreateExam)

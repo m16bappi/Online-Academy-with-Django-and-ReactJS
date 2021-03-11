@@ -86,6 +86,16 @@ export const join_classroom = (id, code) => (dispatch, getState) => {
         }).catch(error => console.log(error))
 }
 
+export const createExam = (exam, qsnSet, date) => (dispatch, getState) =>{
+    Axios.post(`api/classroom/exam/create/`, {exam, qsnSet, date}, TOKEN_CONFIG(getState))
+        .then(res => {
+            dispatch({
+                type: Type.CREATE_EXAM,
+                payload: res.data
+            })
+        }).catch(error => console.log(error))
+}
+
 export const getExamList = (classroom) => (dispatch, getState) => {
     Axios.get(`api/classroom/exam/list/${classroom}/`, TOKEN_CONFIG(getState))
         .then(res => {
@@ -106,7 +116,7 @@ export const getQuestions = (classroom, exam) => (dispatch, getState) => {
         }).catch(e => console.log(e))
 }
 
-export const postParticipants = (exam_id, obtain_marks) => (dispatch, getState) => {
+export const postAssignmentParticipants = (exam_id, obtain_marks) => (dispatch, getState) => {
     Axios.post(`api/classroom/exam/list/participants/`, {exam_id, obtain_marks}, TOKEN_CONFIG(getState))
         .then(res => {
             dispatch({
@@ -118,7 +128,7 @@ export const postParticipants = (exam_id, obtain_marks) => (dispatch, getState) 
         }).catch(e => console.log(e))
 }
 
-export const get_participantsList = (id) => (dispatch) => {
+export const getAssignmentParticipants = (id) => (dispatch) => {
     Axios.get(`api/classroom/exam/list/participants/${id}/`, CONFIG())
         .then(res => {
             dispatch({
