@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Blogs(models.Model):
     author = models.ForeignKey(User, related_name='blog_author', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
@@ -14,7 +15,7 @@ class Blogs(models.Model):
 
     def __str__(self):
         return self.title
-    
+
 
 class Comments(models.Model):
     Blog = models.ForeignKey(Blogs, on_delete=models.CASCADE, null=True)
