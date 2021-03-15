@@ -7,7 +7,7 @@ class ExamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exam
-        fields = ['id', 'exam_name', 'total_marks', 'time_duration', 'submitted']
+        fields = ['id', 'exam_name', 'classroom', 'total_marks', 'submission_time', 'posted_time', 'submitted', 'status']
 
 
 class CreateExamSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class ExamListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exam
-        fields = ['id', 'exam_name', 'total_marks', 'rules', 'posted_time', 'submission_time', 'status', 'submitted']
+        fields = ['id', 'exam_name', 'total_marks', 'posted_time', 'submission_time', 'status', 'submitted']
 
 
 class QuestionSerializer(serializers.ModelSerializer):

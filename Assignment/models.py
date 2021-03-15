@@ -1,7 +1,9 @@
 from datetime import datetime
-from django.db import models
-from Classroom.models import classroom
+
 from django.contrib.auth.models import User
+from django.db import models
+
+from Classroom.models import classroom
 
 
 # Create your models here.
@@ -24,6 +26,7 @@ class assignments(models.Model):
 class assignment_participants(models.Model):
     assignment = models.ForeignKey(assignments, related_name='assignment_participants', on_delete=models.CASCADE)
     file = models.FileField()
+    file_text = models.TextField(null=True, blank=True)
     student_name = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

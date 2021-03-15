@@ -1,10 +1,10 @@
 from rest_framework import generics, views, permissions
 from rest_framework.response import Response
-from django.db import transaction
+from django.db import transaction, DatabaseError
 
 from Classroom.models import classroom
-from .models import Exam, Participants
-from .serializers import (ExamListSerializer, QuestionSerializer, ParticipantSerializer)
+from .models import Exam, Participants, Question
+from .serializers import (CreateExamSerializer, ExamSerializer, ExamListSerializer, QuestionSerializer, ParticipantSerializer)
 
 
 class createExamAPIView(views.APIView):
@@ -12,16 +12,27 @@ class createExamAPIView(views.APIView):
         permissions.IsAuthenticated
     ]
 
+    def __init__(self):
+        super().__init__()
+        self.list = []
+
     def post(self, request, *args, **kwargs):
-        exam_data = self.request.data['exam']
-        qsn_set = self.request.data['qsnSet']
-        date = self.request.data['date']
+        data = {
+            'exam_name': self.request.data['exam']['exam_name'],
+            'classroom': classroom.objects.get(id=self.request.data['exam']['classroom']).id,
+            'total_marks': self.request.data['exam']['total_marks'],
+            'submission_time': self.request.data['date']
+        }
 
-        print(exam_data)
-        print(date)
-        print(qsn_set)
+        try:
+            with transaction.atomic():
+                exam = CreateExamSerializer(data=data)
+                exam.is_valid(raise_exception=True)
+                exam = exam.save()
+        except DatabaseError:
+            return Response('Database Error')
 
-        return Response('ok')
+        return Response(ExamSerializer(exam).data)
 
 
 class ExamListAPIView(generics.ListAPIView):
