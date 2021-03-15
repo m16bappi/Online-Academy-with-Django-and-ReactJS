@@ -15,6 +15,9 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import Exam from "./Exam";
 import CreateExam from "./CreateExam";
+import ExamParticipantList from "./ExamParticipantList";
+
+import {getExamParticipantList} from "../../../../../store/Actions/Classroom/Classroom";
 
 const useStyles = makeStyles(theme => ({
     listItemRoot: {
@@ -65,12 +68,18 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
+    },
+    examParticipantList: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }))
 
 const ExamList = (props) => {
     const classes = useStyles()
     const [collapse, setCollapse] = useState({})
+    const [ep, setEp] = useState(false)
     const [modal, setModal] = useState(false)
     const [exam, setExam] = useState(false)
     const [examName, setExamName] = useState({
@@ -93,6 +102,12 @@ const ExamList = (props) => {
         setExam(true)
     }
 
+    const examParticipantList = (id) => {
+        console.log(id)
+        props.getExamParticipantList(id)
+        setEp(true)
+    }
+
     return (
         <Box>
             <Box className={classes.header}>
@@ -106,19 +121,21 @@ const ExamList = (props) => {
                 <Box key={index}
                      className={collapse[index] ? `${classes.listItemRoot} ${classes.active}` : classes.listItemRoot}>
                     <Box className={classes.listItem}
-                         onClick={item.status ? () => collapseHandler(index, item.id, item.exam_name) : null}>
+                         onClick={item.status && props.user.status === 'student' ? () => collapseHandler(index, item.id, item.exam_name) : null}>
                         <Typography variant="h6">{item.exam_name}</Typography>
-                        {item.status ?
-                            <Typography>{new Date(item.submission_time).toLocaleString().split('T')[0]}</Typography>
-                            :
-                            <Typography>Exam finished</Typography>
+                        {props.user.status === 'teacher' ?
+                            <Button variant="outlined" onClick={() => examParticipantList(item.id)}>submitted
+                                list</Button> : item.status ?
+                                <Typography>{new Date(item.submission_time).toLocaleString().split('T')[0]}</Typography>
+                                :
+                                <Typography>Exam finished</Typography>
                         }
                     </Box>
                     <Collapse in={collapse[index]}>
                         <Box className={classes.listItemCollapse}>
                             <Divider/>
                             <Box component="p">posted
-                                time: {new Date(item.posted_time).toLocaleDateString().split('T')[0]}</Box>
+                                time: {new Date(item["posted_time"]).toLocaleDateString().split('T')[0]}</Box>
                             <Box component="p">
                                 1. Read carefully and answer the questions.<br/>
                                 2. You have to complete on time.<br/>
@@ -127,7 +144,7 @@ const ExamList = (props) => {
                             </Box>
                             <Divider/>
                             <Box component="div">
-                                {item.submitted.includes(props.user.username) ?
+                                {item["submitted"].includes(props.user.username) ?
                                     <Typography variant="h6">Submitted</Typography>
                                     :
                                     <Button variant="outlined" color="secondary"
@@ -154,6 +171,11 @@ const ExamList = (props) => {
                     </div>
                 </Fade>
             </Modal> : null}
+            {ep ? <Modal open={ep} onClose={() => setEp(false)} className={classes.examParticipantList}>
+                <div style={{outline: "none"}}>
+                    <ExamParticipantList list={props.examParticipantList}/>
+                </div>
+            </Modal> : null}
         </Box>
     )
 }
@@ -161,8 +183,10 @@ const ExamList = (props) => {
 const mapStateToProps = state => {
     return {
         examlist: state.Classroom.examlist,
-        user: state.Auth.user
+        user: state.Auth.user,
+        examParticipantList: state.Classroom.participantList.exam,
+        assignmentParticipantList: state.Classroom.participantList.assignment
     }
 }
 
-export default connect(mapStateToProps)(ExamList)
+export default connect(mapStateToProps, {getExamParticipantList})(ExamList)

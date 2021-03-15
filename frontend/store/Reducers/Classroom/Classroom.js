@@ -14,107 +14,111 @@ const initialState = {
     stream: {
         streams: [],
         comments: []
+    },
+    participantList: {
+        exam: [],
+        assignment: []
     }
 }
 
-export default function (state=initialState, action) {
-    switch (action.type){
-        case Type.GET_CLASSROOM_LIST:
-        {
+export default function (state = initialState, action) {
+    switch (action.type) {
+        case Type.GET_CLASSROOM_LIST: {
             return {
                 ...state,
                 classroomList: action.payload
             }
         }
-        case Type.GET_MY_CLASSROOM_LIST:
-        {
+        case Type.GET_MY_CLASSROOM_LIST: {
             return {
                 ...state,
                 myclassroomlist: action.payload
             }
         }
-        case Type.TEACHER_CLASSROOM:
-        {
+        case Type.TEACHER_CLASSROOM: {
             return {
                 ...state,
                 teacher_classroom: action.payload
             }
         }
-        case Type.CREATE_CLASSROOMS:
-        {
+        case Type.CREATE_CLASSROOMS: {
             return {
                 ...state,
                 teacher_classroom: [...state.teacher_classroom, action.payload]
             }
         }
-        case Type.JOIN_CLASSROOM:
-        {
+        case Type.JOIN_CLASSROOM: {
             console.log(action.payload)
             return {
                 ...state,
                 classroomList: state.classroomList.map(value => {
-                    if (value.id === action.payload.id){
+                    if (value.id === action.payload.id) {
                         value.students.push(action.payload.username)
                     }
                     return value
                 })
             }
         }
-        case Type.GET_CLASSROOMS:
-        {
+        case Type.GET_CLASSROOMS: {
             return {
                 ...state,
                 ...action.payload
             }
         }
-        case Type.GET_EXAM_LIST:
-        {
+        case Type.GET_EXAM_LIST: {
             return {
                 ...state,
                 examlist: action.payload
             }
         }
-        case Type.GET_QUESTIONS:
-        {
+        case Type.GET_QUESTIONS: {
             return {
                 ...state,
                 questions: action.payload
             }
         }
 
-        case Type.POST_PARTICIPANTS:
-        {
+        case Type.POST_EXAM_PARTICIPANTS: {
             return {
                 ...state,
-                examlist: state.examlist.map(item=>{
-                    if (item.id === action.exam_id){
+                examlist: state.examlist.map(item => {
+                    if (item.id === action.exam_id) {
                         item["submitted"].push(action.user)
                     }
                     return item
-                }),
-                participants: [...state.participants, action.payload]
+                })
             }
         }
-        case Type.PARTICIPANTS_LIST:
-        {
+        case Type.EXAM_PARTICIPANTS_LIST: {
             return {
                 ...state,
-                participants: action.payload
+                participantList: {
+                    ...state.participantList,
+                    exam: action.payload
+                }
             }
         }
-        case Type.GET_ASSIGNMENTS:
-        {
+
+        case Type.ASSIGNMENT_PARTICIPANTS_LIST: {
+            return {
+                ...state,
+                participantList: {
+                    ...state.participantList,
+                    assignment: [...state.participantList.assignment, action.payload]
+                }
+            }
+        }
+        case Type.GET_ASSIGNMENTS: {
             return {
                 ...state,
                 assignments: action.payload
             }
         }
-        case Type.POST_ASSIGNMENT_ANSWER:
-        {
+        case Type.POST_ASSIGNMENT_ANSWER: {
             return {
                 ...state,
-                assignments: state.assignments.map(item=> {
-                    if(item.id === action.payload.assignment){
+                assignments: state.assignments.map(item => {
+                    if (item.id === action.payload.assignment) {
                         item["submitted"].push(action.payload.student_name)
                     }
                     return item
@@ -122,8 +126,7 @@ export default function (state=initialState, action) {
                 assignment_submit: [...state.assignment_submit, action.payload]
             }
         }
-        case Type.GET_STREAM:
-        {
+        case Type.GET_STREAM: {
             return {
                 ...state,
                 stream: {
@@ -132,8 +135,7 @@ export default function (state=initialState, action) {
                 }
             }
         }
-        case Type.POST_STREAM:
-        {
+        case Type.POST_STREAM: {
             return {
                 ...state,
                 stream: {
@@ -142,8 +144,7 @@ export default function (state=initialState, action) {
                 }
             }
         }
-        case Type.POST_STREAM_COMMENT:
-        {
+        case Type.POST_STREAM_COMMENT: {
             return {
                 ...state,
                 stream: {
@@ -152,8 +153,7 @@ export default function (state=initialState, action) {
                 }
             }
         }
-        case Type.GET_STREAM_COMMENT:
-        {
+        case Type.GET_STREAM_COMMENT: {
             return {
                 ...state,
                 stream: {
@@ -162,8 +162,7 @@ export default function (state=initialState, action) {
                 }
             }
         }
-        case USER_LOGOUT:
-        {
+        case USER_LOGOUT: {
             return {
                 ...state,
                 myclassroomlist: [],

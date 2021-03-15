@@ -33,7 +33,9 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class CreateQuestionSerializer(serializers.ModelSerializer):
-    pass
+    class Meta:
+        model = Question
+        fields = '__all__'
 
 
 class ParticipantSerializer(serializers.ModelSerializer):

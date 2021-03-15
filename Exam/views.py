@@ -1,10 +1,11 @@
+from django.db import transaction, DatabaseError
 from rest_framework import generics, views, permissions
 from rest_framework.response import Response
-from django.db import transaction, DatabaseError
 
 from Classroom.models import classroom
-from .models import Exam, Participants, Question
-from .serializers import (CreateExamSerializer, ExamSerializer, ExamListSerializer, QuestionSerializer, ParticipantSerializer)
+from .models import Exam, Participants
+from .serializers import (CreateExamSerializer, ExamSerializer, ExamListSerializer,
+                          QuestionSerializer, ParticipantSerializer, CreateQuestionSerializer)
 
 
 class createExamAPIView(views.APIView):
@@ -23,15 +24,19 @@ class createExamAPIView(views.APIView):
             'total_marks': self.request.data['exam']['total_marks'],
             'submission_time': self.request.data['date']
         }
-
         try:
             with transaction.atomic():
                 exam = CreateExamSerializer(data=data)
                 exam.is_valid(raise_exception=True)
                 exam = exam.save()
+
+                for value in self.request.data['qsnSet']:
+                    value['exam_name'] = exam.id
+                    qsn = CreateQuestionSerializer(data=value)
+                    qsn.is_valid(raise_exception=True)
+                    qsn.save()
         except DatabaseError:
             return Response('Database Error')
-
         return Response(ExamSerializer(exam).data)
 
 
@@ -52,7 +57,7 @@ class QuestionAPIView(generics.ListAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-        classroom_object = classroom.objects.get(class_name=self.kwargs['class_name'])
+        classroom_object = classroom.objects.get(id=self.kwargs['class_id'])
         quiz_object = classroom_object.classroom_exam.get(exam_name=self.kwargs['quiz'])
         return quiz_object.question_set.all()
 
