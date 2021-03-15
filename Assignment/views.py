@@ -1,11 +1,27 @@
+from rest_framework import permissions
 from rest_framework import generics, views, status
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FileUploadParser
 from django.core.exceptions import ObjectDoesNotExist
 
 from Classroom.models import classroom
-from .serializers import assignmentSerializer, assignmentParticipantSerializer
+from .serializers import assignmentSerializer, assignmentParticipantSerializer, createAssignmentSerializer
 from .models import assignments, assignment_participants
+
+
+class createAssignmentAPIView(generics.GenericAPIView):
+    serializer_class = createAssignmentSerializer
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    def post(self, request, *args, **kwargs):
+        data = self.request.data
+        data['classroom'] = classroom.objects.get(id=self.kwargs.get('id')).id
+        object = createAssignmentSerializer(data=data)
+        object.is_valid(raise_exception=True)
+        object = object.save()
+        return Response(assignmentSerializer(object).data)
 
 
 class assignmentListAPIView(generics.ListAPIView):

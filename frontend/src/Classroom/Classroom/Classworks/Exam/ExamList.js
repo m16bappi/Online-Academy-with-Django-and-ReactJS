@@ -103,7 +103,6 @@ const ExamList = (props) => {
     }
 
     const examParticipantList = (id) => {
-        console.log(id)
         props.getExamParticipantList(id)
         setEp(true)
     }
@@ -124,7 +123,7 @@ const ExamList = (props) => {
                          onClick={item.status && props.user.status === 'student' ? () => collapseHandler(index, item.id, item.exam_name) : null}>
                         <Typography variant="h6">{item.exam_name}</Typography>
                         {props.user.status === 'teacher' ?
-                            <Button variant="outlined" onClick={() => examParticipantList(item.id)}>submitted
+                            <Button variant="outlined" color={"primary"} onClick={() => examParticipantList(item.id)}>submitted
                                 list</Button> : item.status ?
                                 <Typography>{new Date(item.submission_time).toLocaleString().split('T')[0]}</Typography>
                                 :
@@ -167,7 +166,7 @@ const ExamList = (props) => {
             >
                 <Fade in={modal}>
                     <div style={{outline: "none"}}>
-                        <CreateExam id={props.classroom.id}/>
+                        <CreateExam id={props.classroom.id} onClose={()=>setModal(false)}/>
                     </div>
                 </Fade>
             </Modal> : null}
@@ -184,8 +183,7 @@ const mapStateToProps = state => {
     return {
         examlist: state.Classroom.examlist,
         user: state.Auth.user,
-        examParticipantList: state.Classroom.participantList.exam,
-        assignmentParticipantList: state.Classroom.participantList.assignment
+        examParticipantList: state.Classroom.participantList.exam
     }
 }
 

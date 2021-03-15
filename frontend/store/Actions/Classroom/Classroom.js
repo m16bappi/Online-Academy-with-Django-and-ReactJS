@@ -138,8 +138,18 @@ export const getExamParticipantList = (id) => dispatch => {
         }).catch(error => console.log(error))
 }
 
+export const post_assignment = (data, id) => (dispatch, getState) => {
+    Axios.post(`api/classroom/assignment/create/${id}/`, data, TOKEN_CONFIG(getState))
+        .then(res => {
+            dispatch({
+                type: Type.POST_ASSIGNMENT,
+                payload: res.data
+            })
+        }).catch(error=>console.log(error))
+}
+
 export const getAssignmentParticipants = (id) => (dispatch) => {
-    Axios.get(`api/classroom/exam/list/participants/${id}/`, CONFIG())
+    Axios.get(`api/classroom/assignment/participant/list/${id}/`, CONFIG())
         .then(res => {
             dispatch({
                 type: Type.ASSIGNMENT_PARTICIPANTS_LIST,

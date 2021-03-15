@@ -90,6 +90,7 @@ const CreateExam = (props) => {
 
     const submit = () => {
         props.createExam(exam, qsnSet, date)
+        props.onClose()
     }
 
     return (

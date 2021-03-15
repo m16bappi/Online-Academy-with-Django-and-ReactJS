@@ -65,6 +65,14 @@ export default function (state = initialState, action) {
                 ...action.payload
             }
         }
+
+        case Type.CREATE_EXAM: {
+            return {
+                ...state,
+                examlist: [...state.examlist, action.payload]
+            }
+        }
+
         case Type.GET_EXAM_LIST: {
             return {
                 ...state,
@@ -104,7 +112,7 @@ export default function (state = initialState, action) {
                 ...state,
                 participantList: {
                     ...state.participantList,
-                    assignment: [...state.participantList.assignment, action.payload]
+                    assignment: action.payload
                 }
             }
         }
@@ -114,12 +122,18 @@ export default function (state = initialState, action) {
                 assignments: action.payload
             }
         }
+        case Type.POST_ASSIGNMENT: {
+            return {
+                ...state,
+                assignments: [...state.assignments, action.payload]
+            }
+        }
         case Type.POST_ASSIGNMENT_ANSWER: {
             return {
                 ...state,
                 assignments: state.assignments.map(item => {
                     if (item.id === action.payload.assignment) {
-                        item["submitted"].push(action.payload.student_name)
+                        item["submitted"].push(action.payload["student_name"])
                     }
                     return item
                 }),
