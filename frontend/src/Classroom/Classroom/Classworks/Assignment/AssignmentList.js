@@ -98,7 +98,7 @@ const AssignmentList = (props) => {
             >
                 <Fade in={create}>
                     <div style={{outline: "none"}}>
-                        <CreateAssignment id={props.classroom.id}/>
+                        <CreateAssignment id={props.classroom.id} onClose={()=>setCreate(false)}/>
                     </div>
                 </Fade>
             </Modal> : null}

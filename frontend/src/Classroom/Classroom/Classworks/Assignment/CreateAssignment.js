@@ -36,6 +36,7 @@ const CreateAssignment = (props) => {
     })
     const submitHandler = () => {
         props.post_assignment(state, props.id)
+        props.onClose()
     }
     return (
         <Box className={classes.root}>

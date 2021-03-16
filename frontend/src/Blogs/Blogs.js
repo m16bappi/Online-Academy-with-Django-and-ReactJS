@@ -4,7 +4,6 @@ import {GET_BLOGS, ADD_BLOGS} from "../../store/Actions/Blogs/Blogs";
 import {Box, makeStyles} from "@material-ui/core";
 import BlogItem from "./BlogItem/Blogitem";
 
-import BlogImage from "./BlogImage/BlogHeader.jpg";
 import Filter from "./Filter";
 
 
@@ -35,17 +34,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Blogs = () => {
+const Blogs = (props) => {
     const classes = useStyles()
 
     return(
         <Box className={classes.root}>
            <Box className={classes.container}>
-               <BlogItem image={BlogImage}/>
-               <BlogItem image={BlogImage}/>
-               <BlogItem image={BlogImage}/>
-               <BlogItem image={BlogImage}/>
-               <BlogItem image={BlogImage}/>
+               {props.Blogs.map((item, index)=> (
+                   <BlogItem item={item} key={index}/>
+               ))}
            </Box>
            <Box className={classes.filter}>
                <Filter />
@@ -54,4 +51,10 @@ const Blogs = () => {
     )
 }
 
-export default connect(null, {GET_BLOGS, ADD_BLOGS})(Blogs)
+const mapStateToProps = (state) => {
+    return {
+        Blogs: state.Blogs.Blogs
+    }
+}
+
+export default connect(mapStateToProps, {GET_BLOGS, ADD_BLOGS})(Blogs)

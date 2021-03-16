@@ -1,6 +1,6 @@
-from rest_framework import permissions, generics
+from rest_framework import permissions, generics, status
 from rest_framework.response import Response
-
+from rest_framework.parsers import MultiPartParser
 from .models import Blogs
 from .serializers import BlogsSerializer, BlogsListSerializer
 
@@ -9,6 +9,7 @@ class BlogsAddAPIView(generics.CreateAPIView):
     permission_classes = [
         permissions.IsAuthenticated
     ]
+    parser_classes = [MultiPartParser]
 
     serializer_class = BlogsSerializer
 
@@ -41,6 +42,4 @@ class BlogDestroyAPIView(generics.DestroyAPIView):
                 'success message': 'deleted successfully'
             })
         else:
-            return Response({
-                'error': 'user error'
-            })
+            return Response(status=status.HTTP_400_BAD_REQUEST)

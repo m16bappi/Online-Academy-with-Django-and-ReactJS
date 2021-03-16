@@ -1,7 +1,5 @@
 from django.urls import path
-from django.conf.urls import url
-from rest_framework.routers import DefaultRouter
-from .views import BlogsAddAPIView,BlogsAPIView, BlogRetrieveAPIView, BlogDestroyAPIView
+from .views import BlogsAddAPIView, BlogsAPIView, BlogRetrieveAPIView, BlogDestroyAPIView
 
 urlpatterns = [
     path('api/add_blog/', BlogsAddAPIView.as_view()),

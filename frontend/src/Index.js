@@ -20,9 +20,11 @@ import ClassroomList from "./Classroom/ClassroomList/ClassroomList";
 import MyClassroom from "./Classroom/MyClassroomList/MyClassroomList";
 import Classroom from "./Classroom/Classroom/Classroom";
 import PrivateRoute from "./Route/PrivateRoute";
+import {GET_BLOGS} from "../store/Actions/Blogs/Blogs";
 
 class App extends Component {
   componentDidMount() {
+    store.dispatch(GET_BLOGS())
     store.dispatch(USER_LOADING())
     store.dispatch(get_programs())
     store.dispatch(get_intakes())

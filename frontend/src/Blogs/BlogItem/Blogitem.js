@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, CardMedia, makeStyles, Typography} from "@material-ui/core";
 
-const useStyles = makeStyles(theme=>({
+const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
         flexDirection: "column",
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme=>({
     image: {
         height: "25rem",
         width: "100%",
-        [theme.breakpoints.down('sm')] : {
+        [theme.breakpoints.down('sm')]: {
             height: "15rem"
         }
     },
@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme=>({
             fontWeight: 600,
             textAlign: "justify"
         },
-        [theme.breakpoints.down('sm')] : {
+        [theme.breakpoints.down('sm')]: {
             width: "100%",
             margin: 0,
             height: "28rem"
@@ -73,14 +73,14 @@ const BlogItem = (props) => {
 
     return (
         <Box className={classes.root}>
-            <CardMedia image={"/static/bundles/" + props.image} component="img" className={classes.image}/>
+            <CardMedia image={props.item['cover']} component="img" className={classes.image}/>
             <Box className={classes.container}>
-                <Typography variant="h4">Voices from a Melting World</Typography>
-                <Typography variant="h6">Mehedi / 10-02-2021</Typography>
+                <Typography variant="h4">{props.item['title']}</Typography>
+                <Typography
+                    variant="h6">{props.item['author']} /
+                    {new Date(props.item['created_time']).toLocaleString().split('T')[0].replaceAll('/', '-')}</Typography>
                 <Box component="p">
-                    For 117 hours I waited as temperatures plummeted as low as -50°C and winds gusted up to 60 km/h,
-                    hoping to witness the rare moment when a mother polar bear and her new cubs would leave their den for the very first time.
-                    Today, Arctic sea ice is melting faster than ever before, leaving polar bears vulnerable and hungry.
+                    {props.item['blog'].length >= 320 ? props.item['blog'].substring(0, 320) + '...': props.item['blog']}
                 </Box>
             </Box>
         </Box>
