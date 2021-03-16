@@ -4,6 +4,5 @@ from .views import BlogsAddAPIView, BlogsAPIView, BlogRetrieveAPIView, BlogDestr
 urlpatterns = [
     path('api/add_blog/', BlogsAddAPIView.as_view()),
     path('api/blogs_list/', BlogsAPIView.as_view()),
-    path('api/blogs/details/<int:pk>/', BlogRetrieveAPIView.as_view()),
     path('api/blogs/delete/<int:pk>/', BlogDestroyAPIView.as_view()),
 ]

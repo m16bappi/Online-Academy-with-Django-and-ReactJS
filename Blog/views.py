@@ -2,7 +2,7 @@ from rest_framework import permissions, generics, status
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 from .models import Blogs
-from .serializers import BlogsSerializer, BlogsListSerializer
+from .serializers import BlogsSerializer
 
 
 class BlogsAddAPIView(generics.CreateAPIView):
@@ -18,12 +18,7 @@ class BlogsAddAPIView(generics.CreateAPIView):
 
 
 class BlogsAPIView(generics.ListAPIView):
-    serializer_class = BlogsListSerializer
-    queryset = Blogs.objects.all()
-
-
-class BlogRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = BlogsListSerializer
+    serializer_class = BlogsSerializer
     queryset = Blogs.objects.all()
 
 
@@ -31,7 +26,6 @@ class BlogDestroyAPIView(generics.DestroyAPIView):
     permission_classes = [
         permissions.IsAuthenticated
     ]
-
     queryset = Blogs.objects.all()
 
     def destroy(self, request, *args, **kwargs):

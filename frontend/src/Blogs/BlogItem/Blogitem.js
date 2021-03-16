@@ -1,5 +1,6 @@
 import React from "react";
 import {Box, CardMedia, makeStyles, Typography} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -42,9 +43,11 @@ const useStyles = makeStyles(theme => ({
             transition: "0.3s"
         },
         '& h4': {
+            textDecoration: "none",
             fontFamily: "Playfair Display, serif",
             textAlign: "center",
             fontWeight: 500,
+
             '&:hover': {
                 color: "tomato",
                 cursor: "pointer"
@@ -70,17 +73,22 @@ const useStyles = makeStyles(theme => ({
 
 const BlogItem = (props) => {
     const classes = useStyles()
+    const history = useHistory()
+    const blogDetails = (id) => {
+        history.push(`/blog/${id}`)
+    }
 
     return (
         <Box className={classes.root}>
             <CardMedia image={props.item['cover']} component="img" className={classes.image}/>
             <Box className={classes.container}>
-                <Typography variant="h4">{props.item['title']}</Typography>
+                <Typography variant="h4"
+                            onClick={()=>blogDetails(props.item['id'])}>{props.item['title']}</Typography>
                 <Typography
                     variant="h6">{props.item['author']} /
                     {new Date(props.item['created_time']).toLocaleString().split('T')[0].replaceAll('/', '-')}</Typography>
                 <Box component="p">
-                    {props.item['blog'].length >= 320 ? props.item['blog'].substring(0, 320) + '...': props.item['blog']}
+                    {props.item['blog'].length >= 320 ? props.item['blog'].substring(0, 320) + '...' : props.item['blog']}
                 </Box>
             </Box>
         </Box>

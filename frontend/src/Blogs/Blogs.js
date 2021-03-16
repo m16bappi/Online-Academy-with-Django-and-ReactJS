@@ -36,7 +36,6 @@ const useStyles = makeStyles(theme => ({
 
 const Blogs = (props) => {
     const classes = useStyles()
-
     return(
         <Box className={classes.root}>
            <Box className={classes.container}>
