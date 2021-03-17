@@ -87,7 +87,7 @@ const Exam = (props) => {
                     </Box>
                     {props.questions.length > index ?
                         <Box className={classes.containerBody}>
-                            <Typography variant="h6">This is question title</Typography>
+                            <Typography variant="h6">{props.questions[index].question}</Typography>
                             <FormControl>
                                 <RadioGroup value={value} onChange={event => radioHandler(event)}>
                                     <FormControlLabel value="A" control={<Radio/>}

@@ -2,6 +2,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from Classroom.models import classroom
+from Users.models import student
 
 
 class Exam(models.Model):
@@ -37,8 +38,8 @@ class Question(models.Model):
 
 class Participants(models.Model):
     exam_name = models.ForeignKey(Exam, related_name="participants", on_delete=models.CASCADE)
-    student_name = models.ForeignKey(User, on_delete=models.CharField)
+    student_id = models.CharField(max_length=12)
     obtain_marks = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.student_name.username
+        return self.student_id

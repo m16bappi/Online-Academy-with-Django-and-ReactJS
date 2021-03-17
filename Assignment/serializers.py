@@ -17,8 +17,6 @@ class createAssignmentSerializer(serializers.ModelSerializer):
 
 
 class assignmentParticipantSerializer(serializers.ModelSerializer):
-    student_name = serializers.StringRelatedField()
-
     class Meta:
         model = assignment_participants
-        fields = ['assignment', 'file', 'student_name']
+        fields = ['assignment', 'file', 'student_id']

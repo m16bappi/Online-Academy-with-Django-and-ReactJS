@@ -27,7 +27,7 @@ class assignment_participants(models.Model):
     assignment = models.ForeignKey(assignments, related_name='assignment_participants', on_delete=models.CASCADE)
     file = models.FileField()
     file_text = models.TextField(null=True, blank=True)
-    student_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    student_id = models.CharField(max_length=15)
 
     def __str__(self):
-        return self.student_name.username
+        return self.student_id

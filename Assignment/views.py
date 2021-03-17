@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FileUploadParser
 from django.core.exceptions import ObjectDoesNotExist
 
+from Users.models import student
 from Classroom.models import classroom
 from .serializers import assignmentSerializer, assignmentParticipantSerializer, createAssignmentSerializer
 from .models import assignments, assignment_participants
@@ -44,7 +45,8 @@ class assignmentParticipantAPIView(views.APIView):
                 assignment.submitted.add(self.request.user)
 
             participant = assignment_participants.objects.create(assignment=assignment, file=request.data.get('file'),
-                                                                 student_name=self.request.user)
+                                                                 student_id=student.objects.get(
+                                                                     name=self.request.user).varsity_id)
             return Response(assignmentParticipantSerializer(participant).data)
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

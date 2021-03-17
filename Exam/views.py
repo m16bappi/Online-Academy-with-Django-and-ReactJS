@@ -2,6 +2,7 @@ from django.db import transaction, DatabaseError
 from rest_framework import generics, views, permissions
 from rest_framework.response import Response
 
+from Users.models import student
 from Classroom.models import classroom
 from .models import Exam, Participants
 from .serializers import (CreateExamSerializer, ExamSerializer, ExamListSerializer,
@@ -69,7 +70,8 @@ class participantAPIView(views.APIView):
             pass
         else:
             exam_object.submitted.add(self.request.user)
-        participant = Participants.objects.create(exam_name=exam_object, student_name=self.request.user,
+        participant = Participants.objects.create(exam_name=exam_object,
+                                                  student_id=student.objects.get(name=self.request.user).varsity_id,
                                                   obtain_marks=request.data.get('obtain_marks'))
         return Response(ParticipantSerializer(participant).data)
 

@@ -6,6 +6,8 @@ import Assignment from "./Assignment";
 import CreateAssignment from "./CreateAssignment";
 import {getAssignmentParticipants} from "../../../../../store/Actions/Classroom/Classroom";
 import AssignmentParticipantList from "./AssignmentParticipantList";
+import {exportToCSV} from "../FileSave/FileSave";
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 const useStyles = makeStyles(theme => ({
     listItemRoot: {
@@ -52,6 +54,7 @@ const AssignmentList = (props) => {
     const [state, setState] = useState()
     const [create, setCreate] = useState(false)
     const [ap, setAP] = useState(false)
+    const [ex, setEx] = useState(false)
     const onClickHandler = (item) => {
         setState(item)
         setValue(true)
@@ -64,6 +67,16 @@ const AssignmentList = (props) => {
     const getParticipant = (id) => {
         props.getAssignmentParticipants(id)
         setAP(true)
+    }
+
+    const downloadSheet = (id) => {
+        props.getAssignmentParticipants(id)
+        setEx(true)
+    }
+
+    if(props.assignmentParticipantList.length && ex) {
+        exportToCSV(props.assignmentParticipantList, 'assignment-list')
+        setEx(false)
     }
 
     return (
@@ -79,8 +92,8 @@ const AssignmentList = (props) => {
                 <Box className={classes.listItem} key={index} onClick={item.status && props.user.status === 'student'? () => onClickHandler(item) : null}>
                     <Typography variant="h6">{item.title}</Typography>
                     {props.user.status === 'teacher' ?
-                        <Button variant="outlined" color="primary" onClick={() => getParticipant(item.id)}>Submitted
-                            list</Button> : item.status ?
+                        <div><Button variant="outlined" color="primary" onClick={() => getParticipant(item.id)}>Submitted
+                            list</Button> <Button variant="outlined" color="secondary" onClick={()=>downloadSheet(item.id)}><GetAppIcon /></Button></div> : item.status ?
                             <Typography>{new Date(item["submission_time"]).toLocaleString().split('T')[0]}</Typography>
                             :
                             <Typography>Time over</Typography>

@@ -33,6 +33,11 @@
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Mehedi\Desktop\BUBT\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mehedi\Desktop\BUBT\frontend\src\Classroom\Classroom\Classworks" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="BUBT" type="Python.DjangoServer" factoryName="Django server">
       <module name="BUBT" />
@@ -125,7 +130,7 @@
       <workItem from="1615817486447" duration="14337000" />
       <workItem from="1615871498006" duration="11434000" />
       <workItem from="1615919631042" duration="4903000" />
-      <workItem from="1615956033740" duration="6881000" />
+      <workItem from="1615956033740" duration="15926000" />
     </task>
     <servers />
   </component>

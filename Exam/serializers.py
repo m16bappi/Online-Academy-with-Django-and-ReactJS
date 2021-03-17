@@ -40,7 +40,6 @@ class CreateQuestionSerializer(serializers.ModelSerializer):
 
 class ParticipantSerializer(serializers.ModelSerializer):
     exam_name = serializers.StringRelatedField()
-    student_name = serializers.StringRelatedField()
 
     class Meta:
         model = Participants

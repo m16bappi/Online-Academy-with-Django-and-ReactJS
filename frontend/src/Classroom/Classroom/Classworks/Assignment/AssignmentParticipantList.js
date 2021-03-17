@@ -28,7 +28,7 @@ const AssignmentParticipantList = (props) => {
             <List className={classes.list}>
                 {props.list ? props.list.map((item, index) => (
                     <ListItem key={index} divider>
-                        <ListItemText primary={item["student_name"]}/>
+                        <ListItemText primary={item["student_id"]}/>
                         <ListItemSecondaryAction><Button href={item.file}
                                                          download><GetAppIcon/></Button></ListItemSecondaryAction>
                     </ListItem>

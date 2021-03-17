@@ -15,7 +15,8 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import Exam from "./Exam";
 import CreateExam from "./CreateExam";
-import ExamParticipantList from "./ExamParticipantList";
+import {exportToCSV} from "../FileSave/FileSave";
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 import {getExamParticipantList} from "../../../../../store/Actions/Classroom/Classroom";
 
@@ -94,6 +95,7 @@ const ExamList = (props) => {
             exam_name: exam_name
         })
     }
+
     const examModalHandler = () => {
         setExam(false)
     }
@@ -105,6 +107,11 @@ const ExamList = (props) => {
     const examParticipantList = (id) => {
         props.getExamParticipantList(id)
         setEp(true)
+    }
+
+    if (props.examParticipantList.length && ep) {
+        exportToCSV(props.examParticipantList, 'quiz')
+        setEp(false)
     }
 
     return (
@@ -123,8 +130,8 @@ const ExamList = (props) => {
                          onClick={item.status && props.user.status === 'student' ? () => collapseHandler(index, item.id, item.exam_name) : null}>
                         <Typography variant="h6">{item.exam_name}</Typography>
                         {props.user.status === 'teacher' ?
-                            <Button variant="outlined" color={"primary"} onClick={() => examParticipantList(item.id)}>submitted
-                                list</Button> : item.status ?
+                            <Button variant="outlined" color={"primary"}
+                                    onClick={() => examParticipantList(item.id, item.exam_name)}><GetAppIcon /></Button> : item.status ?
                                 <Typography>{new Date(item.submission_time).toLocaleString().split('T')[0]}</Typography>
                                 :
                                 <Typography>Exam finished</Typography>
@@ -166,14 +173,9 @@ const ExamList = (props) => {
             >
                 <Fade in={modal}>
                     <div style={{outline: "none"}}>
-                        <CreateExam id={props.classroom.id} onClose={()=>setModal(false)}/>
+                        <CreateExam id={props.classroom.id} onClose={() => setModal(false)}/>
                     </div>
                 </Fade>
-            </Modal> : null}
-            {ep ? <Modal open={ep} onClose={() => setEp(false)} className={classes.examParticipantList}>
-                <div style={{outline: "none"}}>
-                    <ExamParticipantList list={props.examParticipantList}/>
-                </div>
             </Modal> : null}
         </Box>
     )
