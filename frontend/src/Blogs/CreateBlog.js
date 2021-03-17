@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Box, Button, Input, makeStyles, TextField, Typography} from "@material-ui/core";
 
 import {ADD_BLOGS} from "../../store/Actions/Blogs/Blogs";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const useStyles = makeStyles({
     root: {
@@ -17,22 +18,20 @@ const useStyles = makeStyles({
         gap: "1rem",
         borderRadius: "5px",
         background: "white",
-        '&>:first-child': {
-            marginBottom: "2rem"
-        }
     }
 })
 
 const CreateBlog = (props) => {
     const classes = useStyles()
     const [form, setForm] = useState({
-        title: '', body: '', file: undefined
+        title: '', body: '', file: undefined, category: ''
     })
 
     const submitHandler = () => {
         const formData = new FormData()
         formData.append('title', form.title)
         formData.append('blog', form.body)
+        formData.append('category', form.category)
         if (form.file !== undefined) {
             formData.append('cover', form.file, form.file.name)
         }
@@ -49,9 +48,23 @@ const CreateBlog = (props) => {
                        onChange={event => setForm({...form, body: event.target.value})}/>
             <Input type="file" disableUnderline color="primary" fullWidth
                    onChange={event => setForm({...form, file: event.target.files[0]})}/>
+            <Autocomplete fullWidth
+                onChange={(event, value) => {
+                    setForm({...form, category: value ? value["program_title"] : ''})
+                }}
+                options={props.program ? props.program : null}
+                getOptionLabel={(option) => option["program_title"]}
+                renderInput={(params) => <TextField {...params} name="program" label="Program" variant="outlined"/>}
+            />
             <Button variant="contained" color="primary" fullWidth onClick={submitHandler}>Post</Button>
         </Box>
     )
 }
 
-export default connect(null, {ADD_BLOGS})(CreateBlog)
+const mapStateToProps = state => {
+    return {
+        program: state.Program.program
+    }
+}
+
+export default connect(mapStateToProps, {ADD_BLOGS})(CreateBlog)

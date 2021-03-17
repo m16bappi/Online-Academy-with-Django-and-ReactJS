@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BlogsAddAPIView, BlogsAPIView, BlogRetrieveAPIView, BlogDestroyAPIView
+from .views import BlogsAddAPIView, BlogsAPIView, BlogDestroyAPIView
 
 urlpatterns = [
     path('api/add_blog/', BlogsAddAPIView.as_view()),

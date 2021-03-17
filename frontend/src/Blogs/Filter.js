@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import {connect} from "react-redux";
 import CreateBlog from "./CreateBlog";
+import {Make_Filter} from "../../store/Actions/Blogs/Blogs";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,6 +37,10 @@ const Filter = (props) => {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
 
+    const FilterHandler = (category) => {
+        props.Make_Filter(category)
+    }
+
     return (
         <Box className={classes.root}>
             {props.isAuthenticated ?
@@ -47,28 +52,29 @@ const Filter = (props) => {
             }
             <List>
                 {list.map((item, index) => (
-                    <ListItem button divider={true} key={index}>
+                    <ListItem button divider={true} key={index} onClick={()=>FilterHandler(item)}>
                         <ListItemAvatar><Avatar>{item.charAt(0)}</Avatar></ListItemAvatar>
                         <ListItemText primary={item}/>
                         <ListItemSecondaryAction>
-                            <ListItemText primary={5}/>
+                            <ListItemText primary={props.blogs ? props.blogs.filter(value => value.category === item).length: null}/>
                         </ListItemSecondaryAction>
                     </ListItem>
                 ))}
             </List>
-            {open ? <Modal open={open} onClose={()=>setOpen(false)} className={classes.post}>
+            {open ? <Modal open={open} onClose={() => setOpen(false)} className={classes.post}>
                 <div style={{outline: "none"}}>
-                    <CreateBlog onClose={()=>setOpen(false)}/>
+                    <CreateBlog onClose={() => setOpen(false)}/>
                 </div>
-            </Modal>: null}
+            </Modal> : null}
         </Box>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.Auth.isAuthenticated
+        isAuthenticated: state.Auth.isAuthenticated,
+        blogs: state.Blogs.Blogs
     }
 }
 
-export default connect(mapStateToProps)(Filter)
+export default connect(mapStateToProps, {Make_Filter})(Filter)

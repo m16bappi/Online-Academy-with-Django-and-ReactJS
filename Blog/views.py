@@ -1,4 +1,4 @@
-from rest_framework import permissions, generics, status
+from rest_framework import permissions, generics, status, views
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 from .models import Blogs

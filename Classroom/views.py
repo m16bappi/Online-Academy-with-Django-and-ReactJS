@@ -28,14 +28,15 @@ class classroomCreateAPIView(generics.CreateAPIView):
         code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
 
         class_name = [value for key, value in self.request.data.items()]
-        class_name = '-'.join(value for value in class_name)
+        class_name = '-'.join(value for value in class_name[:4])
 
         data = {
             'class_code': code,
             'class_name': class_name,
             'course_name': course.objects.get(course_code=self.request.data['course']).id,
             'program': program.objects.get(program_title=self.request.data['program']).id,
-            'intake': intake.objects.get(intake_name=self.request.data['intake']).id
+            'intake': intake.objects.get(intake_name=self.request.data['intake']).id,
+            'url': self.request.data['url']
         }
 
         serializer = self.get_serializer(data=data)

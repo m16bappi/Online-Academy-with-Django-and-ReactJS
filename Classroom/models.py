@@ -14,6 +14,7 @@ class classroom(models.Model):
     intake = models.ForeignKey(intake, on_delete=models.CASCADE)
     students = models.ManyToManyField(student, related_name='students', blank=True)
     course_teacher = models.ForeignKey(teacher, related_name='course_teacher', on_delete=models.CASCADE)
+    url = models.URLField(default='https://meet.google.com/', max_length=300)
 
     def __str__(self):
         return str(self.class_name)

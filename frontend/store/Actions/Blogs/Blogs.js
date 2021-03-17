@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {GET_BLOG, ADD_BLOG, DELETE_BLOG} from '../../Types/BlogTypes';
+import {GET_BLOG, ADD_BLOG, DELETE_BLOG, FILTER} from '../../Types/BlogTypes';
 import Cookies from "js-cookie";
 
 const csrftoken = Cookies.get('csrftoken');
@@ -64,3 +64,10 @@ export const DELETE_BLOGS = (id) => (dispatch, getState) => {
             })
         }).catch(err => console.log(err))
 };
+
+export const Make_Filter = (filer) => dispatch => {
+    dispatch({
+        type: FILTER,
+        payload: filer
+    })
+}

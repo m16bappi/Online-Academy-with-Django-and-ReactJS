@@ -87,7 +87,7 @@ const Classroom = (props) => {
                 </Box>
                 <Box className={classes.headerActionContent}>
                     <Typography variant="h6">class code: {props.classroom["class_code"]}</Typography>
-                    <Button endIcon={<VideocamIcon/>} variant="outlined" color="primary">LIVE</Button>
+                    <Button endIcon={<VideocamIcon/>} variant="outlined" color="primary" href={props.classroom['url']} target="_blank">LIVE</Button>
                 </Box>
             </Box>
 

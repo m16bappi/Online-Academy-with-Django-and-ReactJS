@@ -14,10 +14,11 @@ const BlogDetails = (props) => {
                     <Typography variant="h1">{value['title']}</Typography>
                     <Typography>{value['blog']}</Typography>
                 </div>
-            )):null}
+            )) : null}
         </Container>
     )
 }
+
 const mapStateToProps = (state) => {
     return {
         Blog: state.Blogs.Blogs

@@ -22,7 +22,6 @@ const useStyles = makeStyles(() => ({
         paddingRight: "2rem",
         borderRadius: "5px",
         display: "flex",
-        gap: "1rem",
         flexDirection: "column",
     }
 }))
@@ -36,7 +35,8 @@ const CreateClassroom = (props) => {
         intake: '',
         section: '',
         semester: '',
-        program: ''
+        program: '',
+        url: ''
 
     })
     const [error, setError] = useState({
@@ -44,7 +44,8 @@ const CreateClassroom = (props) => {
         intake: false,
         section: false,
         semester: false,
-        course: false
+        course: false,
+        url: false
     })
 
     const onsubmitHandler = () => {
@@ -77,6 +78,12 @@ const CreateClassroom = (props) => {
             flag = 0
             setError(prevState => {
                 return {...prevState, course: true}
+            })
+        }
+        if (!state.url.length) {
+            flag = 0
+            setError(prevState => {
+                return {...prevState, url: true}
             })
         }
         if (flag === 1) {
@@ -137,7 +144,7 @@ const CreateClassroom = (props) => {
             />
 
             <Autocomplete
-                options={props.course? props.course.filter(value => value.dept === state.program):null}
+                options={props.course ? props.course.filter(value => value.dept === state.program) : null}
                 getOptionLabel={(option) => option.course_code}
                 onChange={(event, value) => {
                     setState({...state, course: value ? value.course_code : ''})
@@ -148,6 +155,13 @@ const CreateClassroom = (props) => {
                                                     error={error.course}
                                                     helperText={error.program ? 'course required' : ' '} label="Course"
                                                     variant="outlined"/>}
+            />
+            <TextField variant="outlined" label="class url" value={state.url} name="url"
+                       error={error.url} helperText={error.url ? 'section required' : ' '}
+                       onChange={event => {
+                           setState({...state, url: event.target.value})
+                           setError({...error, url: false})
+                       }}
             />
             <Button variant="contained" color="primary" fullWidth onClick={onsubmitHandler}>Create</Button>
         </Box>

@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "5px"
     },
     inputButton: {
-        display:"flex",
+        display: "flex",
         alignItems: "center",
         justifyContent: "flex-start",
         gap: theme.spacing(2),
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
             cursor: "pointer"
         }
     },
-    inputField:{
+    inputField: {
         display: "flex",
         gap: theme.spacing(2),
         flexDirection: "column",
@@ -112,8 +112,8 @@ const Stream = (props) => {
     }
 
     const inputButton = (
-        <Box className={classes.inputButton} onClick={()=>setInput(true)}>
-            <Avatar>{props.username ? props.username.charAt(0):null}</Avatar>
+        <Box className={classes.inputButton} onClick={() => setInput(true)}>
+            <Avatar>{props.username ? props.username.charAt(0) : null}</Avatar>
             <Typography component={'p'}>Announce something on your class</Typography>
         </Box>)
 
@@ -121,7 +121,7 @@ const Stream = (props) => {
         <Box className={classes.inputField}>
             <TextField multiline rows={3} rowsMax={5} label="Announce something on your class"
                        value={textarea}
-                name="textarea" onChange={event => setTextarea(event.target.value)}
+                       name="textarea" onChange={event => setTextarea(event.target.value)}
             />
             <Box>
                 <Button variant="text" onClick={inputHandler}>Cancel</Button>
@@ -130,37 +130,39 @@ const Stream = (props) => {
             </Box>
         </Box>)
 
-    return(
+    return (
         <Box className={classes.root}>
             <Box className={classes.input}>
-                {input ? inputField:inputButton}
+                {input ? inputField : inputButton}
             </Box>
-            {props.stream.map((item, index)=>(
+            {props.stream.map((item, index) => (
                 <Box className={classes.post} key={index}>
                     <ListItem disableGutters className={classes.postHeader}>
-                        <ListItemAvatar><Avatar>{item ? item.user.charAt(0):null}</Avatar></ListItemAvatar>
-                        <ListItemText primary={item.user} secondary={item.created}/>
+                        <ListItemAvatar><Avatar>{item ? item.user.charAt(0) : null}</Avatar></ListItemAvatar>
+                        <ListItemText primary={item.user}
+                                      secondary={new Date(item["created"]).toLocaleString().replaceAll('/', '-').split('T')}/>
                     </ListItem>
                     <Typography className={classes.postBody}>{item.body}</Typography>
                     <Box className={classes.postFooter}>
                         <Typography>Comments</Typography>
                         <Box className={classes.postFooterInput}>
-                            <Avatar>{props.username ? props.username.charAt(0):null}</Avatar>
-                            <TextField fullWidth variant="outlined" value={comment.id === item.id ? comment.comment : ''}
-                                       onChange={event => setComment({comment: event.target.value, id: item.id}) }/>
-                            <IconButton onClick={post_comment_handler}><SendIcon /></IconButton>
+                            <Avatar>{props.username ? props.username.charAt(0) : null}</Avatar>
+                            <TextField fullWidth variant="outlined"
+                                       value={comment.id === item.id ? comment.comment : ''}
+                                       onChange={event => setComment({comment: event.target.value, id: item.id})}/>
+                            <IconButton onClick={post_comment_handler}><SendIcon/></IconButton>
                         </Box>
                         <List disablePadding>
-                        {props.comment.filter(value => value.stream === item.id).map((value, key)=>(
-                            <ListItem alignItems={"flex-start"} disableGutters key={key}>
-                                <ListItemAvatar><Avatar>{value ? value.user.charAt(0):null}</Avatar></ListItemAvatar>
-                                <ListItemText primary={value.user} secondary={
-                                    <Typography>
-                                        {value.comment}
-                                    </Typography>
-                                }/>
-                            </ListItem>
-                        ))}
+                            {props.comment.filter(value => value.stream === item.id).map((value, key) => (
+                                <ListItem alignItems={"flex-start"} disableGutters key={key}>
+                                    <ListItemAvatar><Avatar>{value ? value.user.charAt(0) : null}</Avatar></ListItemAvatar>
+                                    <ListItemText primary={value.user} secondary={
+                                        <Typography>
+                                            {value.comment}
+                                        </Typography>
+                                    }/>
+                                </ListItem>
+                            ))}
                         </List>
                     </Box>
                 </Box>

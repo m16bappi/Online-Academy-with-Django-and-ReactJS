@@ -24,7 +24,7 @@ class classroomCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = classroom
-        fields = ['class_name', 'course_name', 'program', 'intake']
+        fields = ['class_name', 'course_name', 'program', 'intake', 'url']
 
 
 class classroomJoinSerializer(serializers.Serializer):

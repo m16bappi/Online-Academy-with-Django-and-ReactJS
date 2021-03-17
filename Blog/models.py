@@ -9,6 +9,7 @@ class Blogs(models.Model):
     blog = models.TextField()
     created_time = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='blog_likers', blank=True)
+    category = models.CharField(max_length=50)
 
     class Meta:
         ordering = ['-created_time']
